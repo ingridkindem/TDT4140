@@ -8,9 +8,7 @@
 
 3. !!The master branch is sacred and is not to be trifled with!! 
 
-4. We will have two main branches; master and develop. 
-
-When branching out for your issues, make sure your current branch is develop. Before branching use "git pull" in terminal or pull directly in eclipse, to make sure you have the must updated version of our project.
+4. We will have two main branches; master and develop. When branching out for your issues, make sure your current branch is develop. Before branching use "git pull" in terminal or pull directly in eclipse, to make sure you have the must updated version of our project.
 
 5. When commiting to your branch, make sure your commit message is descriptive enough for the other group members to understand what you have done, and to some extent how you have done it.
 
