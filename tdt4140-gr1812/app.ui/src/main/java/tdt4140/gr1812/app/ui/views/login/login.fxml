@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-1.0">
+         <image>
+            <Image url="@login_view.jpg" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="329.0" layoutY="527.0" prefHeight="39.0" prefWidth="146.0" />
+      <Hyperlink layoutX="528.0" layoutY="527.0" prefHeight="39.0" prefWidth="146.0" />
+      <PasswordField layoutX="312.0" layoutY="430.0" prefHeight="45.0" prefWidth="375.0" promptText="Passord" />
+      <TextField layoutX="312.0" layoutY="365.0" prefHeight="45.0" prefWidth="375.0" promptText="Mobilnummer" />
+   </children>
+</AnchorPane>
