@@ -2,11 +2,15 @@ package tdt4140.gr1812.app.core;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import tdt4140.gr1812.app.core.dataClasses.Athlete;
+import tdt4140.gr1812.app.core.dataClasses.Sport;
 
 public class AthleteTest {
 
@@ -78,16 +82,21 @@ public class AthleteTest {
 	}
 	
 	@Test
-	public void testSetHeight() {
-		athlete.setHeight(170.3);
-		assertTrue(170.3 == athlete.getHeight());
-	}
-	
-	@Test
 	public void testSetMaxPulse() {
 		athlete.setMaxPulse(230);
 		assertTrue(230 == athlete.getMaxPulse());
 	}
+	
+	@Test 
+	public void testSetSport() {
+		
+		Sport basket = new Sport("Basket");
+		Sport volley = new Sport("Volley");
+		athlete.addSport(basket);
+		athlete.addSport(volley);
+		assertEquals(new ArrayList(Arrays.asList(basket, volley)),athlete.getSports());
+	}
+	
 	
 	@After
 	public void tearDown() throws Exception {

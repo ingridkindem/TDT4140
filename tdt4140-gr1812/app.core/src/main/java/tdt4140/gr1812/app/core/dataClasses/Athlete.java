@@ -1,5 +1,8 @@
 package tdt4140.gr1812.app.core.dataClasses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Athlete {
 	
 	private String phoneNumber; 
@@ -7,10 +10,9 @@ public class Athlete {
 	private String lastName; 
 	private int age;
 	private double weight;
-	private double height;
 	private int maxPulse;
 	private boolean gender; //true is female, false is male
-	//private List<Sport> sports = new ArrayList<Sport>();
+	private List<Sport> sports = new ArrayList<Sport>();
 	
 	
 	public Athlete(String phoneNumber, String firstName, String lastName) {
@@ -54,14 +56,6 @@ public class Athlete {
 		this.weight = weight;
 	}
 
-	public double getHeight() {
-		return height;
-	}
-
-	public void setHeight(double height) {
-		this.height = height;
-	}
-
 	public int getMaxPulse() {
 		return maxPulse;
 	}
@@ -78,4 +72,12 @@ public class Athlete {
 		this.gender = gender;
 	}
 
+	public List<Sport> getSports() {
+		return sports;
+	}
+	
+	public void addSport(Sport sport) {
+		sports.add(sport);
+	}
+	
 }
