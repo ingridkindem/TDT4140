@@ -17,6 +17,8 @@ public class SignUpModelTest {
 	
 	@Test
 	public void testSetCellPhoneNumber() {
+		test.setcellPhoneNumber(1234);
+		assertTrue(test.getcellPhoneNumber() == 1234);
 	}
 
 	@Test
