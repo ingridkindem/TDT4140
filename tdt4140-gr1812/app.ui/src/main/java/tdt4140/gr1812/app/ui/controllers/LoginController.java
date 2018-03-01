@@ -1,9 +1,11 @@
-package tdt4140.gr1812.app.core.controllers.login;
+package tdt4140.gr1812.app.ui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import tdt4140.gr1812.app.ui.FxApp;
+
 
 public class LoginController {
 	
@@ -17,6 +19,10 @@ public class LoginController {
 	@FXML
 	private TextField setPhoneNumber;
 	
+	private FxApp app;
+	
+	private String p = "";
+	
 	@FXML
 	public void initialize() {
 		//login = new Login();
@@ -25,26 +31,29 @@ public class LoginController {
 	}
 	
 	public void update() {
-		//this.prompt.setText(login.getPrompt());
+		this.prompt.setText(p);
 	}
 		
 	@FXML
 	public boolean handleLogin() { //return true if phonenumber and password is correct
 		String phoneNumber = this.setPhoneNumber.getText();
 		String password = this.setPassword.getText();
-		boolean checkInput = true; //check if the input is correct
+		boolean checkInput = false; //login.login(phoneNumber, password); //check if the input is correct
 		if (checkInput) {
-			//change view to loggedIn
+			p = "";
+			app.goToLoggedIn();
 			this.atLoginView = false;
 			return true;
+		} else {
+			p = "Wrong username or password";
 		}
 		update();
 		return false;
 	}
 	
 	@FXML
-	public void handleRegister() {
-		//change view to signUp
+	public void handleSignup() {
+		app.goToSignup();
 		this.atLoginView = false;
 	}
 	
@@ -58,6 +67,14 @@ public class LoginController {
 	
 	public void setSetPassword(PasswordField pf) {
 		this.setPassword = pf;
+	}
+	
+	public void setPrompt(Text t) {
+		this.prompt = t;
+	}
+	
+	public void setApplication(FxApp app) {
+		this.app = app;
 	}
 	
 }

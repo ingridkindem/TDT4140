@@ -1,13 +1,14 @@
-package tdt4140.gr1812.app.core.controller;
+package tdt4140.gr1812.app.ui.controllers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import tdt4140.gr1812.app.core.controllers.login.LoginController;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import tdt4140.gr1812.app.ui.FxApp;
 
 public class LoginControllerTest {
 
@@ -16,6 +17,10 @@ public class LoginControllerTest {
 	@Before
 	public void setUp() {
 		this.loginController = new LoginController();
+		final JFXPanel fxPanel = new JFXPanel(); // Must be here to initialize toolkit (for PasswordField() and TextField())
+		Text t = new Text();
+		this.loginController.setPrompt(t);
+		this.loginController.setApplication(new FxApp());
 	}
 	
 	@Test
@@ -27,7 +32,6 @@ public class LoginControllerTest {
 	
 	@Test
 	public void testHandleLogin() {
-		final JFXPanel fxPanel = new JFXPanel(); // Must be here to initialize toolkit (for PasswordField() and TextField())
 		//set phone number and password correct
 		this.loginController.setSetPhoneNumber(new TextField("95493939"));
 		PasswordField pf1 = new PasswordField();
@@ -51,7 +55,7 @@ public class LoginControllerTest {
 	@Test
 	public void testHandleRegistration() {
 		//check that stage is not LoginView
-		this.loginController.handleRegister();
+		this.loginController.handleSignup();
 		assertFalse(this.loginController.getAtLoginView());
 	}
 
