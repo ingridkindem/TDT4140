@@ -182,18 +182,5 @@ public class SignUpModelTest {
             assertTrue(true);
         }
     }
-    
-    
-    
-	
-	
-	
-	/*
-	 * model.setfirstName("Toralf");
-		model.setsurName("Frich");
-		model.setheight(202);
-		model.setweight(100);
-		model.setmaxPulse(200);
-	 */
 
 }
