@@ -4,11 +4,12 @@ public class Sport {
 
 	private String sportsName; 
 
-
-	public Sport(String Sportsname) {
-		this.sportsName = Sportsname;
+	//Constructor to create a sport with a sports name. 
+	public Sport(String sportsName) {
+		this.sportsName = sportsName;
 	}
 
+	//A method to get the sport.  
 	public String getSport() {
 		return this.sportsName; 
 	}
