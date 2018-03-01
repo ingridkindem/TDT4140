@@ -64,6 +64,7 @@ public final class BackendConnector {
 				response.append(inputLine);
 			}
 			in.close();
+			System.out.print(response.toString());
 			return new JSONObject(response.toString()); 
 		} catch (Exception e) {
 			e.printStackTrace();
