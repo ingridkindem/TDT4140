@@ -16,9 +16,14 @@ public class LoginModelTest {
 	}
 
 	@Test
-	public void testRandom() {
-		assertTrue(this.loginmodel.login("95902393","Maren123"));
+	public void testFalseLogin() {
+	    assert(this.loginmodel.login("testuser22","testuser1") == false);  
 	}
+	
+	@Test
+    public void testCorrectLogin() {
+        assert(this.loginmodel.login("testuser","testuser"));  
+    }
 
 	@Test
 	public void testEmtyPasswordThrowsNullPointerException() {

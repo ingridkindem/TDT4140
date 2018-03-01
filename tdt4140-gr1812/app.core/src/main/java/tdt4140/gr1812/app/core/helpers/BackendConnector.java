@@ -13,22 +13,12 @@ import org.json.*;
 
 public final class BackendConnector {
 	
-	static String baseUrl = "http://pu.larserikfagernaes.com/"; 
-	public static void main(String [] args)
-	{
-		BackendConnector conn = new BackendConnector();
-		try {
-			JSONObject response = BackendConnector.makeRequest(new HashMap<String, String>(), Method.GET, "test/");
-			System.out.print(response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-	}
+	static String baseUrl = "http://gobitech.no/"; 
 	public static JSONObject makeRequest(HashMap<String, String> dict, Method method, String path) throws Exception { 
 		
 		HttpURLConnection con = null;
 		try {
-			URL obj = new URL(BackendConnector.baseUrl + path);
+			URL obj = new URL(baseUrl + path);
 			con = (HttpURLConnection) obj.openConnection();
 			// connection to backend is open
 			
@@ -64,7 +54,6 @@ public final class BackendConnector {
 				response.append(inputLine);
 			}
 			in.close();
-			System.out.print(response.toString());
 			return new JSONObject(response.toString()); 
 		} catch (Exception e) {
 			e.printStackTrace();
