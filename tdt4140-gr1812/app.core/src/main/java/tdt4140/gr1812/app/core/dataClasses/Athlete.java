@@ -14,13 +14,14 @@ public class Athlete {
 	private boolean gender; //true is female, false is male
 	private List<Sport> sports = new ArrayList<Sport>();
 	
-	
+	// Constructor to create an athlete. Initialized with phone number, first name and last name.
 	public Athlete(String phoneNumber, String firstName, String lastName) {
 		this.phoneNumber = phoneNumber;
 		this.firstName = firstName; 
 		this.lastName = lastName;
 	}
 	
+	// Getters for the attributes
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -41,6 +42,23 @@ public class Athlete {
 		return age;
 	}
 
+	public double getWeight() {
+        return weight;
+    }
+	
+	public int getMaxPulse() {
+        return maxPulse;
+    }
+	
+	public boolean getGender() {
+        return gender;
+    }
+	
+	public List<Sport> getSports() {
+	    return sports;
+	}
+	
+	//Set-methods to change age, weight, max pulse and gender.
 	public void setAge(int age) {
 		if ((age < 0) || (age > 200)) {
 			throw new IllegalArgumentException("Age not valid.");
@@ -48,34 +66,19 @@ public class Athlete {
 		this.age = age;
 	}
 
-	public double getWeight() {
-		return weight;
-	}
-
 	public void setWeight(double weight) {
 		this.weight = weight;
-	}
-
-	public int getMaxPulse() {
-		return maxPulse;
 	}
 
 	public void setMaxPulse(int maxPulse) {
 		this.maxPulse = maxPulse;
 	}
 	
-	public boolean getGender() {
-		return gender;
-	}
-	
 	public void setGender(boolean gender) {
 		this.gender = gender;
 	}
-
-	public List<Sport> getSports() {
-		return sports;
-	}
 	
+	//Method to add a sport in the sports-list
 	public void addSport(Sport sport) {
 		sports.add(sport);
 	}
