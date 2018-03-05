@@ -21,10 +21,9 @@ public class LoginModel {
 	    myMap.put("password", password);
 
 		try {
-			JSONObject response = BackendConnector.makeRequest(myMap, Method.POST, "login");
+			JSONObject response = BackendConnector.makeRequest(myMap, Method.POST, "testPu.php");
 			System.out.print(response.toString());
-			if (response.get("status") == "success") {
-				
+			if (response.get("status").equals("success")) {
 				return true;
 			}
 			else {
