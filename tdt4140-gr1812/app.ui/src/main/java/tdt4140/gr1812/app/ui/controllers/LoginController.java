@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import tdt4140.gr1812.app.core.dataClasses.LoginModel;
 import tdt4140.gr1812.app.ui.FxApp;
 
 
@@ -38,7 +39,9 @@ public class LoginController {
 	public boolean handleLogin() { //return true if phonenumber and password is correct
 		String phoneNumber = this.setPhoneNumber.getText();
 		String password = this.setPassword.getText();
-		boolean checkInput = false; //login.login(phoneNumber, password); //check if the input is correct
+
+		boolean checkInput = LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
+
 		if (checkInput) {
 			p = "";
 			app.goToLoggedIn();
