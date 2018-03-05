@@ -1,5 +1,11 @@
 package tdt4140.gr1812.app.core.model;
 
+import java.util.HashMap;
+import org.json.JSONObject;
+import tdt4140.gr1812.app.core.helpers.BackendConnector;
+import tdt4140.gr1812.app.core.helpers.Method;
+
+
 public class SignUpModel {
 	
 	private int cellPhoneNumber;
@@ -40,6 +46,30 @@ public class SignUpModel {
 		return firstName;
 	}
 	
+	public boolean signupUser(int phonenumber, String password, String sport, String firstName, String surname, int maxpulse, int weight) {
+	       try {
+	           HashMap requestParam = new HashMap<String, String>();
+	           requestParam.put("username", "testuser");
+	           requestParam.put("password", "testuser");
+	           requestParam.put("sport", sport);
+	           requestParam.put("firstname", firstName);
+	           requestParam.put("surname", surname);
+	           requestParam.put("maxpulse", String.valueOf(maxpulse));
+	           requestParam.put("weight", String.valueOf(maxpulse));
+	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "testPu.php");
+	           
+	           if (response.get("status").equals("success")) {
+	               return true;
+	           }
+	           else {
+	               return false; 
+	           }
+	       } catch (Exception e) {
+	           e.printStackTrace();
+	           return false;
+	       }
+	}
+	
 	public void setfirstName(String firstName) {
 		if (!firstName.matches("[a-åA-Å]+$")) {
 			throw new IllegalArgumentException("Du kan ikke skrive inn tall i et navn.");
@@ -61,7 +91,6 @@ public class SignUpModel {
         }
         this.surName = surName;
     }
-	
 	
 	public String getPassWord() {
 		return this.passWord;
