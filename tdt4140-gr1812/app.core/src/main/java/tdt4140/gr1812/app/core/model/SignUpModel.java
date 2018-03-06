@@ -3,6 +3,7 @@ package tdt4140.gr1812.app.core.model;
 import java.util.HashMap;
 import org.json.JSONObject;
 import tdt4140.gr1812.app.core.helpers.BackendConnector;
+import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.helpers.Method;
 
 
@@ -46,16 +47,21 @@ public class SignUpModel {
 		return firstName;
 	}
 	
-	public boolean signupUser(int phonenumber, String password, String sport, String firstName, String surname, int maxpulse, int weight) {
+	public boolean signupUser(int phonenumber, String password, String sport, String firstName, String surname, int maxpulse, int weight, Gender gender) {
 	       try {
+	           
+	           String genderString = gender == gender.FEMALE ? "female" : "male";  
+	           
 	           HashMap requestParam = new HashMap<String, String>();
-	           requestParam.put("username", "testuser");
-	           requestParam.put("password", "testuser");
+	           requestParam.put("username", String.valueOf(phonenumber));
+	           requestParam.put("password", password);
 	           requestParam.put("sport", sport);
 	           requestParam.put("firstname", firstName);
 	           requestParam.put("surname", surname);
 	           requestParam.put("maxpulse", String.valueOf(maxpulse));
 	           requestParam.put("weight", String.valueOf(maxpulse));
+	           requestParam.put("gender", genderString);
+	           
 	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "testPu.php");
 	           
 	           if (response.get("status").equals("success")) {
