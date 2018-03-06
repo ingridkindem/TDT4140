@@ -48,15 +48,10 @@ public class SignupController {
     private void registerButtonClicked(ActionEvent event) {
         // Button was clicked, do something...
         SignUpModel model = new SignUpModel();
-        
-        String writtenPassord = passord.getText();  
-        
-        System.out.println("Written passord = " + writtenPassord);
-        
+
         
         Gender gender;
-        
-        if (manToggle.isSelected()) {
+        if (manToggle.isSelected()){
             gender = Gender.MALE; 
         }
         else {

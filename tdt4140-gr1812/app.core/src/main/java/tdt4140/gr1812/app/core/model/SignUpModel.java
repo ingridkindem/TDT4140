@@ -53,8 +53,8 @@ public class SignUpModel {
 	           String genderString = gender == gender.FEMALE ? "female" : "male";  
 	           
 	           HashMap requestParam = new HashMap<String, String>();
-	           requestParam.put("username", "testuser");
-	           requestParam.put("password", "testuser");
+	           requestParam.put("username", String.valueOf(phonenumber));
+	           requestParam.put("password", password);
 	           requestParam.put("sport", sport);
 	           requestParam.put("firstname", firstName);
 	           requestParam.put("surname", surname);
