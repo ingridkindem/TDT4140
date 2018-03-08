@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import tdt4140.gr1812.app.ui.controllers.SignUpModel;
+
+import tdt4140.gr1812.app.core.helpers.Gender;
+import tdt4140.gr1812.app.core.models.signup.SignUpModel;
 
 //HUSK Å LEGGE INN SPORT KLASSEN
 //Hvilke tester skal du kjøre? 
@@ -118,6 +120,19 @@ public class SignUpModelTest {
             assertTrue(true);
         }
     }
+    
+    @Test
+    public void testSignupUser() {
+        SignUpModel model = new SignUpModel();
+        try {
+            boolean signupResponse = model.signupUser(46643025, "46643025", "basket", "lars erik", "fagernæs", 244, 254, Gender.MALE); 
+            assert(signupResponse == false); 
+            
+        } catch (IllegalArgumentException e){
+            assertTrue(true);
+        }
+    }
+    
     
     @Test
     public void testPassWordValid() {

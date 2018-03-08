@@ -12,11 +12,17 @@ public class BackendConnectorTest { // må endres til ny server
 	@Test
 	public void testMakeGetRequest() {
 		try {
-			JSONObject response = BackendConnector.makeRequest(new HashMap<String, String>(), Method.GET, "tst/");
-			assertEquals(response.get("status"), "success");
+			
+	           
+	           HashMap requestParam = new HashMap<String, String>();
+	           requestParam.put("username", String.valueOf(46643025));
+	           requestParam.put("password", "46643025");
+
+			
+	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "login");
+	           assertEquals(response.get("status"), "success");
 		} catch (Exception e) {
 			fail("fail: did'nt connect to server");
 		}		
 	}
-	
 }
