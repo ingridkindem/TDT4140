@@ -4,8 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import tdt4140.gr1812.app.core.model.SignUpModel;
+import tdt4140.gr1812.app.ui.controllers.SignUpModel;
 
 //HUSK Å LEGGE INN SPORT KLASSEN
 //Hvilke tester skal du kjøre? 

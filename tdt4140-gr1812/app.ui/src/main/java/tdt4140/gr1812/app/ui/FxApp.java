@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tdt4140.gr1812.app.ui.controllers.LoginController;
+import tdt4140.gr1812.app.ui.controllers.SignupController;
 
 
 public class FxApp extends Application {
@@ -30,16 +31,27 @@ public class FxApp extends Application {
     
     public void goToLoggedIn() {
 		try {
-		replaceSceneContent("views/login/loggedIn.fxml"); //path to loggedIn-view
-		stage.show();
-	} catch(Exception e) {
-		Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
-	}
-}
+		    replaceSceneContent("views/login/loggedIn.fxml"); //path to loggedIn-view
+		    stage.show();
+		} catch(Exception e) {
+		    Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
+	    }
+    }
+    
+    public void goToSuccessfullSignup(){
+        try {
+            replaceSceneContent("views/signup/signedUp.fxml"); //path to loggedIn-view
+            stage.show();
+        } catch(Exception e) {
+            Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
+        }
+    }
     
     public void goToSignup() {
     		try {
     			replaceSceneContent("views/signup/signup.fxml"); //path to signup-view
+    	         SignupController controller = this.fxmlLoader.getController();
+    	         controller.setApplication(this);
     			stage.show();
     		} catch(Exception e) {
     			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;

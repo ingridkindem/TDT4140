@@ -1,4 +1,4 @@
-package tdt4140.gr1812.app.ui;
+package tdt4140.gr1812.app.ui.controllers;
 
 import java.util.Iterator;
 import javafx.event.ActionEvent;
@@ -11,7 +11,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import tdt4140.gr1812.app.core.helpers.Gender;
-import tdt4140.gr1812.app.core.model.SignUpModel;
+import tdt4140.gr1812.app.core.models.signup.SignUpModel;
+import tdt4140.gr1812.app.ui.FxApp;
+
+
 
 public class SignupController {
     @FXML
@@ -62,7 +65,7 @@ public class SignupController {
                 selectedSport, fornavn.getText(), etternavn.getText(), Integer.parseInt(makspuls.getText()), Integer.parseInt(vekt.getText()), gender);
         
         if(registerSuccess) {
-            System.out.println("Success with register! :D ");
+            app.goToSuccessfullSignup();
         }
         else {
             System.out.println("No success in register :,( ");
@@ -70,9 +73,14 @@ public class SignupController {
     }
     
     private String selectedSport = "Basket";
+    private FxApp app; 
+    
+    
+    public void setApplication(FxApp app) {
+        this.app = app; 
+    }
     
     public void initialize() {
-
         // do initialization and configuration work...
         Iterator<MenuItem> it = idretter.getItems().iterator(); 
         while (it.hasNext()){
