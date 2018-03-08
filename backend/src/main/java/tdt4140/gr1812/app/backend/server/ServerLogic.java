@@ -21,8 +21,8 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                                   String gender) {
         		//connecting to database
             MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUser("user");
-            dataSource.setPassword("password123");
+            dataSource.setUser("root");
+            dataSource.setPassword("root");
             dataSource.setServerName("localhost");
             dataSource.setPort(3306);
             dataSource.setDatabaseName("PU");
@@ -60,11 +60,11 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             }
         }
         
-        public static void login(String username, String password) {
+        public static boolean login(String username, String password) {
     			
         	 	 MysqlDataSource dataSource = new MysqlDataSource();
-             dataSource.setUser("user");
-             dataSource.setPassword("password123");
+             dataSource.setUser("root");
+             dataSource.setPassword("root");
              dataSource.setServerName("localhost");
              dataSource.setPort(3306);
              dataSource.setDatabaseName("PU");
@@ -80,17 +80,19 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 	                 ps.setInt(1, Integer.parseInt(username));
 	                 ps.setString(2,  password);
 	                 resultSet = ps.executeQuery();
-	                 if (!resultSet.next() ) { //seeing if query returns empty table of data, meaning that user/pw-combo doesn't exist and login not possible
-	                	    throw new SQLException();
+	                 if (resultSet.next() ) { //seeing if query returns empty table of data, meaning that user/pw-combo doesn't exist and login not possible
+	                	    return true;
 	                	} 
-             }catch (SQLException e) {
+	                 else {
+	                	 	return false; 
+	                 }
+             }catch (SQLException e) {            	 
             	 	throw new RuntimeException(e);
              } finally {
             	 	if (conn!=null) {
             	 		try {
             	 			conn.close();
             	 		}catch (SQLException e) {
-            	 			
             	 		}
             	 	}
              }
