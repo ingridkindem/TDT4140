@@ -13,7 +13,7 @@ import org.json.*;
 
 public final class BackendConnector {
 	
-	static String baseUrl = "http://gobitech.no/"; 
+	static String baseUrl = "http://larserikfagernaes.com:8000/"; 
 	public static JSONObject makeRequest(HashMap<String, String> dict, Method method, String path) throws Exception { 
 		
 		HttpURLConnection con = null;

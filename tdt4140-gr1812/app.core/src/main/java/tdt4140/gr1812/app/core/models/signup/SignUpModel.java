@@ -62,7 +62,7 @@ public class SignUpModel {
 	           requestParam.put("weight", String.valueOf(maxpulse));
 	           requestParam.put("gender", genderString);
 	           
-	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "testPu.php");
+	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "signup");
 	           
 	           if (response.get("status").equals("success")) {
 	               return true; 

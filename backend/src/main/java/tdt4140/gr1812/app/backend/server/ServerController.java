@@ -23,15 +23,20 @@ public class ServerController {
                         @RequestParam("weight") String weight,
                         @RequestParam("gender") String gender
                         ) {
-     String feedback; //Variable letting user know outcome. Only success/failure implemented.
+     String feedback = ""; //Variable letting user know outcome. Only success/failure implemented.
    
 		try {
         ServerLogic.signup(username, password, sport, firstname, surname, maxpulse, weight, gender);
         feedback = new JSONObject()
                   .put("status", "success").toString();
 		} catch (Exception e) { // Catches all outcomes that are not successful. Should be specified in more detail in later versions.
-			feedback = "failure";
-			
+			try {
+				feedback = new JSONObject()
+				          .put("status", "failed").toString();
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
         return feedback;
     }
@@ -53,7 +58,14 @@ public class ServerController {
     			}
     			
     		}catch (Exception e) {
-    			
+    			e.printStackTrace();
+				try {
+					feedback = new JSONObject()
+					          .put("status", "failed").toString();
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
     		}
     		
         return feedback;
