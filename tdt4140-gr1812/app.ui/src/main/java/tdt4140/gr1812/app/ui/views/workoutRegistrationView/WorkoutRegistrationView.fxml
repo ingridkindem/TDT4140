@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-2.0" layoutY="-2.0">
+         <image>
+            <Image url="@../../../../../../../../../../../../../../../Applications/NTNU/Kjellern/toralf_pu-03.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="lengdePåØkt" layoutX="115.0" layoutY="270.0" prefHeight="47.0" prefWidth="382.0" promptText="lengde på økt">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="puls" layoutX="117.0" layoutY="343.0" prefHeight="49.0" prefWidth="382.0" promptText="puls">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="mål" alignment="TOP_LEFT" layoutX="517.0" layoutY="270.0" prefHeight="121.0" prefWidth="381.0" promptText="mål for økt">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <MenuButton fx:id="idrett" cache="true" cacheHint="SCALE" contentDisplay="CENTER" layoutX="114.0" layoutY="422.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="387.0" style="-fx-background-color: #70dbdb;" text="IDRETT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+         <items>
+            <RadioMenuItem mnemonicParsing="false" onAction="#handleFotball" text="Fotball" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <RadioMenuItem mnemonicParsing="false" onAction="#handleBasket" text="Basket" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <RadioMenuItem mnemonicParsing="false" onAction="#handleLangrenn" text="Langrenn" />
+         </items>
+      </MenuButton>
+      <Hyperlink fx:id="registrer" layoutX="384.0" layoutY="537.0" onAction="#handleRegistrer" prefHeight="60.0" prefWidth="230.0" />
+      <CheckBox fx:id="privatØkt" layoutX="532.0" layoutY="416.0" mnemonicParsing="false" onAction="#handlePrivatØkt" prefHeight="61.0" prefWidth="60.0">
+         <font>
+            <Font name="System Italic" size="24.0" />
+         </font>
+      </CheckBox>
+      <Hyperlink fx:id="kryssUt" layoutX="108.0" layoutY="164.0" onAction="#handleKryssUt" prefHeight="38.0" prefWidth="38.0" />
+   </children>
+</AnchorPane>
