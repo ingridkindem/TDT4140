@@ -1,11 +1,10 @@
-package tdt4140.gr1812.app.core.model;
+package tdt4140.gr1812.app.core.models.signup;
 
 import java.util.HashMap;
 import org.json.JSONObject;
 import tdt4140.gr1812.app.core.helpers.BackendConnector;
 import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.helpers.Method;
-
 
 public class SignUpModel {
 	
@@ -18,6 +17,7 @@ public class SignUpModel {
 	// private List<Sport> Idretter = new List<Sport>;
 
 	public SignUpModel() {
+ 
 		this.cellPhoneNumber = getcellPhoneNumber();
 		this.firstName = getfirstName();
         this.surName = getsurName();
@@ -65,7 +65,7 @@ public class SignUpModel {
 	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "testPu.php");
 	           
 	           if (response.get("status").equals("success")) {
-	               return true;
+	               return true; 
 	           }
 	           else {
 	               return false; 
@@ -126,6 +126,4 @@ public class SignUpModel {
         }
         this.weight = weight;
     }
-
 }
-
