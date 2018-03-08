@@ -3,6 +3,8 @@ package tdt4140.gr1812.app.backend.server;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -22,9 +24,11 @@ public class ServerController {
                         @RequestParam("gender") String gender
                         ) {
      String feedback; //Variable letting user know outcome. Only success/failure implemented.
+   
 		try {
         ServerLogic.signup(username, password, sport, firstname, surname, maxpulse, weight, gender);
-        feedback = "Success! New user with username: " + username + " created!";
+        feedback = new JSONObject()
+                  .put("status", "success").toString();
 		} catch (Exception e) { // Catches all outcomes that are not successful. Should be specified in more detail in later versions.
 			feedback = "failure";
 			
@@ -35,24 +39,27 @@ public class ServerController {
     @RequestMapping("/login") //mapping to login endpoint
     public String login(@RequestParam("username") String username,
     					   @RequestParam("password") String password) {
-    		String feedback;
     		
+    	String feedback = ""; 
     		try{
-    			ServerLogic.login(username, password);
-    			feedback = "success! "+ username + " logged in!";
+    			boolean loginResult = ServerLogic.login(username, password);
+    			if (loginResult) {
+    				JSONObject responseObject = new JSONObject().put("status", "success");  
+    				feedback = responseObject.toString(); 
+    			}
+    			else {
+    				feedback = new JSONObject()
+  		                  .put("status", "failed").toString();
+    			}
+    			
     		}catch (Exception e) {
-    			feedback = "failure";
+    			
     		}
     		
-
-        
-
         return feedback;
     }
     @RequestMapping("")
     public String index() {
     		return "Welcome. I am your server.";
     }
-    
-    
 }
