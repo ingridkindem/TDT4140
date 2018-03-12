@@ -22,7 +22,7 @@ public class LoginModelTest {
 	
 	@Test
     public void testCorrectLogin() {
-        assert(this.loginmodel.login("32323232","testuser"));  
+        assert(this.loginmodel.login("testuser","testuser"));  
     }
 
 	@Test
