@@ -54,7 +54,7 @@
             <Cursor fx:constant="NONE" />
          </cursor>
       </MenuButton>
-      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MAN" />
+      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN" />
       <ToggleButton id="kvinneToggle" layoutX="308.0" layoutY="454.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" />
       <TextField id="passord" fx:id="passord" layoutX="509.0" layoutY="309.0" prefHeight="46.0" prefWidth="373.0" promptText="PASSORD">
          <font>
