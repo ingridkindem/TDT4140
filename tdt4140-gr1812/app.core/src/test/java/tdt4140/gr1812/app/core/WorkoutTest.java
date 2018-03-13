@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tdt4140.gr1812.app.core.dataClasses.Sport;
 import tdt4140.gr1812.app.core.dataClasses.Workout;
 
 public class WorkoutTest {
@@ -17,7 +18,8 @@ public class WorkoutTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		this.workout=new Workout(140, true);
+		Sport sport = new Sport("Fotball");
+		this.workout=new Workout(sport, true);
 		
 	}
 	
@@ -50,6 +52,12 @@ public class WorkoutTest {
 	}
 	
 	@Test
+	public void testSetDuration() {
+		workout.setDuration(140);
+		assertEquals("2:20",workout.getDuration());
+	}
+	
+	@Test
 	public void testSetDistance() {
 		workout.setDistance(10);
 		assertEquals(10, workout.getDistance());
@@ -74,15 +82,10 @@ public class WorkoutTest {
 	}
 	
 	@Test
-	public void testGetDuration() {
-		//String testDur="2:20";
-		assertEquals("2:20", workout.getDuration());
-	}
-	
-	/*@Test
 	public void testGetSports() {
-		assertEquals
-	}*/
+		System.out.print(workout.getSport());
+		assertEquals("Fotball", workout.getSport().get(0).getSport());
+	}
 	
 	@Test
 	public void testGetPrivacy() {
