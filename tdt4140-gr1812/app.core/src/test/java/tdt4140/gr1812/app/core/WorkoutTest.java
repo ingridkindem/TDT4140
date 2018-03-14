@@ -3,6 +3,8 @@ package tdt4140.gr1812.app.core;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -16,39 +18,19 @@ public class WorkoutTest {
 	
 	private Workout workout;
 	
+	private Sport sport;
+	
 	@Before
 	public void setUp() throws Exception {
-		Sport sport = new Sport("Fotball");
+		sport = new Sport("Fotball");
 		this.workout=new Workout(sport, true);
 		
 	}
 	
 	@Test
-	public void testSetPulse() {
-		List<Integer> pulses=new ArrayList<Integer>();
-		pulses.add(100);
-		pulses.add(120);
-		pulses.add(200);
-		workout.setPulses(100,120,200);
-		assertEquals(pulses,workout.getPulses());
-	}
-	
-	@Test
-	public void testSetPulsesThrowsIllegalArgumentException() {
-		try {
-			workout.setPulses(251);
-			System.out.println("Should have thrown IllegalArgumentException.");
-			assert false;
-		} catch (IllegalArgumentException e) {
-			assert true;
-		}
-		try {
-			workout.setPulses(0);
-			System.out.println("Should have thrown IllegalArgumentException.");
-			assert false;
-		} catch (IllegalArgumentException e) {
-			assert true;
-		}
+	public void testSetPulses() {
+		workout.setPulses(Arrays.asList(251));
+		assertEquals(Arrays.asList(251), workout.getPulses());
 	}
 	
 	@Test
@@ -58,33 +40,20 @@ public class WorkoutTest {
 	}
 	
 	@Test
-	public void testSetDistance() {
-		workout.setDistance(10);
-		assertEquals(10, workout.getDistance());
-	}
-	
-	@Test
-	public void testSetCalories() {
-		workout.setCalories(200);
-		assertEquals(200, workout.getCalories());
-	}
-	
-	@Test
 	public void testSetDate() {
-		workout.setDate("11/11/11");
-		assertEquals("11/11/11", workout.getDate());
+		workout.setDate(new Date(2018,5,12));
+		assertEquals(new Date(2018,5,12), workout.getDate());
 	}
 	
 	@Test
-	public void testSetComment() {
-		workout.setComment("Dette var en fin Ã¸kt!");
-		assertEquals("Dette var en fin Ã¸kt!", workout.getComment());
+	public void testSetGoal() {
+		workout.setGoal("Dette var en fin økt!");
+		assertEquals("Dette var en fin økt!", workout.getGoal());
 	}
 	
 	@Test
-	public void testGetSports() {
-		System.out.print(workout.getSport());
-		assertEquals("Fotball", workout.getSport().get(0).getSport());
+	public void testGetSport() {
+		assertEquals(this.sport, workout.getSport());
 	}
 	
 	@Test
