@@ -5,17 +5,21 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import tdt4140.gr1812.app.core.dataClasses.Sport;
+import tdt4140.gr1812.app.core.models.workoutRegistration.WorkoutRegistrationModel;
+import tdt4140.gr1812.app.ui.FxApp;
 
 public class WorkoutRegistrationController {
 	
 	//WorkoutRegistrationModel model;
 	
 	@FXML
-	TextField lengdeP√•√òkt;
+	TextField lengdePÂÿkt;
 	@FXML
 	TextField puls;
 	@FXML
-	TextField m√•l;
+	TextField mÂl;
 	@FXML
 	Hyperlink registrer;
 	@FXML
@@ -27,11 +31,17 @@ public class WorkoutRegistrationController {
 	@FXML
 	RadioMenuItem fotball;
 	@FXML
-	CheckBox privat√òkt;
+	CheckBox privatÿkt;
+	@FXML
+	Text feedback;
+	
+	WorkoutRegistrationModel model = new WorkoutRegistrationModel();
+	FxApp app;
+	
 	
 	@FXML
 	public void update() {
-		
+		feedback.setText(model.getText());
 	}
 	
 	@FXML
@@ -39,15 +49,36 @@ public class WorkoutRegistrationController {
 		boolean b = basket.isSelected();
 		boolean f = fotball.isSelected();
 		boolean l = langrenn.isSelected();
-		boolean c = privat√òkt.isPressed();
-		String lengde = lengdeP√•√òkt.getText();
+		boolean c = privatÿkt.isPressed();
+		String lengde = lengdePÂÿkt.getText();
 		String p = puls.getText();
-		String m = m√•l.getText();
+		String m = mÂl.getText();
+		Sport s = null;
+		if (b) {
+			s = new Sport("basket");
+		}
+		if (f) {
+			s = new Sport("fotball");
+		}
+		if (l) {
+			s = new Sport("langrenn");
+		}
+		boolean action = model.WorkoutRegistrationModelInit(Integer.parseInt(lengde), p, s, m, c);
+		if (action) {
+			// gÂ tilbake til brukerens profil
+		}
+		else {
+			update();
+		}
 	}
 	
 	@FXML
 	public void handleKryssUt() {
-		
+		// gÂ tilbke til brukerens profil
+	}
+	
+	public void setApplication(FxApp app) {
+		this.app = app;
 	}
 
 }

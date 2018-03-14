@@ -1,6 +1,7 @@
 package tdt4140.gr1812.app.core.dataClasses;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import tdt4140.gr1812.app.core.dataClasses.Sport;
 
@@ -8,16 +9,14 @@ public class Workout {
 	
 	private List<Integer> pulses= new ArrayList<Integer>();
 	private int duration;
-	private int distance;
-	private List<Sport> sports = new ArrayList<Sport>();
-	private int calories;
-	private String comment;
-	private String date;
+	private Sport sport;
+	private String goal;
+	private Date date;
 	private boolean privacy; //true=private
 	
 	//Constructor to create a workout. Initialized with sport and possibilty for privacy mode.
 	public Workout(Sport sport, boolean privacy) {
-		this.sports.add(sport);
+		this.sport = sport;
 		this.privacy=privacy;
 	}
 	
@@ -31,30 +30,23 @@ public class Workout {
 		this.duration=duration*60; //converting from minutes to seconds
 	}
 	
-	public void setPulses(int...pulses) {
-		for (int pulse : pulses) {
-			if (pulse<=0 || pulse>250) {
-				throw new IllegalArgumentException("See a doctor.");
-			}
-			this.pulses.add(pulse);
-		}
-	}
-	//distance in km
-	public void setDistance(int distance) {
-		this.distance=distance;
-	}
-	
-	public void setCalories(int calories) {
-		this.calories=calories;
+	public void setPulses(List<Integer> pulses) {
+//		for (int pulse : pulses) {
+//			if (pulse<=0 || pulse>250) {
+//				throw new IllegalArgumentException("See a doctor.");
+//			}
+//			this.pulses.add(pulse);
+//		}
+		this.pulses=pulses;
 	}
 	
 	//set date, format "dd/mm/yy"
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date=date;
 	}
 	
-	public void setComment(String comment) {
-		this.comment=comment;
+	public void setGoal(String goal) {
+		this.goal=goal;
 	}
 	
 	//getters for attributes
@@ -86,8 +78,8 @@ public class Workout {
 		return durationString;
 	}
 	
-	public List<Sport> getSport() {
-		return sports;
+	public Sport getSport() {
+		return sport;
 	}
 	
 	public boolean getPrivacy() {
@@ -98,19 +90,11 @@ public class Workout {
 		return pulses;
 	}
 	
-	public int getDistance() {
-		return distance;
-	}
-	
-	public int getCalories() {
-		return calories;
-	}
-	
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public String getComment() {
-		return comment;
+	public String getGoal() {
+		return goal;
 	}
 }

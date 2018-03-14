@@ -10,6 +10,7 @@ public class FxApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+<<<<<<< HEAD
     		this.stage = stage;
         goToLogin();
         
@@ -74,6 +75,12 @@ public class FxApp extends Application {
 				e.printStackTrace();
 			}
 
+=======
+        Parent root = FXMLLoader.load(getClass().getResource("views/workoutRegistrationView/WorkoutRegistrationView.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+>>>>>>> Made Athletes workout registration MVC #70 #36 #69
     }
 
     public static void main(String[] args) {
