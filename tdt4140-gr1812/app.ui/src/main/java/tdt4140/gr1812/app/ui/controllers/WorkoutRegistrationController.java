@@ -15,11 +15,11 @@ public class WorkoutRegistrationController {
 	//WorkoutRegistrationModel model;
 	
 	@FXML
-	TextField lengdePåØkt;
+	TextField lengdePÃ¥Ã˜kt;
 	@FXML
 	TextField puls;
 	@FXML
-	TextField mål;
+	TextField mÃ¥l;
 	@FXML
 	Hyperlink registrer;
 	@FXML
@@ -31,7 +31,7 @@ public class WorkoutRegistrationController {
 	@FXML
 	RadioMenuItem fotball;
 	@FXML
-	CheckBox privatØkt;
+	CheckBox privatÃ˜kt;
 	@FXML
 	Text feedback;
 	
@@ -45,14 +45,14 @@ public class WorkoutRegistrationController {
 	}
 	
 	@FXML
-	public void handleRegistrer() {
+	public boolean handleRegistrer() {
 		boolean b = basket.isSelected();
 		boolean f = fotball.isSelected();
 		boolean l = langrenn.isSelected();
-		boolean c = privatØkt.isPressed();
-		String lengde = lengdePåØkt.getText();
+		boolean c = privatÃ˜kt.isPressed();
+		String lengde = lengdePÃ¥Ã˜kt.getText();
 		String p = puls.getText();
-		String m = mål.getText();
+		String m = mÃ¥l.getText();
 		Sport s = null;
 		if (b) {
 			s = new Sport("basket");
@@ -65,16 +65,18 @@ public class WorkoutRegistrationController {
 		}
 		boolean action = model.WorkoutRegistrationModelInit(Integer.parseInt(lengde), p, s, m, c);
 		if (action) {
-			// gå tilbake til brukerens profil
+			// gï¿½ tilbake til brukerens profil
+			return true;
 		}
 		else {
 			update();
+			return false;
 		}
 	}
 	
 	@FXML
 	public void handleKryssUt() {
-		// gå tilbke til brukerens profil
+		// gï¿½ tilbke til brukerens profil
 	}
 	
 	public void setApplication(FxApp app) {

@@ -3,6 +3,7 @@ package tdt4140.gr1812.app.core;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -21,7 +22,10 @@ public class WorkoutRegistrationModelTest {
 			assert false;
 		} catch (IllegalArgumentException e) {
 			assert true;
-		}
+		} 
+		List<Integer> liste = model.checkPulse("50,60,70");
+		List<Integer> fasitListe = Arrays.asList(50,60,70);
+		assertEquals(liste, fasitListe);
 	}
 	
 	public void testCheckDuration() {
@@ -30,7 +34,12 @@ public class WorkoutRegistrationModelTest {
 			System.out.println("Should have thrown IllegalArgumentException.");
 			assert false;
 		} catch (IllegalArgumentException e) {
-			assert true;
+			try {
+				model.checkDuration(30);
+				assert true;
+			} catch (Exception e2) {
+				assert false;
+			}
 		}
 	}
 	
@@ -40,13 +49,21 @@ public class WorkoutRegistrationModelTest {
 			System.out.println("Should have thrown IllegalArgumentException.");
 			assert false;
 		} catch (IllegalArgumentException e) {
-			assert true;
-		}
+			try {
+				model.checkSport(new Sport(""));
+				assert true;
+			} catch (Exception e2) {
+				assert false;
+			}
+		} 
+		assertEquals(model.getText(), "Sport field is empty");
 	}
 	
 	public void testWorkoutRegistrationModelInit() {
 		boolean t = model.WorkoutRegistrationModelInit(20, "70,90,100", new Sport("fotball"), "Hei", true);
 		assertTrue(t);
+		boolean t2 = model.WorkoutRegistrationModelInit(20, "70,90,100", new Sport("fotball"), "Hei", false);
+		assertTrue(t2);
 		boolean f = model.WorkoutRegistrationModelInit(-20, "70,90,100", new Sport("fotball"), "Hei", true);
 		assertFalse(f);
 	}
