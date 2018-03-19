@@ -4,38 +4,38 @@ public class Coach {
     
     private String name;
     private int age;
-    private String sport;
+    private Sport sport;
     
-    public Coach(String name, int age, String sport) {
+    
+    //Constructor to create a Coach. Init with name and sport.
+    public Coach(String name, Sport sport) {
         this.name=name;
-        this.age=age;
         this.sport=sport;
     }
+        
+    // Set age
+    public void setAge(int age) {
+        if (age<0 || age>150) {
+            throw new IllegalArgumentException("Illegal age");
+        }
+        this.age = age;
+
+    }
     
+    //Getters for attributes
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        if (name.matches("[a-zA-Z ]+ ")==true) {
-            this.name = name;
-        }
         
-    }
+    
     public int getAge() {
         return age;
     }
-    public void setAge(int age) {
-        if (age>=0 && age<150) {
-            this.age = age;
-        }
-       
-    }
-    public String getSport() {
+
+    public Sport getSport() {
         return sport;
     }
-    public void setSport(String sport) {
-        this.sport = sport;
-    }
+
     
     
 
