@@ -1,3 +1,8 @@
+How to run application: 
+Run file tdt4140.gr1812.app.ui.FxApp.java
+
+
+
 #readme - PU-group 12
 
 #Internal guidelines for gitlab 
