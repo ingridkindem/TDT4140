@@ -21,7 +21,7 @@ public class CoachTest {
         this.coach=new Coach("Ingrid",sport);
     }
     
-    /*@Test
+    @Test
     public void testSetAgeThrowsIllegalArgumentException() {
         try {
             coach.setAge(151);
@@ -39,7 +39,7 @@ public class CoachTest {
         catch (IllegalArgumentException e) {
             assert true;
         }
-    }*/
+    }
     
     @Test
     public void testSetAge() {

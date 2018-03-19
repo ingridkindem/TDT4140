@@ -26,7 +26,7 @@ public class FxApp extends Application {
     		//Parent root = FXMLLoader.load(getClass().getResource("/views/login/lo.fxml"));
         //Scene scene = new Scene(root);
         //stage.setScene(scene);
-        //stage.show();
+        //stage.show(); hello world
     }
     
     public void goToLoggedIn() {
