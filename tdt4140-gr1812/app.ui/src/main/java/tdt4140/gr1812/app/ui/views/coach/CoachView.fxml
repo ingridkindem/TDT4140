@@ -21,11 +21,7 @@
             <Image url="@trenerView1.jpg" />
          </image>
       </ImageView>
-      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="586.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="Utøvere" textFill="#fcf5f5" wrapText="true">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
+      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" onAction="#athletesButtonAction" prefHeight="46.0" prefWidth="586.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="Utøvere" textFill="#fcf5f5" wrapText="true">
          <font>
             <Font name="Futura Medium" size="17.0" />
          </font>
@@ -36,17 +32,19 @@
             <Insets left="10.0" />
          </opaqueInsets>
       </MenuButton>
-      <ScrollBar layoutX="769.0" layoutY="288.0" orientation="VERTICAL" />
-      <MenuButton fx:id="sportsButton" layoutX="385.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sportsButtonAction" prefHeight="81.0" prefWidth="384.0" style="-fx-background-radius: 15;" stylesheets="@coach_stylesheet.css" text="VELG IDRETT" textFill="WHITE">
+      <MenuButton fx:id="sportsButton" layoutX="385.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="81.0" prefWidth="384.0" style="-fx-background-radius: 15;" stylesheets="@coach_stylesheet.css" text="VELG IDRETT" textFill="WHITE">
          <font>
             <Font name="Futura Medium" size="29.0" />
          </font>
          <padding>
             <Insets right="10.0" />
          </padding>
-         <graphic>
-            <ScrollBar fx:id="scrollbar_sport" orientation="VERTICAL" prefHeight="76.0" prefWidth="8.0" />
-         </graphic>
       </MenuButton>
+      <TableView fx:id="athletestable" layoutX="209.0" layoutY="288.0" prefHeight="200.0" prefWidth="581.0" style="-fx-background-radius: 15;">
+        <columns>
+          <TableColumn prefWidth="286.3631134033203" text="Navn" />
+          <TableColumn prefWidth="293.6368408203125" text="Mobilnummer" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

@@ -1,16 +1,24 @@
 package tdt4140.gr1812.app.ui.controllers;
 
 
+import java.awt.Event;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
-
+import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.dataClasses.Athlete;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
@@ -32,8 +40,12 @@ public class CoachController {
     private MenuButton athletesButton;
     
     @FXML
+    private TableView<String> athletestable;
+    
+    @FXML
     public void initialize() {
         this.atCoachView = true;
+        this.athletestable.setVisible(false);
         update();
     }
     
@@ -44,26 +56,10 @@ public class CoachController {
     }
     
     @FXML
-    public void sportsButtonAction(ArrayList<String> differentSports){
-        
-        for (String item : differentSports) {
-            
-            sportsButton.getItems().add(new MenuItem(item));
-        } 
+    public void athletesButtonAction() {
+       this.athletestable.setVisible(true);
     }
-    
-    @FXML
-    public void athletesButtonAction(ArrayList<Athlete> differentAthletes){
-        
-        for (Athlete item : differentAthletes) {
-            
-            String name = item.getFullName();
-            String phoneNumber = item.getPhoneNumber();
-            
-            athletesButton.getItems().add(new MenuItem(name + phoneNumber)); //r.just?
-        } 
-
-    }
+   
         
     @FXML
     public void handleSport() { 
@@ -87,5 +83,46 @@ public class CoachController {
     public void setApplication(FxApp app) {
         this.app = app;
     }
+
+    
+
+
+    /*@Override
+    public void handle(javafx.event.ActionEvent event) {
+        if (event.equals(sportsButton)) {
+            this.sportsButtonAction();
+        }
+        else if (event.equals(athletesButton)) {
+            this.athletesButtonAction();
+        }
+        
+    }
+    
+    @FXML
+    public void sportsButtonAction(){ //ArrayList<String> differentSports Legg til denne i args her
+        
+        //for (String item : differentSports) {
+            sportsButton.getItems().add(new MenuItem("new")); //Her skal det legges til Item.
+        //} 
+
+    }
+    
+    @FXML
+    public void athletesButtonAction(){ //ArrayList<Athlete> differentAthletes skal inni args her
+        
+        for (Athlete item : differentAthletes) {
+            
+            String name = item.getFullName();
+            String phoneNumber = item.getPhoneNumber();    
+        
+            MenuItem utøver = new MenuItem(name);
+            utøver.setAccelerator(KeyCombination.keyCombination(phoneNumber));
+            athletesButton.getItems().add(utøver);
+        } 
+        MenuItem utøver = new MenuItem("Hei");
+        utøver.setAccelerator(KeyCombination.keyCombination("18282109"));
+        athletesButton.getItems().add(utøver);
+    }
+    */
     
 }
