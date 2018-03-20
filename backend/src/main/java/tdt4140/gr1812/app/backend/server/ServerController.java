@@ -151,6 +151,37 @@ public class ServerController {
     	 return feedback;
     }
    
-    
+    @RequestMapping("sportForCoach")
+    public String requestSportForCoach(@RequestParam("username") String username) {
+    	
+    	String feedback = "";
+    	
+    	try{
+			String getSportForCoachResult = ServerLogic.getSportForCoach(username);
+			if (getSportForCoachResult != "") {
+				JSONObject responseObject = new JSONObject().put("status", getSportForCoachResult);  
+				feedback = responseObject.toString(); 
+			}
+			else {
+				feedback = new JSONObject()
+		                  .put("status", "failed").toString();
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			try {
+				feedback = new JSONObject()
+				          .put("status", "failed").toString();
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+    	
+    	
+    	
+    	
+    	return feedback; 
 
+    }
 }
