@@ -74,4 +74,45 @@ public class ServerController {
     public String index() {
     		return "Welcome. I am your server.";
     }
+    
+    
+    @RequestMapping("workoutRegistration")
+    public String workoutRegistration(@RequestParam("duration") String duration,
+    									 @RequestParam("pulses") String pulses,
+    									 @RequestParam("goal") String goal,
+    									 @RequestParam("sport") String sport,
+    									 @RequestParam("privacy") String privacy) {
+    	
+    	String feedback = "";
+    	
+    	try{
+			boolean workoutRegistrationResult = ServerLogic.registerWorkout(duration, pulses, goal, sport, privacy);
+			if (workoutRegistrationResult) {
+				JSONObject responseObject = new JSONObject().put("status", "success");  
+				feedback = responseObject.toString(); 
+			}
+			else {
+				feedback = new JSONObject()
+		                  .put("status", "failed").toString();
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			try {
+				feedback = new JSONObject()
+				          .put("status", "failed").toString();
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+    	
+    	
+    	
+    	
+    	return feedback;
+
+    }
+    
+
 }
