@@ -8,6 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ServerLogic { // class mainly for handling connection to mySQL
 
 
@@ -96,9 +101,111 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             	 		}
             	 	}
              }
-    	
+             
+      
     }
+        
+       public static boolean registerWorkout(String username,
+    		   									String duration,
+    		   								    String pulses,
+    		   								    String goal,
+    		   								    String sport,
+    		   								    String privacy) {
+    	   
+    	   	   MysqlDataSource dataSource = new MysqlDataSource();
+           dataSource.setUser("root");
+           dataSource.setPassword("cygnus6cygnus");
+           dataSource.setServerName("localhost");
+           dataSource.setPort(3306);
+           dataSource.setDatabaseName("PU");
+           
+           String sql = "insert into workouts (username, duration, pulses, goal, sport, privacy)" +
+           		"values (?, ?, ?, ?, ?, ?)";
+           
+           Connection conn = null;
+           Boolean success = true;
+           
+           try {
+        	   		conn = dataSource.getConnection();
+        	   		PreparedStatement ps = conn.prepareStatement(sql);
+        	   		ps.setString(1,  username);
+        	   		ps.setInt(2, Integer.parseInt(duration));
+        	   		ps.setString(3,  pulses);
+        	   		ps.setString(4,  goal);
+        	   		ps.setString(5,  sport);
+        	   		ps.setString(6,  privacy);
+        	   		int ex = ps.executeUpdate();
+        	   		if (ex>=1) {
+        	   			success = true;
+        	   		}else {
+        	   			success = false;
+        	   		}
+        	   	
+        	   
+           }catch (SQLException e) {
+        	   		success = false;
+        	   		throw new RuntimeException(e);
+        	   		
+        	   		
+           }finally 
+           {
+	        	   if (conn!=null) {
+	       	 		try {
+	       	 			conn.close();
+	       	 		}catch (SQLException e) {
+	       	 
+	       	 		}
+           }  	   
+        }        
+       return success;}  
+       
+       public static ArrayList<JSONObject> getAthletesInSport(String sport) {
+			
+  	 	 MysqlDataSource dataSource = new MysqlDataSource();
+       dataSource.setUser("root");
+       dataSource.setPassword("cygnus6cygnus");
+       dataSource.setServerName("localhost");
+       dataSource.setPort(3306);
+       dataSource.setDatabaseName("PU");
+       
+       String sql = "select firstname, surname, username from users where sport = ?";
+       
+       Connection conn = null;
+       ResultSet resultSet = null; // needed for reading output from database
+       ArrayList<JSONObject> users = new ArrayList<JSONObject>();
+       
+       try {
+          	 conn = dataSource.getConnection();
+               PreparedStatement ps = conn.prepareStatement(sql);
+               ps.setString(1,  sport);
+               resultSet = ps.executeQuery();
+               while (resultSet.next()) {
+            	   		try {
+            	   			JSONObject user = new JSONObject();
+                	   		user.put("firstname", resultSet.getString(1));
+                	   		user.put("surname", resultSet.getString(2));
+                	   		user.put("username", resultSet.getString(3));
+                	   		users.add(user);
+            	   		} catch (JSONException e) {
+            	   			e.printStackTrace();
+            	   		}
+            	   		
+               }
+               
+       }catch (SQLException e) {            	 
+      	 	throw new RuntimeException(e);
+       } finally {
+      	 	if (conn!=null) {
+      	 		try {
+      	 			conn.close();
+      	 		}catch (SQLException e) {
+      	 		}
+      	 	}
+       }
+       
 
+       return users;}
+       
 }
 
 
