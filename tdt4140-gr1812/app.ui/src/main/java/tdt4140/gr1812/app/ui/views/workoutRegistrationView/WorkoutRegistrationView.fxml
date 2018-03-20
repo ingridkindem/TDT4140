@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-4.0" layoutY="1.0">
+         <image>
+            <Image url="@toralf_pu-03.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="lengdePåØkt" layoutX="112.0" layoutY="273.0" prefHeight="46.0" prefWidth="382.0" promptText="lengde på økt (i minutter)">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="puls" layoutX="113.0" layoutY="343.0" prefHeight="50.0" prefWidth="380.0" promptText="puls (separert med komma)">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="mål" alignment="TOP_LEFT" layoutX="511.0" layoutY="270.0" prefHeight="127.0" prefWidth="387.0" promptText="mål for økt">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <MenuButton fx:id="idrett" cache="true" cacheHint="SCALE" contentDisplay="CENTER" layoutX="114.0" layoutY="422.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="387.0" style="-fx-background-color: #70dbdb;" text="IDRETT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+         <items>
+            <RadioMenuItem fx:id="fotball" mnemonicParsing="false" text="Fotball">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Sporter" />
+               </toggleGroup></RadioMenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <RadioMenuItem fx:id="basket" mnemonicParsing="false" text="Basket" toggleGroup="$Sporter" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <RadioMenuItem fx:id="langrenn" mnemonicParsing="false" text="Langrenn" toggleGroup="$Sporter" />
+         </items>
+      </MenuButton>
+      <Hyperlink fx:id="registrer" layoutX="384.0" layoutY="537.0" onAction="#handleRegistrer" prefHeight="60.0" prefWidth="230.0" />
+      <CheckBox fx:id="privatØkt" layoutX="532.0" layoutY="416.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="60.0">
+         <font>
+            <Font name="System Italic" size="24.0" />
+         </font>
+      </CheckBox>
+      <Hyperlink fx:id="kryssUt" layoutX="108.0" layoutY="164.0" onAction="#handleKryssUt" prefHeight="38.0" prefWidth="38.0" />
+      <Text fx:id="feedback" fill="RED" layoutX="111.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="386.45751190185547">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
