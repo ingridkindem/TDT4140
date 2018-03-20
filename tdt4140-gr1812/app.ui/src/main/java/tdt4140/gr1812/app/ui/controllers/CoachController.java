@@ -7,7 +7,10 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+<<<<<<< HEAD
 import javafx.scene.control.MenuItem;
+=======
+>>>>>>> 8257c39143d8f797e7c3548127463b35b8cee0d7
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -37,6 +40,7 @@ public class CoachController {
     }
     
     public void update() {
+
         sportsButton.getItems().clear();
         athletesButton.getItems().clear();
     }
@@ -60,6 +64,7 @@ public class CoachController {
             
             athletesButton.getItems().add(new MenuItem(name + phoneNumber));
         } 
+
     }
         
     @FXML
