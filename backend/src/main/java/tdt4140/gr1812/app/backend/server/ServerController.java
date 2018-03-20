@@ -3,6 +3,10 @@ package tdt4140.gr1812.app.backend.server;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,6 +118,39 @@ public class ServerController {
     	return feedback;
 
     }
+    @RequestMapping("athletesInSport")
+    public String requestAthletesInSport(@RequestParam("sport") String sport) {
+    	
+    	String feedback = "";
+    	
+    	try{
+			ArrayList<JSONObject> AthletesInSport = ServerLogic.getAthletesInSport(sport);
+			if (AthletesInSport.size()<1) {
+				JSONObject responseObject = new JSONObject().put("status", "No athletes in sport");  
+				 feedback = responseObject.toString(); 
+			}else if (AthletesInSport.size()>=1) {
+				for (int i = 0; i < AthletesInSport.size(); i++) {
+					feedback += AthletesInSport.get(i).toString();
+				}
+			}
+			else {
+				 feedback = new JSONObject()
+		                  .put("status", "failed").toString();
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			try {
+				feedback = new JSONObject()
+				          .put("status", "failed").toString();
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+    	 return feedback;
+    }
+   
     
 
 }
