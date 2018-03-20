@@ -206,6 +206,45 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 
        return users;}
        
+       
+       public static String getSportForCoach(String username) {
+   			
+       	 	 MysqlDataSource dataSource = new MysqlDataSource();
+            dataSource.setUser("root");
+            dataSource.setPassword("cygnus6cygnus");
+            dataSource.setServerName("localhost");
+            dataSource.setPort(3306);
+            dataSource.setDatabaseName("PU");
+            
+            String sql = "select sport from users where username = ?";
+            
+            Connection conn = null;
+            ResultSet resultSet = null; // needed for reading output from database
+            String feedback = "";
+            try {
+	            	 conn = dataSource.getConnection();
+	                 PreparedStatement ps = conn.prepareStatement(sql);
+	                 ps.setString(1,  username);
+	                 resultSet = ps.executeQuery();
+	                 if (resultSet.next() ) { //seeing if query returns empty table of data	    
+	                	    feedback = resultSet.getString(1);
+	                	} 
+	                 else {
+	                	 feedback = "Not a registered coach";
+	                 }
+            }catch (SQLException e) {            	 
+           	 	throw new RuntimeException(e);
+            } finally {
+           	 	if (conn!=null) {
+           	 		try {
+           	 			conn.close();
+           	 		}catch (SQLException e) {
+           	 		}
+           	 	}
+            }
+            
+     return feedback;
+   }       
 }
 
 
