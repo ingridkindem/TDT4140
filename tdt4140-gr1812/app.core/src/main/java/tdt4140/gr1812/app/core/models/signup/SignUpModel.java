@@ -57,11 +57,11 @@ public class SignUpModel {
 	
 	public boolean signupUser(String phonenumber, String password, String sport, String firstName, String surname, String maxpulse, String weight, Gender gender) {
 		try {
+			this.setcellPhoneNumber(phonenumber);
 			this.setfirstName(firstName);
 			this.setsurName(surname);
-			this.setcellPhoneNumber(phonenumber);
-			this.setmaxPulse(maxpulse);
 			this.setPassWord(password);
+			this.setmaxPulse(maxpulse);
 			this.setweight(weight);
 
 			String genderString = gender == gender.FEMALE ? "female" : "male";  
@@ -121,7 +121,7 @@ public class SignUpModel {
 		return this.passWord;
 	}
 	public void setPassWord(String password) {
-	    if (password == ""){
+	    if (password.equals("")){
 	    		this.feedback = "Illegal password.";
             throw new IllegalArgumentException("Du kan ikke ikke ha noe navn");
         }
