@@ -11,6 +11,7 @@ public class FxApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 <<<<<<< HEAD
+<<<<<<< HEAD
     		this.stage = stage;
         goToLogin();
         
@@ -76,11 +77,16 @@ public class FxApp extends Application {
 			}
 
 =======
+=======
+>>>>>>> 1e906e44efb0eefd46b720b2d72bcd992ad740a8
         Parent root = FXMLLoader.load(getClass().getResource("views/workoutRegistrationView/WorkoutRegistrationView.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+<<<<<<< HEAD
 >>>>>>> Made Athletes workout registration MVC #70 #36 #69
+=======
+>>>>>>> 1e906e44efb0eefd46b720b2d72bcd992ad740a8
     }
 
     public static void main(String[] args) {
