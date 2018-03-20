@@ -77,7 +77,8 @@ public class ServerController {
     
     
     @RequestMapping("workoutRegistration")
-    public String workoutRegistration(@RequestParam("duration") String duration,
+    public String workoutRegistration(@RequestParam("username") String username, //need this from model
+    									 @RequestParam("duration") String duration,
     									 @RequestParam("pulses") String pulses,
     									 @RequestParam("goal") String goal,
     									 @RequestParam("sport") String sport,
@@ -86,7 +87,7 @@ public class ServerController {
     	String feedback = "";
     	
     	try{
-			boolean workoutRegistrationResult = ServerLogic.registerWorkout(duration, pulses, goal, sport, privacy);
+			boolean workoutRegistrationResult = ServerLogic.registerWorkout(username, duration, pulses, goal, sport, privacy);
 			if (workoutRegistrationResult) {
 				JSONObject responseObject = new JSONObject().put("status", "success");  
 				feedback = responseObject.toString(); 

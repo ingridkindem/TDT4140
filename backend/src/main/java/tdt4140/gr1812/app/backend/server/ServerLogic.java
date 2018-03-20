@@ -102,11 +102,12 @@ public class ServerLogic { // class mainly for handling connection to mySQL
       
     }
         
-       public static boolean registerWorkout(String duration,
-    		   								 String pulses,
-    		   								 String goal,
-    		   								 String sport,
-    		   								 String privacy) {
+       public static boolean registerWorkout(String username,
+    		   									String duration,
+    		   								    String pulses,
+    		   								    String goal,
+    		   								    String sport,
+    		   								    String privacy) {
     	   
     	   	   MysqlDataSource dataSource = new MysqlDataSource();
            dataSource.setUser("root");
@@ -115,8 +116,8 @@ public class ServerLogic { // class mainly for handling connection to mySQL
            dataSource.setPort(3306);
            dataSource.setDatabaseName("PU");
            
-           String sql = "insert into workouts (duration, pulses, goal, sport, privacy)" +
-           		"values (?, ?, ?, ?, ?)";
+           String sql = "insert into workouts (username, duration, pulses, goal, sport, privacy)" +
+           		"values (?, ?, ?, ?, ?, ?)";
            
            Connection conn = null;
            Boolean success = true;
@@ -124,11 +125,12 @@ public class ServerLogic { // class mainly for handling connection to mySQL
            try {
         	   		conn = dataSource.getConnection();
         	   		PreparedStatement ps = conn.prepareStatement(sql);
-        	   		ps.setInt(1, Integer.parseInt(duration));
-        	   		ps.setString(2,  pulses);
-        	   		ps.setString(3,  goal);
-        	   		ps.setString(4,  sport);
-        	   		ps.setString(5,  privacy);
+        	   		ps.setString(1,  username);
+        	   		ps.setInt(2, Integer.parseInt(duration));
+        	   		ps.setString(3,  pulses);
+        	   		ps.setString(4,  goal);
+        	   		ps.setString(5,  sport);
+        	   		ps.setString(6,  privacy);
         	   		int ex = ps.executeUpdate();
         	   		if (ex>=1) {
         	   			success = true;
@@ -150,12 +152,10 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 	       	 		}catch (SQLException e) {
 	       	 
 	       	 		}
-           }
-     	   
-        }
-     	
-
-       return success;}
+           }  	   
+        }        
+       return success;}      
+       
 }
 
 
