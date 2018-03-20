@@ -1,9 +1,12 @@
 package tdt4140.gr1812.app.ui.controllers;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -15,20 +18,16 @@ import tdt4140.gr1812.app.ui.FxApp;
 
 public class CoachController {
 
-
-    //Coach coach;
     private boolean atCoachView; //for testing
-    @FXML
-    private Text prompt;
-    @FXML
-    private PasswordField setPassword;
-    @FXML
-    private TextField setPhoneNumber;
+    private List<Athlete> athletes = new ArrayList<>();
+    private List<String> sports = new ArrayList<>();
+    private FxApp app; 
     
-    private FxApp app;
+    @FXML
+    private MenuButton sportsButton;
     
-    private String p = "";
-   
+    @FXML
+    private MenuButton athletesButton;
     
     @FXML
     public void initialize() {
@@ -39,16 +38,25 @@ public class CoachController {
     public void update() {
         // need to reset sport -> athlete -> table
     }
+    
+    @FXML
+    public void sportsButtonAction(){
+        
+    }
         
     @FXML
     public void handleSport() { 
-    //method for updating the athlete list after choosing sport    
-    		List<Athlete> athleter =  CoachModel.getAthletesForSport("basket");
-    		List<String> sporter = CoachModel.getSportsForCoach("46643025");
+    //method for handling sports to each coach 
+    		this.sports = CoachModel.getSportsForCoach("46643025");
+    		
     }
     
-
-    
+    @FXML
+    public void handleAthletes() {
+    //method for handling athletes to each sport
+        this.athletes =  CoachModel.getAthletesForSport("basket");
+    }
+   
     
     public boolean getAtCoachView() {
         return this.atCoachView;

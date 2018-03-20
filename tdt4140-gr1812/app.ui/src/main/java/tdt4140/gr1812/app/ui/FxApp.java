@@ -20,13 +20,10 @@ public class FxApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
-//=======
         Parent root = FXMLLoader.load(getClass().getResource("views/coach/CoachView.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-//>>>>>>> origin/CoachView#49
     }
 
     public static void main(String[] args) {
