@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,6 +48,20 @@ public class CoachController {
     public void initialize() {
         this.atCoachView = true;
         this.athletestable.setVisible(false);
+        
+        athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) 
+            {
+                 if(newValue.booleanValue()) {
+                	 	athletestable.setVisible(true);
+                 }
+                 else {
+                	 	athletestable.setVisible(false);
+                 }
+                      
+            }
+                      
+       });
         update();
     }
     
@@ -57,7 +73,8 @@ public class CoachController {
     
     @FXML
     public void athletesButtonAction() {
-       this.athletestable.setVisible(true);
+    	   System.out.println("We are in Athlete click");
+//       this.athletestable.setVisible(true);
     }
    
         
