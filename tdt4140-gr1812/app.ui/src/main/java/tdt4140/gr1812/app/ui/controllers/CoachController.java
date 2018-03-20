@@ -1,11 +1,15 @@
 package tdt4140.gr1812.app.ui.controllers;
 
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import tdt4140.gr1812.app.core.dataClasses.Athlete;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
+import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 import tdt4140.gr1812.app.ui.FxApp;
 
 
@@ -39,27 +43,11 @@ public class CoachController {
     @FXML
     public void handleSport() { 
     //method for updating the athlete list after choosing sport    
-        if (coachView.sport_fotball == true) {
-            coachView.athletes.fotball = true;
-        }
-        else if (coachView.sport_langrenn == true) {
-            coachView.athletes.langrenn = true;
-
-        }
-        else if (coachView.sport_basket == true) {
-            coachView.athletes.basket = true;
-
-        }
-        else {
-            coachView.athletes.empty = true;
-        }
+    		List<Athlete> athleter =  CoachModel.getAthletesForSport("basket");
+    		List<String> sporter = CoachModel.getSportsForCoach("46643025");
     }
     
-    @FXML
-    public boolean handleAthlete() { 
-    //method for updating the training session list after choosing athlete    
 
-    }
     
     
     public boolean getAtCoachView() {
