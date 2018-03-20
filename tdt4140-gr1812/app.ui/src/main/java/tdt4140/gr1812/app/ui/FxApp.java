@@ -1,24 +1,32 @@
 package tdt4140.gr1812.app.ui;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tdt4140.gr1812.app.ui.controllers.LoginController;
+import tdt4140.gr1812.app.ui.controllers.SignupController;
+
 
 public class FxApp extends Application {
+	
+	private FXMLLoader fxmlLoader;
+	private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
-<<<<<<< HEAD
-<<<<<<< HEAD
     		this.stage = stage;
         goToLogin();
         
     		//Parent root = FXMLLoader.load(getClass().getResource("/views/login/lo.fxml"));
         //Scene scene = new Scene(root);
         //stage.setScene(scene);
-        //stage.show(); hello world
+        //stage.show();
     }
     
     public void goToLoggedIn() {
@@ -75,18 +83,6 @@ public class FxApp extends Application {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-=======
-=======
->>>>>>> 1e906e44efb0eefd46b720b2d72bcd992ad740a8
-        Parent root = FXMLLoader.load(getClass().getResource("views/workoutRegistrationView/WorkoutRegistrationView.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-<<<<<<< HEAD
->>>>>>> Made Athletes workout registration MVC #70 #36 #69
-=======
->>>>>>> 1e906e44efb0eefd46b720b2d72bcd992ad740a8
     }
 
     public static void main(String[] args) {
