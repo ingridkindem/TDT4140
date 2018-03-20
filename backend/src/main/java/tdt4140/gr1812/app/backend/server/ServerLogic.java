@@ -10,6 +10,9 @@ import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ServerLogic { // class mainly for handling connection to mySQL
 
 
@@ -154,7 +157,54 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 	       	 		}
            }  	   
         }        
-       return success;}      
+       return success;}  
+       
+       public static ArrayList<JSONObject> getAthletesInSport(String sport) {
+			
+  	 	 MysqlDataSource dataSource = new MysqlDataSource();
+       dataSource.setUser("root");
+       dataSource.setPassword("cygnus6cygnus");
+       dataSource.setServerName("localhost");
+       dataSource.setPort(3306);
+       dataSource.setDatabaseName("PU");
+       
+       String sql = "select firstname, surname, username from users where sport = ?";
+       
+       Connection conn = null;
+       ResultSet resultSet = null; // needed for reading output from database
+       ArrayList<JSONObject> users = new ArrayList<JSONObject>();
+       
+       try {
+          	 conn = dataSource.getConnection();
+               PreparedStatement ps = conn.prepareStatement(sql);
+               ps.setString(1,  sport);
+               resultSet = ps.executeQuery();
+               while (resultSet.next()) {
+            	   		try {
+            	   			JSONObject user = new JSONObject();
+                	   		user.put("firstname", resultSet.getString(1));
+                	   		user.put("surname", resultSet.getString(2));
+                	   		user.put("username", resultSet.getString(3));
+                	   		users.add(user);
+            	   		} catch (JSONException e) {
+            	   			e.printStackTrace();
+            	   		}
+            	   		
+               }
+               
+       }catch (SQLException e) {            	 
+      	 	throw new RuntimeException(e);
+       } finally {
+      	 	if (conn!=null) {
+      	 		try {
+      	 			conn.close();
+      	 		}catch (SQLException e) {
+      	 		}
+      	 	}
+       }
+       
+
+       return users;}
        
 }
 
