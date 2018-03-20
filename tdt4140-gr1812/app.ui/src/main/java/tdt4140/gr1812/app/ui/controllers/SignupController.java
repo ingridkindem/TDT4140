@@ -8,8 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.models.signup.SignUpModel;
 import tdt4140.gr1812.app.ui.FxApp;
@@ -30,7 +32,7 @@ public class SignupController {
     private TextField etternavn;
     
     @FXML
-    private TextField passord;
+    private PasswordField passord;
     
     @FXML
     private TextField makspuls;
@@ -48,6 +50,9 @@ public class SignupController {
     private ToggleButton manToggle;
     
     @FXML
+    private Text feedback;
+    
+    @FXML
     private void registerButtonClicked(ActionEvent event) {
         // Button was clicked, do something...
         SignUpModel model = new SignUpModel();
@@ -60,16 +65,23 @@ public class SignupController {
         else {
             gender = Gender.FEMALE; 
         }
+     
+        	boolean registerSuccess = model.signupUser(mobilnummer.getText(), passord.getText(), 
+            selectedSport, fornavn.getText(), etternavn.getText(), makspuls.getText(), vekt.getText(), gender);
         
-        boolean registerSuccess = model.signupUser(Integer.parseInt(mobilnummer.getText()), passord.getText(), 
-                selectedSport, fornavn.getText(), etternavn.getText(), Integer.parseInt(makspuls.getText()), Integer.parseInt(vekt.getText()), gender);
-        
+        	this.feedback.setText(model.getFeedback());
+        	
         if(registerSuccess) {
             app.goToSuccessfullSignup();
         }
         else {
             System.out.println("No success in register :,( ");
         }
+    }
+    
+    @FXML 
+    private void backButtonClicked(ActionEvent event) {
+    		app.goToLogin();
     }
     
     private String selectedSport = "Basket";

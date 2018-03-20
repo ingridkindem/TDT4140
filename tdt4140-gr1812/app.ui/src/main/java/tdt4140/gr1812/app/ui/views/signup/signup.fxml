@@ -4,12 +4,16 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
    <children>
@@ -18,33 +22,33 @@
             <Image url="@signupViewBackground.jpg" />
          </image>
       </ImageView>
-      <TextField id="mobilnummer" fx:id="mobilnummer" layoutX="121.0" layoutY="229.0" prefHeight="46.0" prefWidth="373.0" promptText="MOBILNUMMER">
+      <TextField id="mobilnummer" fx:id="mobilnummer" layoutX="111.0" layoutY="229.0" prefHeight="46.0" prefWidth="383.0" promptText="MOBILNUMMER">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="fornavn" fx:id="fornavn" layoutX="121.0" layoutY="305.0" prefHeight="46.0" prefWidth="373.0" promptText="FORNAVN">
+      <TextField id="fornavn" fx:id="fornavn" layoutX="111.0" layoutY="305.0" prefHeight="46.0" prefWidth="383.0" promptText="FORNAVN">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="etternavn" fx:id="etternavn" layoutX="120.0" layoutY="384.0" prefHeight="46.0" prefWidth="373.0" promptText="ETTERNAVN">
+      <TextField id="etternavn" fx:id="etternavn" layoutX="111.0" layoutY="382.0" prefHeight="48.0" prefWidth="383.0" promptText="ETTERNAVN">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="makspuls" fx:id="makspuls" layoutX="509.0" layoutY="384.0" prefHeight="46.0" prefWidth="373.0" promptText="MAKSPULS">
+      <TextField id="makspuls" fx:id="makspuls" layoutX="500.0" layoutY="383.0" prefHeight="46.0" prefWidth="383.0" promptText="MAKSPULS">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="vekt" fx:id="vekt" layoutX="510.0" layoutY="460.0" prefHeight="46.0" prefWidth="373.0" promptText="VEKT (KG)">
+      <TextField id="vekt" fx:id="vekt" layoutX="500.0" layoutY="460.0" prefHeight="46.0" prefWidth="383.0" promptText="VEKT (KG)">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
       <Hyperlink id="registerButton2" layoutX="390.0" layoutY="541.0" onAction="#registerButtonClicked" prefHeight="43.0" prefWidth="226.0" />
-      <MenuButton id="idretter" fx:id="idretter" layoutX="509.0" layoutY="229.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="350.0" style="-fx-background-color: TRANSPARENT">
+      <MenuButton id="idretter" fx:id="idretter" layoutX="500.0" layoutY="227.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="358.0" style="-fx-background-color: TRANSPARENT;" textFill="WHITE">
         <items>
           <MenuItem mnemonicParsing="false" text="Langrenn" />
           <MenuItem mnemonicParsing="false" text="Fotball" />
@@ -53,14 +57,29 @@
          <cursor>
             <Cursor fx:constant="NONE" />
          </cursor>
-      </MenuButton>
-      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN" />
-      <ToggleButton id="kvinneToggle" layoutX="308.0" layoutY="454.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" />
-      <TextField id="passord" fx:id="passord" layoutX="509.0" layoutY="309.0" prefHeight="46.0" prefWidth="373.0" promptText="PASSORD">
          <font>
             <Font size="18.0" />
          </font>
-      </TextField>
+      </MenuButton>
+      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN">
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup></ToggleButton>
+      <ToggleButton id="kvinneToggle" layoutX="308.0" layoutY="454.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" toggleGroup="$gender" />
+      <PasswordField id="passord" fx:id="passord" layoutX="500.0" layoutY="304.0" prefHeight="48.0" prefWidth="383.0" promptText="PASSORD">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <Line endX="10.0" layoutX="140.0" layoutY="71.0" startX="-20.0" strokeMiterLimit="5.0" />
+      <Line endX="10.0" layoutX="140.0" layoutY="86.0" startX="-20.0" strokeMiterLimit="5.0" />
+      <Line endY="71.0" layoutX="150.0" startY="86.0" strokeMiterLimit="5.0" />
+      <Line endY="71.0" layoutX="120.0" layoutY="-8.0" startY="79.0" strokeMiterLimit="5.0" />
+      <Line endY="71.0" layoutX="120.0" layoutY="15.0" startY="79.0" strokeMiterLimit="5.0" />
+      <Line endX="10.0" endY="1.0" layoutX="110.0" layoutY="62.0" startX="-20.0" startY="16.0" strokeMiterLimit="5.0" />
+      <Line endX="10.0" endY="-1.0" layoutX="110.0" layoutY="95.0" startX="-20.0" startY="-16.0" strokeMiterLimit="5.0" />
+      <Hyperlink layoutX="89.0" layoutY="61.0" onAction="#backButtonClicked" prefHeight="35.0" prefWidth="64.0" />
+      <Text fx:id="feedback" fill="RED" layoutX="111.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="415.21875" />
    
    </children>
 </AnchorPane>

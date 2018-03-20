@@ -14,10 +14,12 @@ public class SignUpModel {
 	private String passWord;
 	private int maxPulse;
 	private int weight;
+	private String feedback;
 	// private List<Sport> Idretter = new List<Sport>;
 
 	public SignUpModel() {
- 
+		
+		this.feedback = "";
 		this.cellPhoneNumber = getcellPhoneNumber();
 		this.firstName = getfirstName();
         this.surName = getsurName();
@@ -29,8 +31,13 @@ public class SignUpModel {
 	public int getcellPhoneNumber() {
 		return cellPhoneNumber;
 	}
+	
+	public String getFeedback() {
+		return this.feedback;
+	}
 	public void setcellPhoneNumber(String cellPhoneNumber) {
 		if (cellPhoneNumber.length() != 8) {
+			this.feedback = "Illegal phonenumber.";
 			throw new IllegalArgumentException("Et telefonnummer må være 8 sifre langt.");
 		}
 		try
@@ -39,7 +46,8 @@ public class SignUpModel {
 		}
 		catch (NumberFormatException nfe)
 		{
-		   throw new IllegalArgumentException("Could not convert from string to int."); 
+			this.feedback = "Illegal phonenumber.";
+			throw new IllegalArgumentException("Could not convert from string to int."); 
 		}
 	}
 		
@@ -47,39 +55,48 @@ public class SignUpModel {
 		return firstName;
 	}
 	
-	public boolean signupUser(int phonenumber, String password, String sport, String firstName, String surname, int maxpulse, int weight, Gender gender) {
-	       try {
-	           
-	           String genderString = gender == gender.FEMALE ? "female" : "male";  
-	           
-	           HashMap requestParam = new HashMap<String, String>();
-	           requestParam.put("username", String.valueOf(phonenumber));
-	           requestParam.put("password", password);
-	           requestParam.put("sport", sport);
-	           requestParam.put("firstname", firstName);
-	           requestParam.put("surname", surname);
-	           requestParam.put("maxpulse", String.valueOf(maxpulse));
-	           requestParam.put("weight", String.valueOf(weight));
-	           requestParam.put("gender", genderString);
-	           
-	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "signup");
-	           
-	           if (response.get("status").equals("success")) {
-	               return true; 
-	           }
-	           else {
-	               return false; 
-	           }
-	       } catch (Exception e) {
-	           e.printStackTrace();
-	           return false;
-	       }
+	public boolean signupUser(String phonenumber, String password, String sport, String firstName, String surname, String maxpulse, String weight, Gender gender) {
+		try {
+			this.setfirstName(firstName);
+			this.setsurName(surname);
+			this.setcellPhoneNumber(phonenumber);
+			this.setmaxPulse(maxpulse);
+			this.setPassWord(password);
+			this.setweight(weight);
+
+			String genderString = gender == gender.FEMALE ? "female" : "male";  
+
+			HashMap requestParam = new HashMap<String, String>();
+			requestParam.put("username", String.valueOf(phonenumber));
+			requestParam.put("password", password);
+			requestParam.put("sport", sport);
+			requestParam.put("firstname", firstName);
+			requestParam.put("surname", surname);
+			requestParam.put("maxpulse", String.valueOf(maxpulse));
+			requestParam.put("weight", String.valueOf(weight));
+			requestParam.put("gender", genderString);
+
+			JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "signup");
+
+			if (response.get("status").equals("success")) {
+				this.feedback = "";
+				return true; 
+			}
+			else {
+				return false; 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public void setfirstName(String firstName) {
 		if (!firstName.matches("[a-åA-Å]+$")) {
+			this.feedback = "Illegal name.";
 			throw new IllegalArgumentException("Du kan ikke skrive inn tall i et navn.");
 		} else if (firstName == ""){
+			this.feedback = "Illegal name.";
 			throw new IllegalArgumentException("Du kan ikke ikke ha noe navn");
 		}
 		this.firstName = firstName;
@@ -91,8 +108,10 @@ public class SignUpModel {
 	
 	public void setsurName(String surName) {
 	    if (!surName.matches("[a-åA-Å]+$")) {
+	    		this.feedback = "Illegal name.";
             throw new IllegalArgumentException("Du kan ikke skrive inn tall i et navn.");
         } else if (surName == ""){
+        		this.feedback = "Illegal name.";
             throw new IllegalArgumentException("Du kan ikke ikke ha noe navn");
         }
         this.surName = surName;
@@ -103,6 +122,7 @@ public class SignUpModel {
 	}
 	public void setPassWord(String password) {
 	    if (password == ""){
+	    		this.feedback = "Illegal password.";
             throw new IllegalArgumentException("Du kan ikke ikke ha noe navn");
         }
 		this.passWord = password;
@@ -110,20 +130,34 @@ public class SignUpModel {
 	public int getmaxPulse() {
 		return maxPulse;
 	}
-	public void setmaxPulse(int maxPulse) {
-	    if (maxPulse < 0) {
-	        throw new IllegalArgumentException("Du kan ikke ha en negativ puls!");
-	    }
-		this.maxPulse = maxPulse;
+	public void setmaxPulse(String maxPulse) {
+		try {
+			int mp = Integer.parseInt(maxPulse);
+			if (mp < 0) {
+				throw new Exception();
+			}
+			this.maxPulse = mp;
+	    } catch (Exception e) {
+	    		this.feedback = "Illegal maxpulse";
+	    		throw new IllegalArgumentException("Ulovlig maxpuls");
+		}
+	    
 	}
 	
 	public int getweight() {
 		return weight;
 	}
-	public void setweight(int weight) {
-	    if (weight < 0) {
-            throw new IllegalArgumentException("Du kan ikke ha en negativ puls!");
-        }
-        this.weight = weight;
-    }
+	public void setweight(String weight) {
+	    try {
+	    		int w = Integer.parseInt(weight);
+		    	if (w < 0) {
+		    		throw new Exception();
+	        }
+	        this.weight = w;	
+		} catch (Exception e) {
+			this.feedback = "Illegal weight.";
+			throw new IllegalArgumentException("Du kan ikke ha en negativ puls!");
+		}
+	}
+		
 }
