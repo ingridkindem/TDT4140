@@ -8,6 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 public class ServerLogic { // class mainly for handling connection to mySQL
 
 
@@ -96,9 +98,64 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             	 		}
             	 	}
              }
-    	
+             
+      
     }
+        
+       public static boolean registerWorkout(String duration,
+    		   								 String pulses,
+    		   								 String goal,
+    		   								 String sport,
+    		   								 String privacy) {
+    	   
+    	   	   MysqlDataSource dataSource = new MysqlDataSource();
+           dataSource.setUser("root");
+           dataSource.setPassword("cygnus6cygnus");
+           dataSource.setServerName("localhost");
+           dataSource.setPort(3306);
+           dataSource.setDatabaseName("PU");
+           
+           String sql = "insert into workouts (duration, pulses, goal, sport, privacy)" +
+           		"values (?, ?, ?, ?, ?)";
+           
+           Connection conn = null;
+           Boolean success = true;
+           
+           try {
+        	   		conn = dataSource.getConnection();
+        	   		PreparedStatement ps = conn.prepareStatement(sql);
+        	   		ps.setInt(1, Integer.parseInt(duration));
+        	   		ps.setString(2,  pulses);
+        	   		ps.setString(3,  goal);
+        	   		ps.setString(4,  sport);
+        	   		ps.setString(5,  privacy);
+        	   		int ex = ps.executeUpdate();
+        	   		if (ex>=1) {
+        	   			success = true;
+        	   		}else {
+        	   			success = false;
+        	   		}
+        	   	
+        	   
+           }catch (SQLException e) {
+        	   		success = false;
+        	   		throw new RuntimeException(e);
+        	   		
+        	   		
+           }finally 
+           {
+	        	   if (conn!=null) {
+	       	 		try {
+	       	 			conn.close();
+	       	 		}catch (SQLException e) {
+	       	 
+	       	 		}
+           }
+     	   
+        }
+     	
 
+       return success;}
 }
 
 
