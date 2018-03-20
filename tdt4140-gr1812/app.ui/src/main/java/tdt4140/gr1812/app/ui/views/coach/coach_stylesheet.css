@@ -1,0 +1,23 @@
+
+
+#sport{
+	-fx-background-color:  #70dbdb;
+}
+
+#sport_fotball{
+	-fx-background-color:  #2B2D44;
+	-fx-pref-width:"384.0";
+	-fx-font: Futura;
+	-fx-font-size: 16px;
+	
+}
+
+#sport_basketball{
+	-fx-background-color:  #70dbdb;
+	-fx-pref-width:"384.0";
+}
+
+#sport_langrenn{
+	-fx-background-color:  #2B2D44;
+	-fx-pref-width:"384.0";
+}
