@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -36,12 +37,29 @@ public class CoachController {
     }
     
     public void update() {
-        // need to reset sport -> athlete -> table
+        sportsButton.getItems().clear();
+        athletesButton.getItems().clear();
     }
     
     @FXML
-    public void sportsButtonAction(){
+    public void sportsButtonAction(ArrayList<String> differentSports){
         
+        for (String item : differentSports) {
+            
+            sportsButton.getItems().add(new MenuItem(item));
+        } 
+    }
+    
+    @FXML
+    public void athletesButtonAction(ArrayList<Athlete> differentAthletes){
+        
+        for (Athlete item : differentAthletes) {
+            
+            String name = item.getName();
+            String phoneNumber = item.getPhoneNumber();
+            
+            athletesButton.getItems().add(new MenuItem(name + phoneNumber));
+        } 
     }
         
     @FXML
