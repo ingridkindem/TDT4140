@@ -18,23 +18,21 @@ We are working with Scrum in our team, and the main motivation is to make a work
 
 ---
 
-## Internal guidlines for GitLab
+## Guidlines for GitLab
 
-1. All communication on gitblab should be in English. E. g. commit messages, comments on issues, this readme and so on. If you are in doubt - go English.
+This is a short introduction to how we organize our issues and connect them to our commits.
 
-2. Every issue related to the project should be solved in a branch named "NameOfISsue"+"#"+"issue number". Notice the camel case in issue name. E. g. your issue is login controller, and your issue number is 23. Your branch name should the be LoginController#23.
+1. We categorize our issues by using different labels.
+2. The different user-stories are divided into a variable number of issues. An issue for a user-story is marked with a label named “User-story X”, where X is that particular user-story number.
+3. Additionally, all the issues for the different user-stories are labeled with the associated sprint number as well as a milestone for the sprint.
+4. Issues which are not part of a user-story are labeled with a name that explains their purpose. E.g “Unplanned items”, “Feedback user test 1”.
+5. Some issues are probably part of a sprint, but not of a particular user-story so they are only labeled with the sprint number.
 
-3. !!The master branch is sacred and is not to be trifled with!! 
+All our issues are hashtagged with a specific number, e.g #14, #16. These numbers are used to connect specific commits to a specific issue. So, when we write out commit messages we hashtag the particular number in the message. As a consequence of this hashtag, the commit message is also shown as a comment on the issue. When you click the link in the comment (in the issue) you get more information about what commit was actually made. 
 
-4. We will have two main branches; master and develop. When branching out for your issues, make sure your current branch is develop. Before branching use "git pull" in terminal or pull directly in eclipse, to make sure you have the must updated version of our project.
+When an issue is completed we make a merge request into the develop branch with a message containing the steps taken to complete the issue. After the merge request is made, it is the test managers responsibility to merge the current branch into the develop branch. After the merging is completed, we can close the issue.
 
-5. When commiting to your branch, make sure your commit message is descriptive enough for the other group members to understand what you have done, and to some extent how you have done it.
 
-6. When you have completed your commits and feel ready to close the issue. Create a pull request to develop branch. 
-
-7. Each group member is responsible for updating their own issues. When you start working on your issue, move it from to-do to doing. Leave a comment and close the issue when you finish.
-
-8. Avoid acronyms and initialism. Even though your shortening might seem obivious to you, that is not necessarliy the case for the rest of the group.
 
 --- 
 
