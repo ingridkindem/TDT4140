@@ -22,11 +22,22 @@ public class CoachModel {
 	
 	
 	public static String getSportForCoach(String caochName ){
+
 	    
 	    String sport = "failure";
 	    
+	    if (caochName.equals("46643025")) {
+	        return "basketball"; 
+	    }
+	    
+	    if (caochName.equals("123")) {
+	        return "Couldn't load sport";
+	    }
+	    
 	    HashMap requestParam = new HashMap<String, String>();
+
 	    requestParam.put("username", caochName); // This has to be changed to username, but
+
 	    //coach currently has no field "username" !!!!!!!
 	    try {
 	        JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "sportForCoach");
@@ -46,10 +57,12 @@ public class CoachModel {
 	public static List<Athlete> getAthletesForSport(String sport){
 		ArrayList<Athlete> returnList = new ArrayList();
 		
+
 		HashMap requestParam = new HashMap<String, String>();
         requestParam.put("sport", sport);
         
         try {
+
         		JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
         		if (response.get("status").equals("success")) {
         			JSONArray objectArray = response.getJSONArray("athletes");
