@@ -63,7 +63,7 @@ public class WorkoutRegistrationController {
 		}
 		boolean action = model.WorkoutRegistrationModelInit(lengde, p, s, m, c);
 		if (action) {
-			app.goToWorkoutRegistration();
+			app.goToWorkoutRegistration(); //will eventually go to athlete-profile
 			return true;
 		}
 		else {
@@ -74,7 +74,7 @@ public class WorkoutRegistrationController {
 	
 	@FXML
 	public void handleKryssUt() {
-		app.goToWorkoutRegistration();
+		app.goToWorkoutRegistration(); //will eventually go to athlete-profile
 	}
 	
 	public void setApplication(FxApp app) {

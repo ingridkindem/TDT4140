@@ -40,11 +40,17 @@ public class LoginController {
 		String phoneNumber = this.setPhoneNumber.getText();
 		String password = this.setPassword.getText();
 
-		boolean checkInput = true;//LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
+		boolean checkInput = LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
 
 		if (checkInput) {
 			p = "";
-			app.goToWorkoutRegistration();
+			boolean coach = true; //check if a coach is logging in
+			if (coach) {
+				app.goToCoachView();
+			} 
+			else {
+				app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+			}
 			this.atLoginView = false;
 			return true;
 		} else {
@@ -79,5 +85,4 @@ public class LoginController {
 	public void setApplication(FxApp app) {
 		this.app = app;
 	}
-	
 }
