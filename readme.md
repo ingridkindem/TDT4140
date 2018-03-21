@@ -155,7 +155,11 @@ Here is an example of how we test the code above.
 * Toralf Frich – Developer
 * Ingrid Kindem – Developer
 
+---
 
+## License
+
+MIT © 
 
 
 
