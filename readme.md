@@ -34,7 +34,7 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 
 Here is an example of how we write our code. 
 
-´´´
+
 	public Sport(String sportsName) {
 		this.sportsName = sportsName;
 	}
@@ -42,7 +42,8 @@ Here is an example of how we write our code.
 	public String getSport() {
 		return this.sportsName; 
 	}
-´´´
+	
+
 ---
 
 ## Tests
