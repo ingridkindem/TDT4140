@@ -10,7 +10,7 @@ should be visible for the coach.
 
 ---
 
-### Motivation
+## Motivation
 
 We wanted to make a fun application that every member of the team enjoyed working with. 
 
@@ -53,14 +53,14 @@ we test it with the jUnit unit test.
 
 Here is an example of how we test the code above. 
 
-´´´
+
 	@Test
 	public void returnMySport() {
 		
 		Sport tester = new Sport("Basket"); 
 		assertEquals("Basket", tester.getSport());
 	}
-´´´
+
 
 ---
 
