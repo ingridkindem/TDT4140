@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -48,11 +49,13 @@
          </font>
       </TextField>
       <Hyperlink id="registerButton2" layoutX="390.0" layoutY="541.0" onAction="#registerButtonClicked" prefHeight="43.0" prefWidth="226.0" />
-      <MenuButton id="idretter" fx:id="idretter" layoutX="500.0" layoutY="227.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="358.0" style="-fx-background-color: TRANSPARENT;" textFill="WHITE">
+      <MenuButton id="idretter" fx:id="idretter" layoutX="500.0" layoutY="227.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="376.0" style="-fx-background-color: #70dbdb;" text="IDRETTER" textFill="WHITE">
         <items>
-          <MenuItem mnemonicParsing="false" text="Langrenn" />
-          <MenuItem mnemonicParsing="false" text="Fotball" />
-            <MenuItem mnemonicParsing="false" text="Basket" />
+          <MenuItem mnemonicParsing="false" style="-fx-pref-width: 358;" text="LANGRENN" />
+            <SeparatorMenuItem mnemonicParsing="false" style="-fx-background-color: #70dbdb; -fx-pref-width: 358;" />
+          <MenuItem mnemonicParsing="false" style="-fx-pref-width: 358;" text="FOTBALL" />
+            <SeparatorMenuItem mnemonicParsing="false" style="-fx-background-color: #70dbdb; -fx-pref-width: 358;" />
+            <MenuItem mnemonicParsing="false" style="-fx-pref-width: 358;" text="BASKET" />
         </items>
          <cursor>
             <Cursor fx:constant="NONE" />
@@ -61,11 +64,17 @@
             <Font size="18.0" />
          </font>
       </MenuButton>
-      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN">
+      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" text="MANN">
          <toggleGroup>
             <ToggleGroup fx:id="gender" />
-         </toggleGroup></ToggleButton>
-      <ToggleButton id="kvinneToggle" layoutX="308.0" layoutY="454.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" toggleGroup="$gender" />
+         </toggleGroup>
+         <font>
+            <Font size="18.0" />
+         </font></ToggleButton>
+      <ToggleButton id="kvinneToggle" layoutX="308.0" layoutY="454.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" text="KVINNE" toggleGroup="$gender">
+         <font>
+            <Font size="18.0" />
+         </font></ToggleButton>
       <PasswordField id="passord" fx:id="passord" layoutX="500.0" layoutY="304.0" prefHeight="48.0" prefWidth="383.0" promptText="PASSORD">
          <font>
             <Font size="18.0" />
@@ -79,7 +88,10 @@
       <Line endX="10.0" endY="1.0" layoutX="110.0" layoutY="62.0" startX="-20.0" startY="16.0" strokeMiterLimit="5.0" />
       <Line endX="10.0" endY="-1.0" layoutX="110.0" layoutY="95.0" startX="-20.0" startY="-16.0" strokeMiterLimit="5.0" />
       <Hyperlink layoutX="89.0" layoutY="61.0" onAction="#backButtonClicked" prefHeight="35.0" prefWidth="64.0" />
-      <Text fx:id="feedback" fill="RED" layoutX="111.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="415.21875" />
+      <Text fx:id="feedback" fill="RED" layoutX="111.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="415.21875">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
    
    </children>
 </AnchorPane>
