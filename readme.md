@@ -73,38 +73,37 @@ How our application interacts with server and database:
  
 * Example usage in one of the applications models
 
-    (...)
-    HashMap myMap = new HashMap<String, String>();
+        (...)
+        HashMap myMap = new HashMap<String, String>();
 	    myMap.put("username", phoneNumber);
 	    myMap.put("password", password);
 
 		try {
 			JSONObject response = BackendConnector.makeRequest(myMap, Method.POST, "login");
-	(...)		
+	        (...)}		
 * Server from Spring 
 
     // Fires up the server from our Spring dependency
     
-    @SpringBootApplication
-    public class Server {
-    
+        @SpringBootApplication
+        public class Server {
         public static void main(String[] args) {
             SpringApplication.run(Server.class, args);
+            }
         }
-    }
 
 * Endpoint for request
 
-    @RequestMapping("/login") //mapping to login endpoint
-    public String login(@RequestParam("username") String username,
-    					@RequestParam("password") String password) {
-    (...)
-    					   boolean loginResult = ServerLogic.login(username, password);
-    (...)					   
+        @RequestMapping("/login") //mapping to login endpoint
+        public String login(@RequestParam("username") String username,
+        					@RequestParam("password") String password) {
+        (...)
+        					   boolean loginResult = ServerLogic.login(username, password);
+        (...)					   
 
 * Queries to DB
 
-    public static boolean login(String username, String password) {
+        public static boolean login(String username, String password) {
     			
         	 MysqlDataSource dataSource = new MysqlDataSource();
              dataSource.setUser("root");
@@ -114,7 +113,7 @@ How our application interacts with server and database:
              dataSource.setDatabaseName("PU");
              
              String sql = "select * from users where username = ? and password = ?";
-    (...)
+        (...)
 
 
 ## Tests
