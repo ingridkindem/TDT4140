@@ -16,14 +16,14 @@ public class WorkoutRegistrationModel {
 	
 	private String text = "";
 
-	public boolean WorkoutRegistrationModelInit(int duration, String pulses, Sport sport, String goal, boolean privacy) {
+	public boolean WorkoutRegistrationModelInit(String duration, String pulses, Sport sport, String goal, boolean privacy) {
 		try {
+			int d = checkDuration(duration);
 			List<Integer> pulsesList = checkPulse(pulses);
-			checkDuration(duration);
 			checkSport(sport);
 			text = "";
 			Workout workout = new Workout(sport, privacy);		
-			workout.setDuration(duration);
+			workout.setDuration(d);
 			workout.setGoal(goal);
 			workout.setDate(Calendar.getInstance().getTime());
 			String p;
@@ -53,25 +53,36 @@ public class WorkoutRegistrationModel {
 	}
 	
 	public List<Integer> checkPulse(String pulses) {
-		List<Integer> pulsesList = new ArrayList<Integer>();
-		String[] p = pulses.split(",");
-		for (String i : p) {
-			i.trim();
-			int pulseInt = Integer.parseInt(i);
-			if (pulseInt < 0) {
-				text = "Can't have negative pulse.";
-				throw new IllegalArgumentException("Can't have negative pulse.");
+		try {
+			List<Integer> pulsesList = new ArrayList<Integer>();
+			String[] p = pulses.split(",");
+			for (String i : p) {
+				i.trim();
+				int pulseInt = Integer.parseInt(i);
+				if (pulseInt < 0) {
+					throw new Exception();
+				}
+				pulsesList.add(pulseInt);
 			}
-			pulsesList.add(pulseInt);
+			return pulsesList;
+		} catch (Exception e) {
+			text = "Illegal pulses.";
+			throw new IllegalArgumentException("Pulsene må være heltall");
 		}
-		return pulsesList;
+		
 	}
 	
-	public void checkDuration(int duration) {
-		if (duration <= 0) {
+	public int checkDuration(String duration) {
+		try {
+			int d = Integer.parseInt(duration);
+			if (d <= 0) {
+				throw new Exception();
+			} return d;
+		} catch (Exception e) {
 			text = "Can't have negative duration.";
 			throw new IllegalArgumentException("Can't have negative duration.");
 		}
+		
 	}
 	
 	public String getText() { 

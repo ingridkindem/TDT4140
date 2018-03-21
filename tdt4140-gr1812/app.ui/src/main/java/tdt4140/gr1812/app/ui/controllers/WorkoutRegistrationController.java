@@ -12,8 +12,6 @@ import tdt4140.gr1812.app.ui.FxApp;
 
 public class WorkoutRegistrationController {
 	
-	//WorkoutRegistrationModel model;
-	
 	@FXML
 	TextField lengdePåØkt;
 	@FXML
@@ -63,9 +61,9 @@ public class WorkoutRegistrationController {
 		if (l) {
 			s = new Sport("langrenn");
 		}
-		boolean action = model.WorkoutRegistrationModelInit(Integer.parseInt(lengde), p, s, m, c);
+		boolean action = model.WorkoutRegistrationModelInit(lengde, p, s, m, c);
 		if (action) {
-			// g� tilbake til brukerens profil
+			app.goToWorkoutRegistration();
 			return true;
 		}
 		else {
@@ -76,7 +74,7 @@ public class WorkoutRegistrationController {
 	
 	@FXML
 	public void handleKryssUt() {
-		// g� tilbke til brukerens profil
+		app.goToWorkoutRegistration();
 	}
 	
 	public void setApplication(FxApp app) {

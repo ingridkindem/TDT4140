@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tdt4140.gr1812.app.ui.controllers.LoginController;
 import tdt4140.gr1812.app.ui.controllers.SignupController;
+import tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController;
 
 
 public class FxApp extends Application {
@@ -68,6 +69,17 @@ public class FxApp extends Application {
 			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
 		}
     }
+    
+    public void goToWorkoutRegistration() {
+		try {
+		replaceSceneContent("views/workoutRegistrationView/WorkoutRegistrationView.fxml"); //path to workoutRegistrationView-view
+		WorkoutRegistrationController controller = this.fxmlLoader.getController();
+		controller.setApplication(this);
+		stage.show();
+	} catch(Exception e) {
+		Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
+	}
+}
     
     private void replaceSceneContent(String fxml) {
     		this.fxmlLoader = new FXMLLoader(FxApp.class.getResource(fxml));

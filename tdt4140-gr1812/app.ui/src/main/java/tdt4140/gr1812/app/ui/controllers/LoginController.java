@@ -40,11 +40,11 @@ public class LoginController {
 		String phoneNumber = this.setPhoneNumber.getText();
 		String password = this.setPassword.getText();
 
-		boolean checkInput = LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
+		boolean checkInput = true;//LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
 
 		if (checkInput) {
 			p = "";
-			app.goToLoggedIn();
+			app.goToWorkoutRegistration();
 			this.atLoginView = false;
 			return true;
 		} else {
