@@ -1,4 +1,4 @@
- # Work out application for Lier IL
+# Work out application for Lier IL
 
 **Version 1.0.1**
 
@@ -10,7 +10,7 @@ should be visible for the coach.
 
 ---
 
-## Motivation
+### Motivation
 
 We wanted to make a fun application that every member of the team enjoyed working with. 
 
@@ -25,6 +25,7 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 ## Tech/framwork used
 
 ### Built with
+
 * [Maven](https://maven.apache.org/)
 
 --- 
@@ -34,7 +35,6 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 Here is an example of how we write our code. 
 
 ´´´
- 
 	public Sport(String sportsName) {
 		this.sportsName = sportsName;
 	}
@@ -42,7 +42,6 @@ Here is an example of how we write our code.
 	public String getSport() {
 		return this.sportsName; 
 	}
-
 ´´´
 ---
 
@@ -54,24 +53,24 @@ we test it with the jUnit unit test.
 Here is an example of how we test the code above. 
 
 ´´´
-
 	@Test
 	public void returnMySport() {
 		
 		Sport tester = new Sport("Basket"); 
 		assertEquals("Basket", tester.getSport());
 	}
-
 ´´´
 
 ---
 
 ## How to run our application
+
 * Run file: tdt4140.gr1812.app.ui.FxApp.java
 
 ---
 
 ## Credits
+
 * Marte Kristinesdatter Bolstad - Scrum Master
 * Lars Erik Fagernæs – Test manager 
 * Maren Schliekelmann Barth – Developer
