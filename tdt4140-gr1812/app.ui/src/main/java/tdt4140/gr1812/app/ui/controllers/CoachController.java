@@ -47,27 +47,6 @@ public class CoachController {
     private final ObservableList<athleteObject> data = 
             FXCollections.observableArrayList(this.createAthleteObjectList());
             
-    private class athleteObject{
-        private final String fullName;
-        private final String phoneNumber;
-        
-        public athleteObject(String fullName, String phoneNumber) {
-            this.fullName = fullName;
-            this.phoneNumber = phoneNumber;
-        }
-    }
-    
-    public List<athleteObject> createAthleteObjectList(){
-        List<athleteObject> temporaryAthletes = new ArrayList<>();
-        for (int i = 0; i < CoachModel.getFullNames.length(); i++) {
-            String fullName = CoachModel.getFullNames.get(i);
-            String phoneNumber = CoachModel.getPhoneNumbers.get(i);
-            temporaryAthletes.add(new athleteObject(fullName, phoneNumber));
-        }
-        return temporaryAthletes;
-        
-    }
-    
     @FXML
     private Button sportsButton;
     
@@ -108,7 +87,6 @@ public class CoachController {
     }
     
     public void update() {
-
         athletesTable.getItems().clear();
     }
         
@@ -122,9 +100,9 @@ public class CoachController {
         athletesTable.setEditable(true);
         ColumnName.setCellValueFactory(new PropertyValueFactory<athleteObject, String> ("NAVN"));
         ColumnPhoneNumber.setCellValueFactory(new PropertyValueFactory<athleteObject, String> ("MOBILNUMMER"));
+        
+        athletesTable.getColumns().addAll(this.ColumnName, this.ColumnPhoneNumber);  
         athletesTable.setItems(data);
-        athletesTable.getColumns().addAll(this.ColumnName, this.ColumnPhoneNumber);
-
     }
     
     @FXML
@@ -142,5 +120,27 @@ public class CoachController {
     public void setApplication(FxApp app) {
         this.app = app;
     }
+    
+    private class athleteObject{
+        private final String fullName;
+        private final String phoneNumber;
+        
+        public athleteObject(String fullName, String phoneNumber) {
+            this.fullName = fullName;
+            this.phoneNumber = phoneNumber;
+        }
+    }
+    
+    public List<athleteObject> createAthleteObjectList(){
+        List<athleteObject> temporaryAthletes = new ArrayList<>();
+        for (int i = 0; i < CoachModel.getFullNames.length(); i++) {
+            String fullName = CoachModel.getFullNames.get(i);
+            String phoneNumber = CoachModel.getPhoneNumbers.get(i);
+            temporaryAthletes.add(new athleteObject(fullName, phoneNumber));
+        }
+        return temporaryAthletes;
+        
+    }
+    
     
 }

@@ -39,11 +39,11 @@
             <MenuItem mnemonicParsing="false" text="Unspecified Action" />
          </items>
       </MenuButton>
-      <TableView fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0" style="-fx-background-radius: 15;">
-        <columns>
-          <TableColumn prefWidth="286.3631134033203" text="Navn" />
-          <TableColumn prefWidth="293.6368408203125" text="Mobilnummer" />
-        </columns>
+      <TableView id="athletesTable" fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0" style="-fx-background-radius: 15;">
+         <columns>
+            <TableColumn id="ColumnName" fx:id="ColumnName" prefWidth="273.47796630859375" style="-fx-font: Futura; -fx-background-color: #2B2D44;" text="NAVN" />
+            <TableColumn id="ColumnPhoneNumber" fx:id="ColumnPhoneNumber" prefWidth="300.5220642089844" text="MOBILNUMMER" />
+         </columns>
       </TableView>
       <Button id="sportsButton" fx:id="sportsButton" layoutX="388.0" layoutY="134.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="383.0" stylesheets="@../../../../../../../../../target/classes/tdt4140/gr1812/app/ui/views/coach/coach_stylesheet.css" />
    </children>
