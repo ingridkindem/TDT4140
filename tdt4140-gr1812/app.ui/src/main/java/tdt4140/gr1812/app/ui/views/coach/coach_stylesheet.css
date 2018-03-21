@@ -2,6 +2,7 @@
 
 #sportsButton{
 	-fx-background-color:  #70dbdb;
+	-fx-background-radius: 12;
 }
 
 #sport_fotball{
@@ -20,4 +21,8 @@
 #sport_langrenn{
 	-fx-background-color:  #2B2D44;
 	-fx-pref-width:"384.0";
+}
+
+#athletestable{
+	
 }

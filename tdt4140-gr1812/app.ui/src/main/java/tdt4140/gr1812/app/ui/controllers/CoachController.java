@@ -4,10 +4,16 @@ package tdt4140.gr1812.app.ui.controllers;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import com.sun.javafx.collections.MappingChange.Map;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,8 +22,10 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
@@ -32,31 +40,65 @@ public class CoachController {
 
     private boolean atCoachView; //for testing
     private List<Athlete> athletes = new ArrayList<>();
-    private List<String> sports = new ArrayList<>();
+    private String sport;
     private FxApp app; 
+    private Coach coach;
+    
+    private final ObservableList<athleteObject> data = 
+            FXCollections.observableArrayList(this.createAthleteObjectList());
+            
+    private class athleteObject{
+        private final String fullName;
+        private final String phoneNumber;
+        
+        public athleteObject(String fullName, String phoneNumber) {
+            this.fullName = fullName;
+            this.phoneNumber = phoneNumber;
+        }
+    }
+    
+    public List<athleteObject> createAthleteObjectList(){
+        List<athleteObject> temporaryAthletes = new ArrayList<>();
+        for (int i = 0; i < CoachModel.getFullNames.length(); i++) {
+            String fullName = CoachModel.getFullNames.get(i);
+            String phoneNumber = CoachModel.getPhoneNumbers.get(i);
+            temporaryAthletes.add(new athleteObject(fullName, phoneNumber));
+        }
+        return temporaryAthletes;
+        
+    }
     
     @FXML
-    private MenuButton sportsButton;
+    private Button sportsButton;
     
     @FXML
     private MenuButton athletesButton;
     
     @FXML
-    private TableView<String> athletestable;
+    private TableView<athleteObject> athletesTable;
+    @FXML
+    private TableColumn<athleteObject, String> ColumnName; 
+    @FXML
+    private TableColumn<athleteObject, String> ColumnPhoneNumber; 
     
     @FXML
     public void initialize() {
         this.atCoachView = true;
-        this.athletestable.setVisible(false);
+        this.athletesTable.setVisible(false);
+        this.sportsButton.setText(this.handleSport());
+        
+        this.setColumnsInTable();
+        
         
         athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) 
+            public void changed(ObservableValue<? extends Boolean> observableValue, 
+                    Boolean oldValue, Boolean newValue) 
             {
                  if(newValue.booleanValue()) {
-                	 	athletestable.setVisible(true);
+                	 	athletesTable.setVisible(true);
                  }
                  else {
-                	 	athletestable.setVisible(false);
+                	 	athletesTable.setVisible(false);
                  }
                       
             }
@@ -67,29 +109,29 @@ public class CoachController {
     
     public void update() {
 
-        sportsButton.getItems().clear();
-        athletesButton.getItems().clear();
+        athletesTable.getItems().clear();
+    }
+        
+    public String handleSport() { 
+    //method for handling sports to each coach 
+    		this.sport = CoachModel.getSportForCoach(coach.getName());
+    		return "hei"; //skal returnere sport sånn egt.
+    }
+    
+    public void setColumnsInTable() {
+        athletesTable.setEditable(true);
+        ColumnName.setCellValueFactory(new PropertyValueFactory<athleteObject, String> ("NAVN"));
+        ColumnPhoneNumber.setCellValueFactory(new PropertyValueFactory<athleteObject, String> ("MOBILNUMMER"));
+        athletesTable.setItems(data);
+        athletesTable.getColumns().addAll(this.ColumnName, this.ColumnPhoneNumber);
+
     }
     
     @FXML
     public void athletesButtonAction() {
-    	   System.out.println("We are in Athlete click");
-//       this.athletestable.setVisible(true);
+           System.out.println("We are in Athlete click");
     }
    
-        
-    @FXML
-    public void handleSport() { 
-    //method for handling sports to each coach 
-    		this.sports = CoachModel.getSportsForCoach("46643025");
-    		
-    }
-    
-    @FXML
-    public void handleAthletes() {
-    //method for handling athletes to each sport
-        this.athletes =  CoachModel.getAthletesForSport("basket");
-    }
    
     
     public boolean getAtCoachView() {
@@ -100,46 +142,5 @@ public class CoachController {
     public void setApplication(FxApp app) {
         this.app = app;
     }
-
-    
-
-
-    /*@Override
-    public void handle(javafx.event.ActionEvent event) {
-        if (event.equals(sportsButton)) {
-            this.sportsButtonAction();
-        }
-        else if (event.equals(athletesButton)) {
-            this.athletesButtonAction();
-        }
-        
-    }
-    
-    @FXML
-    public void sportsButtonAction(){ //ArrayList<String> differentSports Legg til denne i args her
-        
-        //for (String item : differentSports) {
-            sportsButton.getItems().add(new MenuItem("new")); //Her skal det legges til Item.
-        //} 
-
-    }
-    
-    @FXML
-    public void athletesButtonAction(){ //ArrayList<Athlete> differentAthletes skal inni args her
-        
-        for (Athlete item : differentAthletes) {
-            
-            String name = item.getFullName();
-            String phoneNumber = item.getPhoneNumber();    
-        
-            MenuItem utøver = new MenuItem(name);
-            utøver.setAccelerator(KeyCombination.keyCombination(phoneNumber));
-            athletesButton.getItems().add(utøver);
-        } 
-        MenuItem utøver = new MenuItem("Hei");
-        utøver.setAccelerator(KeyCombination.keyCombination("18282109"));
-        athletesButton.getItems().add(utøver);
-    }
-    */
     
 }
