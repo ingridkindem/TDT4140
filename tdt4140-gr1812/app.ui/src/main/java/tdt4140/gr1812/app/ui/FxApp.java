@@ -23,11 +23,6 @@ public class FxApp extends Application {
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
         goToLogin();
-        
-    		//Parent root = FXMLLoader.load(getClass().getResource("/views/login/lo.fxml"));
-        //Scene scene = new Scene(root);
-        //stage.setScene(scene);
-        //stage.show();
     }
     
     public void goToLoggedIn() {
@@ -72,29 +67,40 @@ public class FxApp extends Application {
     
     public void goToWorkoutRegistration() {
 		try {
-		replaceSceneContent("views/workoutRegistrationView/WorkoutRegistrationView.fxml"); //path to workoutRegistrationView-view
-		WorkoutRegistrationController controller = this.fxmlLoader.getController();
-		controller.setApplication(this);
-		stage.show();
-	} catch(Exception e) {
-		Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
-	}
-}
+			replaceSceneContent("views/workoutRegistrationView/WorkoutRegistrationView.fxml"); //path to workoutRegistrationView-view
+			WorkoutRegistrationController controller = this.fxmlLoader.getController();
+			controller.setApplication(this);
+			stage.show();
+		} catch(Exception e) {
+			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
+		}
+    }
+    
+    public void goToCoachView() {
+		try {
+			replaceSceneContent("views/coach/CoachView.fxml"); //path to coachView
+			WorkoutRegistrationController controller = this.fxmlLoader.getController();
+			controller.setApplication(this);
+			stage.show();
+		} catch(Exception e) {
+			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
+		}
+    }
     
     private void replaceSceneContent(String fxml) {
     		this.fxmlLoader = new FXMLLoader(FxApp.class.getResource(fxml));
     		try {
-				Parent page = (Parent) fxmlLoader.load();
-				Scene scene = this.stage.getScene();
-				if (scene == null) {
-					scene = new Scene(page, 1000, 700);
-					stage.setScene(scene);
-				} else {
-					stage.getScene().setRoot(page);
-				} stage.sizeToScene();
-			} catch (IOException e) {
+			Parent page = (Parent) fxmlLoader.load();
+			Scene scene = this.stage.getScene();
+			if (scene == null) {
+				scene = new Scene(page, 1000, 700); //set pagesize to width=1000 and height=700
+				stage.setScene(scene);
+			} else {
+				stage.getScene().setRoot(page);
+			} stage.sizeToScene();
+		} catch (IOException e) {
 				e.printStackTrace();
-			}
+		}
     }
 
     public static void main(String[] args) {
