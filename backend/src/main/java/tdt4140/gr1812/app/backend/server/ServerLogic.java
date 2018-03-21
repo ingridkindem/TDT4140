@@ -159,40 +159,34 @@ public class ServerLogic { // class mainly for handling connection to mySQL
         }        
        return success;}  
        
-       public static ArrayList<JSONObject> getAthletesInSport(String sport) {
-			
-  	 	 MysqlDataSource dataSource = new MysqlDataSource();
+       public static ArrayList<Athlete> getAthletesInSport(String sport) {
+           MysqlDataSource dataSource = new MysqlDataSource();
        dataSource.setUser("root");
        dataSource.setPassword("cygnus6cygnus");
        dataSource.setServerName("localhost");
        dataSource.setPort(3306);
        dataSource.setDatabaseName("PU");
-       
+
        String sql = "select firstname, surname, username from users where sport = ?";
-       
+
        Connection conn = null;
        ResultSet resultSet = null; // needed for reading output from database
-       ArrayList<JSONObject> users = new ArrayList<JSONObject>();
-       
+       ArrayList<Athlete> users = new ArrayList<Athlete>();
+
        try {
           	 conn = dataSource.getConnection();
                PreparedStatement ps = conn.prepareStatement(sql);
                ps.setString(1,  sport);
                resultSet = ps.executeQuery();
                while (resultSet.next()) {
-            	   		try {
-            	   			JSONObject user = new JSONObject();
-                	   		user.put("firstname", resultSet.getString(1));
-                	   		user.put("surname", resultSet.getString(2));
-                	   		user.put("username", resultSet.getString(3));
-                	   		users.add(user);
-            	   		} catch (JSONException e) {
-            	   			e.printStackTrace();
-            	   		}
-            	   		
+                    JSONObject user = new JSONObject();
+                    String firstName = resultSet.getString(1);
+                    String surname = resultSet.getString(2);
+                    String username = resultSet.getString(3);
+                    users.add(new Athlete(firstName, surname, username));
                }
-               
-       }catch (SQLException e) {            	 
+
+       }catch (SQLException e) {
       	 	throw new RuntimeException(e);
        } finally {
       	 	if (conn!=null) {
@@ -202,9 +196,10 @@ public class ServerLogic { // class mainly for handling connection to mySQL
       	 		}
       	 	}
        }
-       
 
-       return users;}
+
+       return users;
+        }
        
 }
 
