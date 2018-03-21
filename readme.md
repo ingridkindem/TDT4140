@@ -55,17 +55,21 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 --- 
 ## API refrences
 
+(...) = Code not included in readme.
+
+
 How our application interacts with server and database:
 
 
 
 * Method creating request to server
 
-    public final class BackendConnector {
+        
+        public final class BackendConnector {
     	
     	static String baseUrl = "http://larserikfagernaes.com:8000/"; 
     	public static JSONObject makeRequest(HashMap<String, String> dict, Method method, String path)
-    (...)
+        (...)
  
 * Example usage in one of the applications models
 
