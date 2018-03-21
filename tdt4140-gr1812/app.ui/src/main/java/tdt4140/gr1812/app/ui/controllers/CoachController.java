@@ -142,5 +142,12 @@ public class CoachController {
         
     }
     
+    public TableView getathletesTable() {
+        return athletesTable;
+    }
+    
+    public Button getsportsButton() {
+        return sportsButton;
+    }
     
 }
