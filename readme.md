@@ -46,11 +46,71 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 
 ## Tech/framwork used
 
+* [Spring Boot](https://projects.spring.io/spring-boot/)
+
 ### Built with
 
 * [Maven](https://maven.apache.org/)
 
 --- 
+## API refrences
+
+How our application interacts with server and database:
+
+
+
+* Method creating request to server
+
+    public final class BackendConnector {
+    	
+    	static String baseUrl = "http://larserikfagernaes.com:8000/"; 
+    	public static JSONObject makeRequest(HashMap<String, String> dict, Method method, String path)
+    (...)
+ 
+* Example usage in one of the applications models
+
+    (...)
+    HashMap myMap = new HashMap<String, String>();
+	    myMap.put("username", phoneNumber);
+	    myMap.put("password", password);
+
+		try {
+			JSONObject response = BackendConnector.makeRequest(myMap, Method.POST, "login");
+	(...)		
+* Server from Spring 
+
+    // Fires up the server from our Spring dependency
+    
+    @SpringBootApplication
+    public class Server {
+    
+        public static void main(String[] args) {
+            SpringApplication.run(Server.class, args);
+        }
+    }
+
+* Endpoint for request
+
+    @RequestMapping("/login") //mapping to login endpoint
+    public String login(@RequestParam("username") String username,
+    					@RequestParam("password") String password) {
+    (...)
+    					   boolean loginResult = ServerLogic.login(username, password);
+    (...)					   
+
+* Queries to DB
+
+    public static boolean login(String username, String password) {
+    			
+        	 MysqlDataSource dataSource = new MysqlDataSource();
+             dataSource.setUser("root");
+             dataSource.setPassword("password");
+             dataSource.setServerName("localhost");
+             dataSource.setPort(3306);
+             dataSource.setDatabaseName("PU");
+             
+             String sql = "select * from users where username = ? and password = ?";
+    (...)
 
 
 ## Tests
