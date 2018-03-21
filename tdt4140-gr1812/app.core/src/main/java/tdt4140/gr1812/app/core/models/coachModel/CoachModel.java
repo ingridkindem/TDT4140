@@ -3,6 +3,8 @@ package tdt4140.gr1812.app.core.models.coachModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tdt4140.gr1812.app.core.dataClasses.Athlete;
@@ -19,47 +21,51 @@ public class CoachModel {
     }
 	
 	
-	public String getSportForCoach(){
+	public static String getSportForCoach(String caochName ){
 	    
 	    String sport = "failure";
 	    
 	    HashMap requestParam = new HashMap<String, String>();
-	    requestParam.put("username", this.coach.getName()); // This has to be changed to username, but
+	    requestParam.put("username", caochName); // This has to be changed to username, but
 	    //coach currently has no field "username" !!!!!!!
 	    try {
 	        JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "sportForCoach");
+	        System.out.println(response.toString());
 	        if (response.get("status").equals("failure")) {
 	            sport = "Couldn't load sport";
-	        }else {
-	            sport = response.get("status").toString();
+	        }else if(response.getString("status").equals("success")){
+	            sport = response.get("sport").toString();
 	        }
 	    }catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	      
+	    
 		return sport;
 	}
 	
-	public static List<Athlete> getAthletesForSport(Coach coach){
-	    String sport = coach.getSport().getSport();
-		List myList = new ArrayList();
+	public static List<Athlete> getAthletesForSport(String sport){
+		ArrayList<Athlete> returnList = new ArrayList();
 		
 		HashMap requestParam = new HashMap<String, String>();
         requestParam.put("sport", sport);
+        
         try {
-        String response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
+        		JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
+        		if (response.get("status").equals("success")) {
+        			JSONArray objectArray = response.getJSONArray("athletes");
+        			for (int i = 0; i < objectArray.length(); i++) {
+        				JSONObject obj = objectArray.getJSONObject(i); 
+        				String firstname = obj.getString("firstname");
+        				String surname = obj.getString("surname");
+        				String username = obj.getString("username");
+        				returnList.add(new Athlete(firstname, surname, username));
+        			}
+        		}
         }catch (Exception e){
             e.printStackTrace();
-        }
-        
-        
-		Athlete aAthlete = new Athlete("46643025", "Lars erik", "Fagernæs");
+        }	
 		
-		myList.add(aAthlete);
-		
-		
-		return myList;
-		
+		return returnList;
 	}  
 	
 }
