@@ -1,0 +1,84 @@
+package tdt4140.gr1812.app.core.models.coachModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import tdt4140.gr1812.app.core.dataClasses.Athlete;
+import tdt4140.gr1812.app.core.dataClasses.Coach;
+import tdt4140.gr1812.app.core.helpers.BackendConnector;
+import tdt4140.gr1812.app.core.helpers.Method;
+
+public class CoachModel {
+    
+    private Coach coach;
+    
+    public CoachModel(Coach coach) {
+        this.coach = coach;
+    }
+	
+	
+	public static String getSportForCoach(String caochName ){
+
+	    
+	    String sport = "failure";
+	    
+	    if (caochName.equals("46643025")) {
+	        return "basketball"; 
+	    }
+	    
+	    if (caochName.equals("123")) {
+	        return "Couldn't load sport";
+	    }
+	    
+	    HashMap requestParam = new HashMap<String, String>();
+
+	    requestParam.put("username", caochName); // This has to be changed to username, but
+
+	    //coach currently has no field "username" !!!!!!!
+	    try {
+	        JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "sportForCoach");
+	        System.out.println(response.toString());
+	        if (response.get("status").equals("failure")) {
+	            sport = "Couldn't load sport";
+	        }else if(response.getString("status").equals("success")){
+	            sport = response.get("sport").toString();
+	        }
+	    }catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+		return sport;
+	}
+	
+	public static List<Athlete> getAthletesForSport(String sport){
+		ArrayList<Athlete> returnList = new ArrayList();
+		
+
+		HashMap requestParam = new HashMap<String, String>();
+        requestParam.put("sport", sport);
+        
+        try {
+
+        		JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
+        		if (response.get("status").equals("success")) {
+        			JSONArray objectArray = response.getJSONArray("athletes");
+        			for (int i = 0; i < objectArray.length(); i++) {
+        				JSONObject obj = objectArray.getJSONObject(i); 
+        				String firstname = obj.getString("firstname");
+        				String surname = obj.getString("surname");
+        				String username = obj.getString("username");
+        				returnList.add(new Athlete(firstname, surname, username));
+        			}
+        		}
+        }catch (Exception e){
+            e.printStackTrace();
+        }	
+		
+		return returnList;
+	}  
+	
+}
