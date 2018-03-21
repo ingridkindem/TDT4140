@@ -18,7 +18,7 @@ We are working with Scrum in our team, and the main motivation is to make a work
 
 ---
 
-## Guidlines for GitLab
+## Guidelines for GitLab
 
 This is a short introduction to how we organize our issues and connect them to our commits.
 
