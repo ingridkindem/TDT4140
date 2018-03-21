@@ -47,6 +47,10 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 ## Tech/framwork used
 
 * [Spring Boot](https://projects.spring.io/spring-boot/)
+* [Junit](https://junit.org/junit5/)
+* [TestFx](https://github.com/TestFX/TestFX)
+* [JSON](https://github.com/stleary/JSON-java)
+* [Spring](https://spring.io/)
 
 ### Built with
 
