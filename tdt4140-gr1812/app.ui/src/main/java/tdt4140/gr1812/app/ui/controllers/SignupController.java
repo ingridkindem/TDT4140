@@ -65,7 +65,7 @@ public class SignupController {
                 selectedSport, fornavn.getText(), etternavn.getText(), Integer.parseInt(makspuls.getText()), Integer.parseInt(vekt.getText()), gender);
         
         if(registerSuccess) {
-            app.goToSuccessfullSignup();
+            app.goToWorkoutRegistration(); //will eventually go to athlete-profile
         }
         else {
             System.out.println("No success in register :,( ");

@@ -44,7 +44,13 @@ public class LoginController {
 
 		if (checkInput) {
 			p = "";
-			app.goToLoggedIn();
+			boolean coach = true; //check if a coach is logging in
+			if (coach) {
+				app.goToCoachView();
+			} 
+			else {
+				app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+			}
 			this.atLoginView = false;
 			return true;
 		} else {
@@ -79,5 +85,4 @@ public class LoginController {
 	public void setApplication(FxApp app) {
 		this.app = app;
 	}
-	
 }
