@@ -20,44 +20,44 @@ public class WorkoutRegistrationControllerTest {
 	public void setUp() {
 		controller = new WorkoutRegistrationController();
 		final JFXPanel fxPanel = new JFXPanel();
-		controller.lengdePaaOkt = new TextField();
+		controller.lengdePåØkt = new TextField();
 		controller.puls = new TextField();
-		controller.maal = new TextField();
+		controller.mål = new TextField();
 		controller.basket = new RadioMenuItem();
 		controller.fotball = new RadioMenuItem();
 		controller.langrenn = new RadioMenuItem();
 		controller.feedback = new Text();
-		controller.privatOokt = new CheckBox();
+		controller.privatØkt = new CheckBox();
 	}
 	
-//	@Test
-//	public void testHandleRegistrer() {
-//		controller.basket.setSelected(true);
-//		controller.fotball.setSelected(false);
-//		controller.langrenn.setSelected(false);
-//		controller.lengdePåØkt.setText("30");
-//		controller.puls.setText("50,60,70");
-//		controller.mål.setText("mål");
-//		assertTrue(controller.handleRegistrer());
-//
-//		controller.basket.setSelected(false);
-//		controller.fotball.setSelected(true);
-//		controller.langrenn.setSelected(false);
-//		controller.lengdePåØkt.setText("-10");
-//		controller.puls.setText("50,60,70");
-//		controller.mål.setText("mål");
-//		assertFalse(controller.handleRegistrer());
+	@Test
+	public void testHandleRegistrer() {
+		controller.basket.setSelected(true);
+		controller.fotball.setSelected(false);
+		controller.langrenn.setSelected(false);
+		controller.lengdePåØkt.setText("30");
+		controller.puls.setText("50,60,70");
+		controller.mål.setText("mål");
+		assertTrue(controller.handleRegistrer());
 		
-//		controller.basket.setSelected(false);
-//		controller.fotball.setSelected(false);
-//		controller.langrenn.setSelected(true);
-//		controller.lengdePåØkt.setText("10");
-//		controller.puls.setText("-50,60,70");
-//		controller.mål.setText("mål");
-//		assertFalse(controller.handleRegistrer());
+		controller.basket.setSelected(false);
+		controller.fotball.setSelected(true);
+		controller.langrenn.setSelected(false);
+		controller.lengdePåØkt.setText("-10");
+		controller.puls.setText("50,60,70");
+		controller.mål.setText("mål");
+		assertFalse(controller.handleRegistrer());
+		
+		controller.basket.setSelected(false);
+		controller.fotball.setSelected(false);
+		controller.langrenn.setSelected(true);
+		controller.lengdePåØkt.setText("10");
+		controller.puls.setText("-50,60,70");
+		controller.mål.setText("mål");
+		assertFalse(controller.handleRegistrer());
 		
 		
-//	}
+	}
 	
 	@Test
 	public void testHandleKryssUt() {

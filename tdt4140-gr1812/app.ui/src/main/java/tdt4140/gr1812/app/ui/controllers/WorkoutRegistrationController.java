@@ -13,11 +13,11 @@ import tdt4140.gr1812.app.ui.FxApp;
 public class WorkoutRegistrationController {
 	
 	@FXML
-	TextField lengdePaaOkt;
+	TextField lengdePåØkt;
 	@FXML
 	TextField puls;
 	@FXML
-	TextField maal;
+	TextField mål;
 	@FXML
 	Hyperlink registrer;
 	@FXML
@@ -29,7 +29,7 @@ public class WorkoutRegistrationController {
 	@FXML
 	RadioMenuItem fotball;
 	@FXML
-	CheckBox privatOokt;
+	CheckBox privatØkt;
 	@FXML
 	Text feedback;
 	
@@ -49,10 +49,10 @@ public class WorkoutRegistrationController {
 		boolean b = basket.isSelected();
 		boolean f = fotball.isSelected();
 		boolean l = langrenn.isSelected();
-		boolean c = privatOokt.isPressed();
-		String lengde = lengdePaaOkt.getText();
+		boolean c = privatØkt.isPressed();
+		String lengde = lengdePåØkt.getText();
 		String p = puls.getText();
-		String m = maal.getText();
+		String m = mål.getText();
 		Sport s = null;
 		if (b) {
 			s = new Sport("basket");
