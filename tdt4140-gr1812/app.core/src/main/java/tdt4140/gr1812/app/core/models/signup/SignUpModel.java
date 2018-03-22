@@ -59,7 +59,7 @@ public class SignUpModel {
 	           requestParam.put("firstname", firstName);
 	           requestParam.put("surname", surname);
 	           requestParam.put("maxpulse", String.valueOf(maxpulse));
-	           requestParam.put("weight", String.valueOf(maxpulse));
+	           requestParam.put("weight", String.valueOf(weight));
 	           requestParam.put("gender", genderString);
 	           
 	           JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "signup");

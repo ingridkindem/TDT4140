@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1000.0">
+         <image>
+            <Image url="@trenerView1.jpg" />
+         </image>
+      </ImageView>
+      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="586.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="Utøvere" textFill="#fcf5f5" wrapText="true">
+         <font>
+            <Font name="Futura Medium" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <opaqueInsets>
+            <Insets left="10.0" />
+         </opaqueInsets>
+      </MenuButton>
+      <TableView id="athletesTable" fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0" style="-fx-background-radius: 15;">
+         <columns>
+            <TableColumn id="ColumnPhoneNumber" fx:id="ColumnPhoneNumber" prefWidth="300.5220642089844" text="MOBILNUMMER" />
+            <TableColumn fx:id="ColumnName" prefWidth="273.0" text="Navn" />
+         </columns>
+      </TableView>
+      <Label fx:id="sportLabel" layoutX="393.0" layoutY="166.0" prefHeight="17.0" prefWidth="305.0" text="Label" />
+   </children>
+</AnchorPane>

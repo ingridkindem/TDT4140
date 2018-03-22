@@ -1,0 +1,54 @@
+
+
+#sportsButton{
+	-fx-background-color:  #70dbdb;
+	-fx-background-radius: 12;
+}
+
+#sport_fotball{
+	-fx-background-color:  #2B2D44;
+	-fx-pref-width:"384.0";
+	-fx-font: Futura;
+	-fx-font-size: 16px;
+	
+}
+
+#sport_basketball{
+	-fx-background-color:  #70dbdb;
+	-fx-pref-width:"384.0";
+}
+
+#sport_langrenn{
+	-fx-background-color:  #2B2D44;
+	-fx-pref-width:"384.0";
+}
+
+#athletesTable{
+	-fx-background-color: #2B2D44
+	
+}
+
+#ColumnName{
+	-fx-font: Futura;
+}
+
+#ColumnPhoneNumber{
+	-fx-font: Futura;
+	-fx-background-color:
+}
+
+/* .table-row-cell: odd{
+	-fx-background-color: #2B2D44;
+	-fx-font: Futura;
+}
+
+.table-row-cell: even{
+	-fx-background-color: #2B2D44;
+	-fx-font: Futura;
+}*/
+
+
+
+
+
+

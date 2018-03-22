@@ -9,7 +9,7 @@ import tdt4140.gr1812.app.core.helpers.Method;
 
 public class LoginModel {
 
-	public static boolean login(String phoneNumber, String password) {
+	public static Tuple<Boolean, Boolean> login(String phoneNumber, String password) {
 		if (phoneNumber.equals(null)) {
 			throw new NullPointerException("Phone number cannot bo blank");
 		}
@@ -24,17 +24,22 @@ public class LoginModel {
 			JSONObject response = BackendConnector.makeRequest(myMap, Method.POST, "login");
 			System.out.print(response.toString());
 			if (response.get("status").equals("success")) {
-				return true;
+				if (response.getString("coach").equals("true")) {
+					return new Tuple(true, true);
+				}
+				else {
+					return new Tuple(true, false);
+				}
 			}
 			else {
-				return false; 
+				return new Tuple(false, false); 
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return false;
+		return new Tuple(false, false);
 	}
 		
 	
