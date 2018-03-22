@@ -19,10 +19,7 @@ public class CoachControllerTest extends TestCase {
        
     @Test
     public void changedTest() {
-       controller.getathletesTable().setVisible(false);
-       if (p)
+//       controller.getathletesTable().setVisible(false);
+//       if (p)
     }
-    
-    
-
 }

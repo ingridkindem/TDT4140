@@ -17,7 +17,7 @@ import tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController;
 
 
 public class FxApp extends Application {
-	
+    
 	private FXMLLoader fxmlLoader;
 	private Stage stage;
 	private String currentUser; 
@@ -88,6 +88,9 @@ public class FxApp extends Application {
 		try {
 			replaceSceneContent("views/coach/CoachView.fxml"); //path to coachView
 			CoachController controller = this.fxmlLoader.getController();
+			if (this.currentUser == null) {
+				System.out.println("The currentUser = null :/ ");
+			}
 			controller.setUser(this.currentUser);
 			controller.setApplication(this);
 			stage.show();
