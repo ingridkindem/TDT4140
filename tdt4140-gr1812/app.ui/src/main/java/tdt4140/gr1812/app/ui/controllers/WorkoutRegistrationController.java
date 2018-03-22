@@ -33,6 +33,8 @@ public class WorkoutRegistrationController {
 	@FXML
 	Text feedback;
 	
+	private String currentUser;
+	
 	WorkoutRegistrationModel model = new WorkoutRegistrationModel();
 	FxApp app;
 	
@@ -61,7 +63,7 @@ public class WorkoutRegistrationController {
 		if (l) {
 			s = new Sport("langrenn");
 		}
-		boolean action = model.WorkoutRegistrationModelInit(lengde, p, s, m, c);
+		boolean action = model.WorkoutRegistrationModelInit(currentUser, lengde, p, s, m, c);
 		if (action) {
 			app.goToWorkoutRegistration(); //will eventually go to athlete-profile
 			return true;
@@ -70,6 +72,10 @@ public class WorkoutRegistrationController {
 			update();
 			return false;
 		}
+	}
+	
+	public void setCurrentUser(String user) {
+		this.currentUser = user; 
 	}
 	
 	@FXML

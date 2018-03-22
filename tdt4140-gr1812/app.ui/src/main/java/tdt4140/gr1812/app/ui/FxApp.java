@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
+import tdt4140.gr1812.app.ui.controllers.CoachController;
 import tdt4140.gr1812.app.ui.controllers.LoginController;
 import tdt4140.gr1812.app.ui.controllers.SignupController;
 import tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController;
@@ -18,11 +20,16 @@ public class FxApp extends Application {
 	
 	private FXMLLoader fxmlLoader;
 	private Stage stage;
+	private String currentUser; 
 
     @Override
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
         goToLogin();
+    }
+    
+    public void setCurrentUser(String user) {
+    		this.currentUser = user; 
     }
     
     public void goToLoggedIn() {
@@ -70,6 +77,7 @@ public class FxApp extends Application {
 			replaceSceneContent("views/workoutRegistrationView/WorkoutRegistrationView.fxml"); //path to workoutRegistrationView-view
 			WorkoutRegistrationController controller = this.fxmlLoader.getController();
 			controller.setApplication(this);
+			controller.setCurrentUser(this.currentUser);
 			stage.show();
 		} catch(Exception e) {
 			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
@@ -79,7 +87,11 @@ public class FxApp extends Application {
     public void goToCoachView() {
 		try {
 			replaceSceneContent("views/coach/CoachView.fxml"); //path to coachView
-			WorkoutRegistrationController controller = this.fxmlLoader.getController();
+			CoachController controller = this.fxmlLoader.getController();
+			if (this.currentUser == null) {
+				System.out.println("The currentUser = null :/ ");
+			}
+			controller.setUser(this.currentUser);
 			controller.setApplication(this);
 			stage.show();
 		} catch(Exception e) {

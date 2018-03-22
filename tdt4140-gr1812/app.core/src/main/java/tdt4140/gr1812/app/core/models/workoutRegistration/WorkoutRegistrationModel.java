@@ -16,7 +16,7 @@ public class WorkoutRegistrationModel {
 	
 	private String text = "";
 
-	public boolean WorkoutRegistrationModelInit(String duration, String pulses, Sport sport, String goal, boolean privacy) {
+	public boolean WorkoutRegistrationModelInit(String username, String duration, String pulses, Sport sport, String goal, boolean privacy) {
 		try {
 			int d = checkDuration(duration);
 			List<Integer> pulsesList = checkPulse(pulses);
@@ -35,12 +35,16 @@ public class WorkoutRegistrationModel {
 			//send til database. Hvis godkjent - return true. Hvis feil - return false
 			HashMap requestParam = new HashMap<String, String>();
 			requestParam.put("duration", String.valueOf(duration));
+			requestParam.put("username", username);
 			requestParam.put("pulses", pulses);
 			requestParam.put("goal", goal);
-			requestParam.put("sport", sport);
+			requestParam.put("sport", sport.getSport());
 			requestParam.put("privacy", p);
+
 			
+			System.out.println(requestParam.toString());
 			JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "workoutRegistration");
+			System.out.println("Response from server = " + response.toString());
 			if (response.get("status").equals("success")) {
 	               return true; 
 	           }

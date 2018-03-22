@@ -5,6 +5,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.dataClasses.LoginModel;
+import tdt4140.gr1812.app.core.dataClasses.Tuple;
 import tdt4140.gr1812.app.ui.FxApp;
 
 
@@ -40,11 +41,12 @@ public class LoginController {
 		String phoneNumber = this.setPhoneNumber.getText();
 		String password = this.setPassword.getText();
 
-		boolean checkInput = LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
+		Tuple<Boolean, Boolean> checkInput = LoginModel.login(phoneNumber, password); //login.login(phoneNumber, password); //check if the input is correct
 
-		if (checkInput) {
+		if (checkInput.x) {
 			p = "";
-			boolean coach = true; //check if a coach is logging in
+			boolean coach = checkInput.y; //check if a coach is logging in
+			app.setCurrentUser(phoneNumber);
 			if (coach) {
 				app.goToCoachView();
 			} 

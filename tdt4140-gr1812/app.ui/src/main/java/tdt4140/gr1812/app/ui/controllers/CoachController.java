@@ -40,7 +40,9 @@ public class CoachController {
 	@FXML
 	private Label sportLabel;
 	
-	public String coachUsername = "46643025";  
+	
+	private String currentSport; 
+	private String coachUsername;  
 
 	@FXML
 	public void initialize() {
@@ -61,8 +63,8 @@ public class CoachController {
 			}
 
 		});
-		
-		sportLabel.setText(handleSport(this.coachUsername));
+		this.currentSport = handleSport(this.coachUsername); 
+		sportLabel.setText(this.currentSport);
 		update();
 		
 	}
@@ -99,6 +101,10 @@ public class CoachController {
 	public void setApplication(FxApp app) {
 		this.app = app;
 	}
+	
+	public void setUser(String username) {
+		this.coachUsername = username; 
+	}
 
 	private class athleteObject {
 		private final String fullName;
@@ -111,7 +117,7 @@ public class CoachController {
 	}
 
 	public List<Athlete> createAthleteObjectList() {
-		return CoachModel.getAthletesForSport("basketball");
+		return CoachModel.getAthletesForSport(this.currentSport);
 	}
 
 
