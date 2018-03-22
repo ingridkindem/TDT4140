@@ -49,7 +49,7 @@ public class CoachController {
 		this.atCoachView = true;
 		this.athletesTable.setVisible(false);
 		
-		
+		System.out.println("-1-");
 		this.setColumnsInTable();
 
 		athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
@@ -63,15 +63,14 @@ public class CoachController {
 			}
 
 		});
-		this.currentSport = handleSport(this.coachUsername); 
-		sportLabel.setText(this.currentSport);
+
 		update();
 		
 	}
 
 	public void update() {
 		athletesTable.setItems(observableAthletes);
-		observableAthletes.setAll(createAthleteObjectList());
+		
 	}
 
 	public String handleSport(String coach) {
@@ -103,7 +102,11 @@ public class CoachController {
 	}
 	
 	public void setUser(String username) {
-		this.coachUsername = username; 
+		System.out.println("-2-");
+		this.coachUsername = username;
+		this.currentSport = handleSport(this.coachUsername);
+		sportLabel.setText(this.currentSport);
+		observableAthletes.setAll(createAthleteObjectList());
 	}
 
 	private class athleteObject {

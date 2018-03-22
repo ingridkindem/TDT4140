@@ -32,6 +32,7 @@ public class CoachModel {
 	    requestParam.put("username", caochName); // This has to be changed to username, but
 
 	    //coach currently has no field "username" !!!!!!!
+	    System.out.println(requestParam.toString());
 	    try {
 	        JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "sportForCoach");
 	        System.out.println(response.toString());
@@ -64,7 +65,7 @@ public class CoachModel {
         				String firstname = obj.getString("firstname");
         				String surname = obj.getString("surname");
         				String username = obj.getString("username");
-        				returnList.add(new Athlete(firstname, surname, username));
+        				returnList.add(new Athlete(username, surname, firstname));
         			}
         		}
         }catch (Exception e){
