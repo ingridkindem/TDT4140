@@ -159,7 +159,8 @@ Here is an example of how we test the code above.
 
 ## How to run our application
 
-* Run file: tdt4140.gr1812.app.ui.FxApp.java
+* Run file: tdt4140-gr1812/executable/treningsapp1.1.0.jar or 
+* Open and run file within compiler: tdt4140.gr1812.app.ui.FxApp.java
 
 ---
 
