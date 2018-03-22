@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2018 at 11:22 PM
+-- Generation Time: Mar 22, 2018 at 12:44 AM
 -- Server version: 5.7.21
 -- PHP Version: 7.1.7
 
@@ -49,7 +49,8 @@ CREATE TABLE `users` (
   `maxpuls` int(11) NOT NULL,
   `weight` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `sport` varchar(30) NOT NULL
+  `sport` varchar(30) NOT NULL,
+  `Coach` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -100,7 +101,7 @@ ALTER TABLE `workouts`
 -- AUTO_INCREMENT for table `workouts`
 --
 ALTER TABLE `workouts`
-  MODIFY `workoutid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `workoutid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
