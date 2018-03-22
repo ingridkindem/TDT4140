@@ -26,13 +26,6 @@ public class CoachModel {
 	    
 	    String sport = "failure";
 	    
-	    if (caochName.equals("46643025")) {
-	        return "basketball"; 
-	    }
-	    
-	    if (caochName.equals("123")) {
-	        return "Couldn't load sport";
-	    }
 	    
 	    HashMap requestParam = new HashMap<String, String>();
 
