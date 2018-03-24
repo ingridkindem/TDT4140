@@ -43,7 +43,7 @@ public class FxAppTest extends Application {
     
     public void goToHome() {
         try {
-            replaceSceneContent("/homeScreen/HomeScreen.fxml"); //path to homeScreen-view
+            replaceSceneContent("views/homeScreen/HomeScreen.fxml"); //path to homeScreen-view
             stage.show();
         } catch(Exception e) {
             Logger.getLogger(FxAppTest.class.getName()).log(Level.SEVERE, null, e);;

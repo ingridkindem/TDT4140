@@ -46,8 +46,7 @@ public class HomeScreenController {
     @FXML
     public void initialize() {
         
-        maps.getEngine().load("file:///Users/bruker/tdt4180-oxygen/12/tdt4140-gr1812/app.ui/src/main/java/homeScreen/location.html");
-
+       maps.getEngine().load("file:///Users/bruker/tdt4180-oxygen/12/tdt4140-gr1812/app.ui/src/main/java/tdt4140/gr1812/app/ui/views/homeScreen/location.html");
     }
 
 
