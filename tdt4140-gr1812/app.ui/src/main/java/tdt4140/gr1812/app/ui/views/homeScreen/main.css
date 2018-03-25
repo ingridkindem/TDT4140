@@ -4,13 +4,17 @@ body{
     font-family: "Avenir Next", Avenir, "Droid Sans", "DroidSansRegular", Corbel, Tahoma, Geneva, sans-serif;
     font-weight: 400;
     width: 100%;
+    text-align: center;
     
     /* Removes scroll bar */
     overflow-x: hidden;
     overflow-y: hidden;
-    
 }
 
+div{
+	text-align: center;
+}	
+	
 
 	/* Properties for map */
 #map{
@@ -18,4 +22,7 @@ body{
     height: 325px;
     margin-left: 0;
     margin-right: 0;
+    text-align: center;
 }
+
+

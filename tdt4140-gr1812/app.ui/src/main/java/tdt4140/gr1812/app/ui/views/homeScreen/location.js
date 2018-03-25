@@ -1,3 +1,5 @@
+
+//Defining Points on map, can add more Points in features.
 var lierIL = {
   "type": "FeatureCollection",
   "generator": "overpass-turbo",
@@ -8,7 +10,9 @@ var lierIL = {
 	      "type": "Feature",
 	      "id": "node/33209415",
 	      "properties": {
-	        "name": "Lier IL"
+	        "name": "Lier IL".bold(),
+	        	"addresse": "Joseph Kellers vei 5",
+	        	"poststed": "3408 Tranbyen"
 	      },
 	      "geometry": {
 	        "type": "Point",
