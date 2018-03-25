@@ -63,9 +63,7 @@ public class CoachController {
 			}
 
 		});
-
 		update();
-		
 	}
 
 	public void update() {
@@ -102,7 +100,6 @@ public class CoachController {
 	}
 	
 	public void setUser(String username) {
-		System.out.println("-2-");
 		this.coachUsername = username;
 		this.currentSport = handleSport(this.coachUsername);
 		sportLabel.setText(this.currentSport);

@@ -22,39 +22,38 @@ public class LoginControllerTest extends ApplicationTest {
       this.stage.toFront();
     }
     
-    @Test 
-    public void handleLoginTest() {
-        
-        class OneShotTask implements Runnable {
-            Stage stage;
-            OneShotTask(Stage inputStage) { stage = inputStage; }
-            public void run() {
-                
-                FxApp theApp = new FxApp();
-                try {
-                    theApp.start(this.stage);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                LoginController loginController = new LoginController(); 
-                loginController.setApplication(theApp);
-                
-                
-                TextField phonenumberTextField = new TextField();
-                phonenumberTextField.setText("46643025");
-                PasswordField passwordField = new PasswordField();
-                passwordField.setText("46643025");
-                
-                loginController.setSetPhoneNumber(phonenumberTextField);
-                loginController.setSetPassword(passwordField);
-                boolean loginResult = loginController.handleLogin(); 
-                System.out.println(loginResult);
-                assertTrue(loginResult);
-            }
-        }
-        
-        Platform.runLater(new OneShotTask(this.stage));        
-    }
-    
+//    @Test
+//    public void handleLoginTest() {
+//
+//        class OneShotTask implements Runnable {
+//            Stage stage;
+//            OneShotTask(Stage inputStage) { stage = inputStage; }
+//            public void run() {
+//
+//                FxApp theApp = new FxApp();
+//                try {
+//                    theApp.start(this.stage);
+//                } catch (Exception e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//                LoginController loginController = new LoginController();
+//                loginController.setApplication(theApp);
+//
+//
+//                TextField phonenumberTextField = new TextField();
+//                phonenumberTextField.setText("46643025");
+//                PasswordField passwordField = new PasswordField();
+//                passwordField.setText("46643025");
+//
+//                loginController.setSetPhoneNumber(phonenumberTextField);
+//                loginController.setSetPassword(passwordField);
+//                boolean loginResult = loginController.handleLogin();
+//                System.out.println(loginResult);
+//                assertTrue(loginResult);
+//            }
+//        }
+//
+//        Platform.runLater(new OneShotTask(this.stage));
+//    }
 }
