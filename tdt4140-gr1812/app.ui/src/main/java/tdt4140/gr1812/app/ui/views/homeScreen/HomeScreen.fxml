@@ -11,13 +11,13 @@
       <AnchorPane layoutY="-7.0" prefHeight="700.0" prefWidth="1000.0" />
       <ImageView fitHeight="700.0" fitWidth="1000.0" layoutY="-1.0">
          <image>
-            <Image url="@homeScreenView.png" />
+            <Image url="@homeScreen2.png" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="facebookB" layoutX="273.0" layoutY="523.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="124.0" style="-fx-border-radius: 100; -fx-border-color: TRANSPARENT;" />
-      <Hyperlink fx:id="mailB" layoutX="435.0" layoutY="522.0" prefHeight="124.0" prefWidth="124.0" style="-fx-border-color: TRANSPARENT;" />
-      <Hyperlink fx:id="phoneB" layoutX="595.0" layoutY="524.0" prefHeight="124.0" prefWidth="124.0" style="-fx-border-color: TRANSPARENT;" />
-      <Hyperlink fx:id="lierB" layoutX="384.0" layoutY="33.0" prefHeight="91.0" prefWidth="253.0" style="-fx-border-color: TRANSPARENT;" />
+      <Hyperlink fx:id="facebookB" layoutX="273.0" layoutY="523.0" onAction="#handleFacebook" prefHeight="124.0" prefWidth="124.0" style="-fx-border-radius: 100; -fx-border-color: TRANSPARENT;" />
+      <Hyperlink fx:id="mailB" layoutX="435.0" layoutY="522.0" onAction="#handleMail" prefHeight="124.0" prefWidth="124.0" style="-fx-border-color: TRANSPARENT;" />
+      <Hyperlink fx:id="mapB" layoutX="595.0" layoutY="524.0" onAction="#handleMap" prefHeight="124.0" prefWidth="124.0" style="-fx-border-color: TRANSPARENT;" />
+      <Hyperlink fx:id="lierB" layoutX="384.0" layoutY="33.0" onAction="#handleBack" prefHeight="91.0" prefWidth="253.0" style="-fx-border-color: TRANSPARENT;" />
       <WebView fx:id="maps" layoutX="215.0" layoutY="143.0" maxHeight="340.0" maxWidth="568.0" minHeight="340.0" minWidth="568.0" prefHeight="340.0" prefWidth="568.0" />
 
 
