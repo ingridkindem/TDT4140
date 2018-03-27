@@ -47,11 +47,12 @@ public class LoginController {
 			p = "";
 			boolean coach = checkInput.y; //check if a coach is logging in
 			app.setCurrentUser(phoneNumber);
+			app.setCoach(coach);
 			if (coach) {
 				app.goToCoachView();
 			} 
 			else {
-				app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+				app.goToLoggedIn();
 			}
 			this.atLoginView = false;
 			return true;

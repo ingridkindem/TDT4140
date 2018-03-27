@@ -29,12 +29,19 @@ public class WorkoutTest {
 	
 	@Test
 	public void testSetPulses() {
-		workout.setPulses(Arrays.asList(251));
-		assertEquals(Arrays.asList(251), workout.getPulses());
+		workout.setPulses(Arrays.asList(251,53));
+		assertEquals(Arrays.asList(251,53), workout.getPulses());
+		assertEquals(251, workout.getMaxpulse());
 	}
 	
 	@Test
 	public void testSetDuration() {
+		try {
+			workout.setDuration(-3);
+			fail();
+		} catch (IllegalArgumentException e) {
+			
+		}
 		workout.setDuration(140);
 		assertEquals("2:20",workout.getDuration());
 	}
@@ -47,8 +54,8 @@ public class WorkoutTest {
 	
 	@Test
 	public void testSetGoal() {
-		workout.setGoal("Dette var en fin økt!");
-		assertEquals("Dette var en fin økt!", workout.getGoal());
+		workout.setGoal("Dette var en fin ï¿½kt!");
+		assertEquals("Dette var en fin ï¿½kt!", workout.getGoal());
 	}
 	
 	@Test

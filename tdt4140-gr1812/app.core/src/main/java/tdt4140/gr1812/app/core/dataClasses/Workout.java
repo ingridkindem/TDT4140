@@ -13,6 +13,7 @@ public class Workout {
 	private String goal;
 	private Date date;
 	private boolean privacy; //true=private
+	private int maxPulse;
 	
 	//Constructor to create a workout. Initialized with sport and possibilty for privacy mode.
 	public Workout(Sport sport, boolean privacy) {
@@ -37,10 +38,20 @@ public class Workout {
 //			}
 //			this.pulses.add(pulse);
 //		}
+		setMaxpulse(pulses);
 		this.pulses=pulses;
 	}
 	
-	//set date, format "dd/mm/yy"
+	private void setMaxpulse(List<Integer> pulses) { //called from setPulses()
+		int max = 0;
+		for (int pulse : pulses) {
+			if (pulse > max) {
+				max = pulse;
+			}
+		} 
+		this.maxPulse = max;
+	}
+	
 	public void setDate(Date date) {
 		this.date=date;
 	}
@@ -88,6 +99,10 @@ public class Workout {
 	
 	public List<Integer> getPulses() {
 		return pulses;
+	}
+	
+	public int getMaxpulse() {
+		return this.maxPulse;
 	}
 	
 	public Date getDate() {
