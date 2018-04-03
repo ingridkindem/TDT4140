@@ -45,7 +45,10 @@ public class HomeScreenController {
     
     @FXML
     public void handleMail() {
-        maps.getEngine().load("https://lieridrettslag.weborg.no/Lier-IL/Toppmeny/Kontakt-oss.html#/Hovedstyret");
+      // if we are going to use Lier ILs web site as contact, use first link instead
+      //  maps.getEngine().load("https://lieridrettslag.weborg.no/Lier-IL/Toppmeny/Kontakt-oss.html#/Hovedstyret");
+        maps.getEngine().load("file:///Users/bruker/tdt4180-oxygen/12/tdt4140-gr1812/app.ui/src/main/java/tdt4140/gr1812/app/ui/views/homeScreen/contact.html");
+   
     }
     
     public void handleMap() {
