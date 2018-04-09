@@ -15,13 +15,24 @@ import tdt4140.gr1812.app.core.helpers.Method;
 public class WorkoutRegistrationModel {
 	
 	private String text = "";
-
-	public boolean WorkoutRegistrationModelInit(String username, String duration, String pulses, Sport sport, String goal, boolean privacy) {
+	//private String sportParametre = "";
+	
+	
+	public boolean WorkoutRegistrationModelInit(String username, String extraField, String duration, Sport sport, String goal, boolean privacy) {		
 		try {
 			int d = checkDuration(duration);
-			List<Integer> pulsesList = checkPulse(pulses);
+			
 			checkSport(sport);
 			text = "";
+			if (sport.getSport().equals("langrenn")) {
+				List<Integer> pulsesList = checkPulse(extraField);
+			}
+			if (sport.getSport().equals("basket")) {
+				int basketThrows = checkThrows(extraField);
+			}
+			if (sport.getSport().equals("fotball")) {
+				int penalties = checkPenalties(extraField);
+			}
 			Workout workout = new Workout(sport, privacy);		
 			workout.setDuration(d);
 			workout.setGoal(goal);
@@ -32,11 +43,11 @@ public class WorkoutRegistrationModel {
 			} else {
 				p = "0";
 			}
-			//send til database. Hvis godkjent - return true. Hvis feil - return false
+			//send to database. Hvis godkjent - return true. Hvis feil - return false
 			HashMap requestParam = new HashMap<String, String>();
 			requestParam.put("duration", String.valueOf(duration));
 			requestParam.put("username", username);
-			requestParam.put("pulses", pulses);
+			requestParam.put("extraField", extraField);
 			requestParam.put("goal", goal);
 			requestParam.put("sport", sport.getSport());
 			requestParam.put("privacy", p);
@@ -71,9 +82,37 @@ public class WorkoutRegistrationModel {
 			return pulsesList;
 		} catch (Exception e) {
 			text = "Illegal pulses.";
-			throw new IllegalArgumentException("Pulsene må være heltall");
+			throw new IllegalArgumentException("Pulses must be integers.");
 		}
 		
+	}
+	
+	public int checkThrows(String basketThrows) {
+		try {
+			int bThrows = Integer.parseInt(basketThrows);
+			if (bThrows < 0) {
+				throw new Exception();
+			}
+			return bThrows;
+		}
+		catch (Exception e) {
+			text = "Illegal throws.";
+			throw new IllegalArgumentException("Throws must me a positive integer.");
+		}
+	}
+	
+	public int checkPenalties(String penalties) {
+		try {
+			int p = Integer.parseInt(penalties);
+			if (p < 0) {
+				throw new Exception();
+			}
+			return p;
+		}
+		catch (Exception e) {
+			text = "Illegal penalties.";
+			throw new IllegalArgumentException("Penalties must me a positive integer.");
+		}
 	}
 	
 	public int checkDuration(String duration) {
