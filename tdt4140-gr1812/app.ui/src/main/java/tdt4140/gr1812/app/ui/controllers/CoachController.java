@@ -52,6 +52,7 @@ public class CoachController {
 	public void initialize() {
 		this.atCoachView = true;
 		this.athletesTable.setVisible(false);
+		this.selectAthlete.setVisible(false);
 		
 		//Hvorfor funker det ikke å sette selectTable til false her? 
 		//Og hva med infoBut, hvorfor funker ikke den heller?
@@ -93,7 +94,12 @@ public class CoachController {
 		           if (nummer.matches("[0-9]+")) {
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
+		               athletesButton.setText(selectedAthlete);
+		               selectAthlete.setVisible(true);
+		               athletesTable.setVisible(false);
 		           }
+		           
+		           
 		        }
             }   
 		});
