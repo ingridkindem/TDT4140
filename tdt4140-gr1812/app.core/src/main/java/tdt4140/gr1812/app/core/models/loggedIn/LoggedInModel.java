@@ -22,7 +22,7 @@ public final class LoggedInModel {
 		HashMap requestparam = new HashMap<String, String>();
 		requestparam.put("username", username);
 		try {
-			JSONObject response = BackendConnector.makeRequest(requestparam, Method.POST, "");
+			JSONObject response = BackendConnector.makeRequest(requestparam, Method.POST, ""); // må endres
 			if (response.get("status").equals("success")) {
 				name = response.get("firstname").toString() + " " + response.get("surname").toString();
 			} else if (response.get("status").equals("failure")) {
@@ -67,6 +67,7 @@ public final class LoggedInModel {
 		return returnList;
 	}  
 	
+	@SuppressWarnings("deprecation")
 	public static Date stringToDate(String s) {
 		Date date = null;
 		try {
@@ -94,7 +95,46 @@ public final class LoggedInModel {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Pulsene må være heltall");
 		}
+	}
+	
+	public static List<List<Integer>> getPulseZones(String username) {
+		List<List<Integer>> returnList = new ArrayList();
 		
+		HashMap requestParam = new HashMap<String, String>();
+        requestParam.put("username", username);
+        try {
+        	JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, ""); //må endres
+    		if (response.get("status").equals("success")) {
+    			JSONArray objectArray = response.getJSONArray("pulsezones"); // må endres?
+    			for (int i = 0; i < objectArray.length(); i++) {
+    				JSONObject obj = objectArray.getJSONObject(i);
+    				String pulsezones = obj.get("").toString();
+    				returnList.add(getDurationInZones(pulsezones));
+    			}
+    		}
+    		} catch (Exception e) {
+    			returnList = null;
+			e.printStackTrace();
+		}
+        return returnList;
+	}
+	
+	public static List<Integer> getDurationInZones(String pulsezones) {
+		List<Integer> returnList = new ArrayList();
+		try {
+			String[] durations = pulsezones.split(",");
+			if (durations.length != 5) {
+				throw new Exception();
+			}
+			for (int i = 0; i < 5; i++) {
+				returnList.add(Integer.parseInt(durations[i]));
+			}
+			
+		} catch (Exception e) {
+			returnList = null;
+			e.printStackTrace();
+		}
+		return returnList;
 	}
 	
 }

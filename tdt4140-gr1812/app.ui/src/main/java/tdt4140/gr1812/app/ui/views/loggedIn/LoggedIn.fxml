@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -21,7 +20,7 @@
       </ImageView>
       <Text fx:id="name" fill="#393838" layoutX="38.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="193.06550788879395">
          <font>
-            <Font name="Helvetica Neue" size="22.0" />
+            <Font name="Futura Medium" size="22.0" />
          </font>
       </Text>
       <Hyperlink fx:id="registrerOkt" layoutX="267.0" layoutY="43.0" onAction="#registrerOkt" prefHeight="45.0" prefWidth="182.0" />
@@ -30,14 +29,6 @@
             <Image url="@Blank.jpg" />
          </image>
       </ImageView>
-      <StackedBarChart layoutX="91.0" layoutY="146.0" prefHeight="242.0" prefWidth="772.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </StackedBarChart>
       <TableView fx:id="workoutsTable" layoutX="102.0" layoutY="450.0" prefHeight="190.0" prefWidth="793.0" style="-fx-background-color: #dbdbdb;">
         <columns>
           <TableColumn fx:id="date" prefWidth="151.28355407714844" text="DATO" />
@@ -56,11 +47,16 @@
             <Image url="@loggUt.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="483.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGG UT" textAlignment="CENTER" wrappingWidth="128.21875">
+      <Text fill="#464646" layoutX="483.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGG UT" textAlignment="CENTER" wrappingWidth="128.21875">
          <font>
-            <Font name="Arial Hebrew" size="14.0" />
+            <Font name="Futura Medium" size="14.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="464.0" layoutY="48.0" onAction="#loggUt" prefHeight="37.0" prefWidth="166.0" />
+      <Hyperlink layoutX="464.0" layoutY="48.0" onAction="#loggUt" prefHeight="37.0" prefWidth="166.0" textFill="#363535" />
+      <SubScene fx:id="chartScene" height="200.0" layoutX="103.0" layoutY="146.0" style="-fx-background-color: #FBF1E5;" width="785.0">
+        <root>
+          <Region />
+        </root>
+      </SubScene>
    </children>
 </AnchorPane>

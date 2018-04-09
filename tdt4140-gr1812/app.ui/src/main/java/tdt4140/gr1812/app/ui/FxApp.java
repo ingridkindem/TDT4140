@@ -45,8 +45,8 @@ public class FxApp extends Application {
 			controller.setApplication(this);
 			controller.setCurrentUser(this.currentUser);
 			controller.setCoach(this.coach);
-			stage.show();
 			controller.update();
+			stage.show();
 		} catch(Exception e) {
 		    Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
 	    }
