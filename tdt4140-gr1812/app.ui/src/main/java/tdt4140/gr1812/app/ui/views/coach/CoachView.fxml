@@ -51,7 +51,7 @@
             <Font name="Futura Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="infoBut" layoutX="61.0" layoutY="579.0" mnemonicParsing="false" style="-fx-background-radius: 11; -fx-background-color: #70dbdb;" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO" textFill="WHITE">
+      <Button fx:id="infoBut" layoutX="94.0" layoutY="565.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="397.0" style="-fx-background-radius: 11; -fx-background-color: #70dbdb;" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO" textFill="WHITE">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font>
