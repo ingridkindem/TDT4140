@@ -36,7 +36,7 @@
             <Font size="22.0" />
          </font>
       </TextField>
-      <MenuButton fx:id="idrett" cache="true" cacheHint="SCALE" contentDisplay="CENTER" layoutX="114.0" layoutY="270.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="387.0" style="-fx-background-color: #70dbdb;" text="IDRETT" textFill="WHITE">
+      <MenuButton fx:id="idrett" cache="true" cacheHint="SCALE" contentDisplay="CENTER" layoutX="114.0" layoutY="270.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="387.0" style="-fx-background-color: #70dbdb;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -44,15 +44,14 @@
             <Blend />
          </effect>
          <items>
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <RadioMenuItem fx:id="fotball" mnemonicParsing="false" text=" Fotball                                                          ">
+            <RadioMenuItem fx:id="fotball" mnemonicParsing="false" onAction="#initialize" text="Fotball">
                <toggleGroup>
                   <ToggleGroup fx:id="Sporter" />
                </toggleGroup></RadioMenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <RadioMenuItem fx:id="basket" mnemonicParsing="false" text="Basket" toggleGroup="$Sporter" />
+            <RadioMenuItem fx:id="basket" mnemonicParsing="false" onAction="#initialize" text="Basket" toggleGroup="$Sporter" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <RadioMenuItem fx:id="langrenn" mnemonicParsing="false" text="Langrenn" toggleGroup="$Sporter" />
+            <RadioMenuItem fx:id="langrenn" mnemonicParsing="false" onAction="#initialize" text="Langrenn" toggleGroup="$Sporter" />
          </items>
       </MenuButton>
       <Hyperlink fx:id="registrer" layoutX="393.0" layoutY="536.0" onAction="#handleRegistrer" opacity="0.0" prefHeight="60.0" prefWidth="230.0" />

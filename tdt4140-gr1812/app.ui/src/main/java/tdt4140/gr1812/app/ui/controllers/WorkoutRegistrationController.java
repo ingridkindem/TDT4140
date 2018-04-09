@@ -3,6 +3,7 @@ package tdt4140.gr1812.app.ui.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -13,15 +14,17 @@ import tdt4140.gr1812.app.ui.FxApp;
 public class WorkoutRegistrationController {
 	
 	@FXML
-	TextField lengdePåØkt;
+	TextField lengdePaaOkt;
 	@FXML
-	TextField puls;
+	TextField extraField;
 	@FXML
-	TextField mål;
+	TextField maal;
 	@FXML
 	Hyperlink registrer;
 	@FXML
 	Hyperlink kryssUt;
+	@FXML
+	MenuButton idrett;
 	@FXML
 	RadioMenuItem basket;
 	@FXML
@@ -29,7 +32,7 @@ public class WorkoutRegistrationController {
 	@FXML
 	RadioMenuItem fotball;
 	@FXML
-	CheckBox privatØkt;
+	CheckBox privatOkt;
 	@FXML
 	Text feedback;
 	
@@ -38,24 +41,53 @@ public class WorkoutRegistrationController {
 	WorkoutRegistrationModel model = new WorkoutRegistrationModel();
 	FxApp app;
 	
+	@FXML
+	public String setField() {
+		boolean b = basket.isSelected();
+		boolean f = fotball.isSelected();
+		boolean l = langrenn.isSelected();
+		
+		String bas = basket.getText();
+		String lang = langrenn.getText();
+		String fot = fotball.getText();
+		
+		if (b) {
+			return bas;
+		}
+		if (f) {
+			return fot;
+		}if (l) {
+			return lang;
+		}
+		return "Idrett";
+	}
+	
+	@FXML
+	public void initialize() {
+		idrett.setText(setField());
+	}
 	
 	@FXML
 	public void update() {
 		feedback.setText(model.getText());
 	}
 	
+
 	@FXML
 	public boolean handleRegistrer() {
 		boolean b = basket.isSelected();
 		boolean f = fotball.isSelected();
 		boolean l = langrenn.isSelected();
-		boolean c = privatØkt.isPressed();
-		String lengde = lengdePåØkt.getText();
-		String p = puls.getText();
-		String m = mål.getText();
+		boolean c = privatOkt.isPressed();
+		String lengde = lengdePaaOkt.getText();
+		String p = extraField.getText();
+		String m = maal.getText();
 		Sport s = null;
 		if (b) {
 			s = new Sport("basket");
+			//kjore funksjon for aa sende til backend
+			//kunne endre idrett-feltet
+			//sette varierende tekstfelt med det backend sender 
 		}
 		if (f) {
 			s = new Sport("fotball");
@@ -63,7 +95,7 @@ public class WorkoutRegistrationController {
 		if (l) {
 			s = new Sport("langrenn");
 		}
-		boolean action = model.WorkoutRegistrationModelInit(currentUser, lengde, p, s, m, c);
+		boolean action = model.WorkoutRegistrationModelInit(currentUser, p, lengde, s, m, c);
 		if (action) {
 			app.goToWorkoutRegistration(); //will eventually go to athlete-profile
 			return true;
@@ -74,9 +106,13 @@ public class WorkoutRegistrationController {
 		}
 	}
 	
+
+	
+	
 	public void setCurrentUser(String user) {
 		this.currentUser = user; 
 	}
+
 	
 	@FXML
 	public void handleKryssUt() {
