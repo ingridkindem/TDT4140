@@ -75,4 +75,31 @@ public class CoachModel {
 		return returnList;
 	}  
 	
+	
+	public static String getAthletesFullName(String cellPhoneNumber){
+        
+        String returnName = "";
+        
+        HashMap requestParam = new HashMap<String, String>();
+        requestParam.put("username", cellPhoneNumber);
+        
+        try {
+
+                JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
+                if (response.get("status").equals("success")) {
+                    JSONArray objectArray = response.getJSONArray("athletes");
+                    for (int i = 0; i < objectArray.length(); i++) {
+                        JSONObject obj = objectArray.getJSONObject(i); 
+                        String firstname = obj.getString("firstname");
+                        String surname = obj.getString("surname");
+                        returnName = firstname + surname;
+                    }
+                }
+        }catch (Exception e){
+            e.printStackTrace();
+        }   
+        
+        return returnName;
+    }  
+	
 }
