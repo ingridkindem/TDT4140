@@ -17,17 +17,17 @@ public class WorkoutRegistrationControllerTest {
 	private WorkoutRegistrationController controller;
 
 	@Before
-	public void setUp() {
+	public void setUp() { //hva blir feil her?
 		controller = new WorkoutRegistrationController();
 		final JFXPanel fxPanel = new JFXPanel();
-		controller.lengdePåØkt = new TextField();
-		controller.puls = new TextField();
-		controller.mål = new TextField();
+		controller.lengdePaaOkt = new TextField();
+		controller.extraField = new TextField();
+		controller.maal = new TextField();
 		controller.basket = new RadioMenuItem();
 		controller.fotball = new RadioMenuItem();
 		controller.langrenn = new RadioMenuItem();
 		controller.feedback = new Text();
-		controller.privatØkt = new CheckBox();
+		controller.privatOkt = new CheckBox();
 	}
 	
 	@Test
@@ -35,32 +35,55 @@ public class WorkoutRegistrationControllerTest {
 		controller.basket.setSelected(true);
 		controller.fotball.setSelected(false);
 		controller.langrenn.setSelected(false);
-		controller.lengdePåØkt.setText("30");
-		controller.puls.setText("50,60,70");
-		controller.mål.setText("mål");
-		assertTrue(controller.handleRegistrer());
-		
+		controller.lengdePaaOkt.setText("30");
+		controller.puls.setText("-50,60,70");
+		controller.extraField.setText("-50,60,70");
+		controller.maal.setText("mål");
+		assertFalse(controller.handleRegistrer());
+
 		controller.basket.setSelected(false);
 		controller.fotball.setSelected(true);
 		controller.langrenn.setSelected(false);
-		controller.lengdePåØkt.setText("-10");
+		controller.lengdePaaOkt.setText("-10");
 		controller.puls.setText("50,60,70");
-		controller.mål.setText("mål");
+		controller.extraField.setText("50,60,70");
+		controller.maal.setText("mål");
 		assertFalse(controller.handleRegistrer());
 		
 		controller.basket.setSelected(false);
 		controller.fotball.setSelected(false);
 		controller.langrenn.setSelected(true);
-		controller.lengdePåØkt.setText("10");
+		controller.lengdePaaOkt.setText("10");
 		controller.puls.setText("-50,60,70");
-		controller.mål.setText("mål");
+		controller.extraField.setText("-50,60,70");
+		controller.maal.setText("mål");
 		assertFalse(controller.handleRegistrer());
-		
-		
+	}
+
+	@Test
+	public void testSetField() {
+		controller.setField();
 	}
 	
 	@Test
-	public void testHandleKryssUt() {
+	public void testInitialize() { //hvordan teste
+		
+	}
+	@Test
+	public void testUpdate() {
+		controller.update();
+	}
+	
+	@Test
+	public void testSetCurrentUser() {
+		String currentUser = "11111111";
+		controller.setCurrentUser(currentUser);
+		assertEquals(currentUser, controller.getCurrentUser());
+	}
+
+	
+	@Test
+	public void testHandleKryssUt() { 
 		
 	}
 	
@@ -72,3 +95,4 @@ public class WorkoutRegistrationControllerTest {
 	}
 
 }
+

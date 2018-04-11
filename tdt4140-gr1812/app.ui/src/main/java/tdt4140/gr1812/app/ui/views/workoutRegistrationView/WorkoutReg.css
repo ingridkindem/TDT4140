@@ -1,4 +1,4 @@
-
+/*sets the color for the idrett-menu */
 #idrett.menu-item .label {
     -fx-text-fill: #70dbdb;
    
@@ -8,27 +8,50 @@
      -fx-background-color: #70dbdb;
 }
 
+/*sets the color of the sport-text when sport is focused */
 .menu-item:focused .label {
     -fx-text-fill: white;
 }
 
-.radio-button .radio{
--fx-border-width     : 1px   ;
--fx-border-color     : #000  ;
--fx-background-color : white ;
--fx-background-image : null  ;
--fx-border-radius    : 15px  ;
+/*sets the color of the background when sport is focused */
+.menu-item:focused {
+	-fx-background-color: #70dbdb;
 }
 
-.context-menu {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-background-color:  #70dbdb;
-    -fx-background-insets: 0, 1, 2;
-  
-    -fx-border-color: gray;
-    
-    
-    -fx-background-radius: 0 0 6 6, 0 0 5 5, 0 0 4 4;
-/*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
-    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+/*sets font, size, radius and width for the sport-fields */
+#fotball {
+	-fx-font: 17px Futura;
+	-fx-background-size:8.0cm; 
+	-fx-background-radius: 1.0cm; 
+	-fx-pref-width: 10.0cm; /*makes the menu items the same length as the menu */
 }
+
+#basket {
+	-fx-font: 17px Futura;
+	-fx-background-size:8.0cm; 
+	-fx-background-radius: 1.0cm;
+}
+
+#langrenn {
+	-fx-font: 17px Futura;
+	-fx-background-size:8.0cm; 
+	-fx-background-radius: 1.0cm;
+}
+
+/*sets the font for the "idrett"-field */
+#idrett {
+	-fx-font: 25px Futura;
+}
+
+/*sets the color on the check box */
+#privatOkt {
+	-fx-color: #70dbdb;		
+}
+
+/*sets the background color and border on the drop down menu */
+.context-menu {
+    -fx-background-color:  #a9e9e9;
+    -fx-border-color: gray;
+}
+
+

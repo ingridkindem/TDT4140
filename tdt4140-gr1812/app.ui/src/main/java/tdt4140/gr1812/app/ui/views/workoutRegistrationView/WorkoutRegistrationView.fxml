@@ -14,24 +14,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@WorkoutReg.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@WorkoutReg.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="8.0" layoutY="1.0">
          <image>
-            <Image url="@registrer.jpg" />
+            <Image url="@correct_reg.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="lengdePaaOkt" layoutX="114.0" layoutY="345.0" prefHeight="52.0" prefWidth="387.0" promptText="lengde på økt (i minutter)">
+      <TextField fx:id="lengdePaaOkt" layoutX="114.0" layoutY="345.0" prefHeight="52.0" prefWidth="387.0" promptText="Varighet på økt (i minutter)">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="extraField" layoutX="114.0" layoutY="423.0" prefHeight="50.0" prefWidth="387.0">
+      <TextField fx:id="extraField" layoutX="523.0" layoutY="271.0" prefHeight="50.0" prefWidth="387.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="maal" alignment="TOP_LEFT" layoutX="506.0" layoutY="270.0" prefHeight="127.0" prefWidth="394.0" promptText="mål for økt">
+      <TextField fx:id="maal" alignment="TOP_LEFT" layoutX="524.0" layoutY="345.0" prefHeight="127.0" prefWidth="388.0" promptText="Mål for økt">
          <font>
             <Font size="22.0" />
          </font>
@@ -54,8 +54,8 @@
             <RadioMenuItem fx:id="langrenn" mnemonicParsing="false" onAction="#initialize" text="Langrenn" toggleGroup="$Sporter" />
          </items>
       </MenuButton>
-      <Hyperlink fx:id="registrer" layoutX="393.0" layoutY="536.0" onAction="#handleRegistrer" opacity="0.0" prefHeight="60.0" prefWidth="230.0" />
-      <CheckBox fx:id="privatOkt" layoutX="543.0" layoutY="418.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="79.0">
+      <Hyperlink fx:id="registrer" layoutX="602.0" layoutY="532.0" onAction="#handleRegistrer" opacity="0.0" prefHeight="60.0" prefWidth="230.0" />
+      <CheckBox fx:id="privatOkt" layoutX="228.0" layoutY="532.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="79.0">
          <font>
             <Font name="System Italic" size="24.0" />
          </font>
@@ -66,5 +66,10 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <TextField fx:id="puls" layoutX="115.0" layoutY="420.0" prefHeight="52.0" prefWidth="387.0" promptText="Puls (separert med komma)">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>
