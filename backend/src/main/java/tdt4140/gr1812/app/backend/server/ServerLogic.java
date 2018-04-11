@@ -204,7 +204,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        
        public static String getSportForCoach(String username) {
    			
-       	 	 MysqlDataSource dataSource = new MysqlDataSource();
+       	     MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("root");
             dataSource.setPassword("cygnus6cygnus");
             dataSource.setServerName("localhost");
@@ -243,7 +243,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        
 public static String getNameForUser(String username) {
            
-           MysqlDataSource dataSource = new MysqlDataSource();
+          MysqlDataSource dataSource = new MysqlDataSource();
           dataSource.setUser("root");
           dataSource.setPassword("cygnus6cygnus");
           dataSource.setServerName("localhost");
@@ -255,6 +255,7 @@ public static String getNameForUser(String username) {
           Connection conn = null;
           ResultSet resultSet = null; // needed for reading output from database
           String feedback = "";
+          
           try {
                    conn = dataSource.getConnection();
                    PreparedStatement ps = conn.prepareStatement(sql);
@@ -262,6 +263,8 @@ public static String getNameForUser(String username) {
                    resultSet = ps.executeQuery();
                    if (resultSet.next() ) { //seeing if query returns empty table of data  
                       
+                           //Bruker firstname og surname her ettersom at det så ut som de ikke var rad 1 og 2 i databasen
+                           //Er dette riktig? 
                           feedback = resultSet.getString(1);
                           feedback += " ";
                           feedback+= resultSet.getString(2);
