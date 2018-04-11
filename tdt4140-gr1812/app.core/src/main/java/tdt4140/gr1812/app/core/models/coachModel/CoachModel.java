@@ -76,28 +76,30 @@ public class CoachModel {
 	}  
 	
 	
-	public static String getAthletesFullName(String cellPhoneNumber){
+	public static String getAthletesFullName(String cellPhoneNumber, String sport){
         
         String returnName = "";
         
         HashMap requestParam = new HashMap<String, String>();
         requestParam.put("username", cellPhoneNumber);
+        requestParam.put("sport", sport);
+        
         
         try {
                 //Hva er relasjonen mellom username og person? Er det riktig at det skal stå username der? 
-                JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "users");
+                JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
                 if (response.get("status").equals("success")) {
-                    
-                    //Trenger vi å ha et JSONArray objekt hvis vi kun leter etter én person? 
+   
+                    //Oppretter JSONArray som kjører gjennom alle atletene.
                     JSONArray objectArray = response.getJSONArray("athletes");
                     for (int i = 0; i < objectArray.length(); i++) {
                         JSONObject obj = objectArray.getJSONObject(i); 
                         
                         //Sjekker hvis string == cellphonenumber input. Hvis så -> Legg til navn.
-                        if (obj.getString("username") == cellPhoneNumber) {
+                        if (obj.getString("username").equals(cellPhoneNumber)) {
                             String firstname = obj.getString("firstname");
                             String surname = obj.getString("surname");
-                            returnName = firstname + surname;
+                            returnName = firstname + " " + surname;
                         }
                         
                     }
@@ -110,7 +112,7 @@ public class CoachModel {
     }  
 	
 	public static void main(String[] args) {
-        System.out.println(getAthletesFullName("12345678"));
+        System.out.println(getAthletesFullName("12345678", "basket"));
         
     }
 }
