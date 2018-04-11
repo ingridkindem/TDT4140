@@ -18,14 +18,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../../../../../../../../target/classes/tdt4140/gr1812/app/ui/views/coach/coach_stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0">
          <image>
             <Image url="@trenerView1.jpg" />
          </image>
       </ImageView>
-      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="586.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="UTØVERE" textFill="#fcf5f5" wrapText="true">
+      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="586.0" text="UTØVERE" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Futura Medium" size="17.0" />
          </font>
@@ -36,9 +36,9 @@
             <Insets left="10.0" />
          </opaqueInsets>
       </MenuButton>
-      <TableView id="athletesTable" fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0" style="-fx-background-radius: 15;">
+      <TableView id="testid" fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0">
          <columns>
-            <TableColumn id="ColumnPhoneNumber" fx:id="ColumnPhoneNumber" prefWidth="292.5146179199219" text="MOBILNUMMER" />
+            <TableColumn id="kolonnenavn" fx:id="ColumnPhoneNumber" prefWidth="292.5146179199219" text="MOBILNUMMER" />
             <TableColumn fx:id="ColumnName" prefWidth="261.4853820800781" text="NAVN" />
          </columns>
       </TableView>
@@ -46,12 +46,12 @@
          <font>
             <Font name="Futura Bold" size="24.0" />
          </font></Label>
-      <Button fx:id="selectAthlete" layoutX="723.0" layoutY="567.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="UTFORSK UTØVER" textFill="WHITE">
+      <Button fx:id="selectAthlete" layoutX="723.0" layoutY="567.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="198.0" text="UTFORSK UTØVER" textFill="WHITE">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="infoBut" layoutX="94.0" layoutY="565.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="397.0" style="-fx-background-radius: 11; -fx-background-color: #70dbdb;" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO" textFill="WHITE">
+      <Button fx:id="infoBut" layoutX="94.0" layoutY="565.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="397.0" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO" textFill="#2b2d44">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font>
