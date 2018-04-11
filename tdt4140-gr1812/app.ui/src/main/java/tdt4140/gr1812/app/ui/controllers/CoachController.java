@@ -92,12 +92,20 @@ public class CoachController {
 		           //Sjekker om valgt element fra kolonnen er et mobilnummer.
 		           String nummer = (String) val;
 		           if (nummer.matches("[0-9]+")) {
+		               
+		               //Velger en selected athlete
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
-		               athletesButton.setText(selectedAthlete);
+		               
+		               //Setter visibility på knapp og tabell.
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
-		               CoachModel.getAthletesFullName(nummer);
+		               
+		               System.out.print("current sport = " + currentSport);
+		               
+		               //Setter knappens tekst til person
+		               athletesButton.setText(CoachModel.getAthletesFullName(nummer, currentSport) + "   Mob: " + selectedAthlete);
+		               
 		           }
 		           
 		           
