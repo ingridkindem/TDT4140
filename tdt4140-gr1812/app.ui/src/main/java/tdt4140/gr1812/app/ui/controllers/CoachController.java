@@ -97,6 +97,7 @@ public class CoachController {
 		               athletesButton.setText(selectedAthlete);
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
+		               CoachModel.getAthletesFullName(nummer);
 		           }
 		           
 		           
