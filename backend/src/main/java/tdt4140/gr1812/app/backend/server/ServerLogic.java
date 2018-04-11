@@ -68,9 +68,9 @@ public class ServerLogic { // class mainly for handling connection to mySQL
         public static boolean login(String username, String password) {
     			
         	 	 MysqlDataSource dataSource = new MysqlDataSource();
-             dataSource.setUser("root");
-             dataSource.setPassword("cygnus6cygnus");
-             dataSource.setServerName("localhost");
+             dataSource.setUser("pu");
+             dataSource.setPassword("cygnus6cygunus");
+             dataSource.setServerName("http://larserikfagernaes.com");
              dataSource.setPort(3306);
              dataSource.setDatabaseName("PU");
              
@@ -161,7 +161,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        
        public static ArrayList<Athlete> getAthletesInSport(String sport) {
            MysqlDataSource dataSource = new MysqlDataSource();
-       dataSource.setUser("root");
+       dataSource.setUser("pu");
        dataSource.setPassword("cygnus6cygnus");
        dataSource.setServerName("localhost");
        dataSource.setPort(3306);
