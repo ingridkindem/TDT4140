@@ -26,8 +26,8 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                                   String gender) {
         		//connecting to database
             MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUser("root");
-            dataSource.setPassword("cygnus6cygnus");
+            dataSource.setUser("pu");
+            dataSource.setPassword("ZAmrUsPWD3vd");
             dataSource.setServerName("localhost");
             dataSource.setPort(3306);
             dataSource.setDatabaseName("PU");
@@ -69,7 +69,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
     			
         	 	 MysqlDataSource dataSource = new MysqlDataSource();
              dataSource.setUser("pu");
-             dataSource.setPassword("cygnus6cygunus");
+             dataSource.setPassword("ZAmrUsPWD3vd");
              dataSource.setServerName("http://larserikfagernaes.com");
              dataSource.setPort(3306);
              dataSource.setDatabaseName("PU");
@@ -113,9 +113,9 @@ public class ServerLogic { // class mainly for handling connection to mySQL
     		   								    String privacy) {
     	   
     	   	   MysqlDataSource dataSource = new MysqlDataSource();
-           dataSource.setUser("root");
-           dataSource.setPassword("cygnus6cygnus");
-           dataSource.setServerName("localhost");
+           dataSource.setUser("pu");
+           dataSource.setPassword("ZAmrUsPWD3vd");
+           dataSource.setServerName("http://larserikfagernaes.com");
            dataSource.setPort(3306);
            dataSource.setDatabaseName("PU");
            
@@ -162,8 +162,8 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        public static ArrayList<Athlete> getAthletesInSport(String sport) {
            MysqlDataSource dataSource = new MysqlDataSource();
        dataSource.setUser("pu");
-       dataSource.setPassword("cygnus6cygnus");
-       dataSource.setServerName("localhost");
+       dataSource.setPassword("ZAmrUsPWD3vd");
+       dataSource.setServerName("http://larserikfagernaes.com");
        dataSource.setPort(3306);
        dataSource.setDatabaseName("PU");
 
@@ -205,9 +205,9 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        public static String getSportForCoach(String username) {
    			
        	 	 MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUser("root");
-            dataSource.setPassword("cygnus6cygnus");
-            dataSource.setServerName("localhost");
+            dataSource.setUser("pu");
+            dataSource.setPassword("ZAmrUsPWD3vd");
+            dataSource.setServerName("http://larserikfagernaes.com");
             dataSource.setPort(3306);
             dataSource.setDatabaseName("PU");
             
