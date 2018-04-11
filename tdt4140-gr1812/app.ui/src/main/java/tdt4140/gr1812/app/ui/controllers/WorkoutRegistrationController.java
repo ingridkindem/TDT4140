@@ -86,5 +86,9 @@ public class WorkoutRegistrationController {
 	public void setApplication(FxApp app) {
 		this.app = app;
 	}
+	
+	public String getCurrentUser() {
+		return this.currentUser;
+	}
 
 }
