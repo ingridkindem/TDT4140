@@ -53,7 +53,7 @@
          </font>
       </Text>
       <Hyperlink layoutX="464.0" layoutY="48.0" onAction="#loggUt" prefHeight="37.0" prefWidth="166.0" textFill="#363535" />
-      <SubScene fx:id="chartScene" height="200.0" layoutX="103.0" layoutY="146.0" style="-fx-background-color: #FBF1E5;" width="785.0">
+      <SubScene fx:id="chartScene" height="280.0" layoutX="103.0" layoutY="110.0" style="-fx-background-color: #FBF1E5;" width="785.0">
         <root>
           <Region />
         </root>

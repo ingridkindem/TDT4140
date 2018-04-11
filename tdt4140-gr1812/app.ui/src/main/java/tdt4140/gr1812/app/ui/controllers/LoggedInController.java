@@ -28,6 +28,16 @@ import tdt4140.gr1812.app.core.dataClasses.Workout;
 import tdt4140.gr1812.app.core.models.loggedIn.LoggedInModel;
 import tdt4140.gr1812.app.ui.FxApp;
 
+/*
+ Hva er igjen å gjøre?
+ - Endre farge på grafen
+ - Endre farge på bakgrunnen av grafen
+ - Lage metodene til backend riktig (står mer over hver metode i LoggedInModel)
+ - Finne en måte å lagre hvilken utøver man ser på (når man er coach). HEr må vi se på hvordan toralf lagrer utøveren i sin del. 
+ - Skrive tester til metodene som kobler til backend
+ - Skrive testene som mangler i LoggedInControllerTest
+ */
+
 public class LoggedInController {
 	
 	private FxApp app;
@@ -48,16 +58,12 @@ public class LoggedInController {
 	@FXML
 	SubScene chartScene;
 	
-	public StackedBarChart getChart() {
-		return this.chart;
-	}
-	
 	public void registrerOkt() { // Registrer Økt hyperlink pressed
 		this.app.goToWorkoutRegistration();
 	}
 	
 	public void update() {
-		name.setText(LoggedInModel.getName(this.currentUser)); 
+		name.setText(this.currentUser);//LoggedInModel.getName(this.currentUser)); 
 		if (this.coach) { //check if the logged in user is a coach
 			//hide the "Registrer økt"-button
 			this.blank.setVisible(true); 
@@ -104,7 +110,7 @@ public class LoggedInController {
 			}
 		}
 		
-		List<List<Integer>> durationInPulsezones = LoggedInModel.getPulseZones(this.currentUser);
+		List<List<Integer>> durationInPulsezones = testList;//LoggedInModel.getPulseZones(this.currentUser);
 		List<String> weekdays = Arrays.asList(mandag, tirsdag, onsdag, torsdag, fredag, lordag, sondag);
 		
 		for (int i = 0; i<7; i++) {
@@ -134,13 +140,13 @@ public class LoggedInController {
 	@SuppressWarnings("unchecked")
 	public void setWorkoutsInTable() {
 		//get workouts from backend
-		this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.currentUser)); //for coach - currentuser has to be changed to the athlete
+		//this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.currentUser)); //for coach - currentuser has to be changed to the athlete
 		Workout w = new Workout(new Sport("Fotball"), false);
 		w.setDate(new Date());
 		w.setDuration(120);
 		w.setGoal("bli raskere");
 		w.setPulses(Arrays.asList(50,60,90));
-		//this.observableWorkouts.add(w);
+		this.observableWorkouts.add(w);
 		
 		//set values in the workout-table
 		this.workoutsTable.setItems(observableWorkouts);
@@ -157,17 +163,17 @@ public class LoggedInController {
 	}
 	
 	//set-methods:
-		public void setApplication(FxApp app) {
-			this.app = app;
-		}
+	public void setApplication(FxApp app) {
+		this.app = app;
+	}
 		
-		public void setCoach(boolean coach) {
-			this.coach = coach;
-		}
+	public void setCoach(boolean coach) {
+		this.coach = coach;
+	}
 		
-		public void setCurrentUser(String user) {
-			this.currentUser = user;
-		}
+	public void setCurrentUser(String user) {
+		this.currentUser = user;
+	}
 	
 	//get-methods:
 	public FxApp getApplication() {

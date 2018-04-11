@@ -16,6 +16,9 @@ import tdt4140.gr1812.app.core.helpers.Method;
 
 public final class LoggedInModel {
 	
+	// må få en metode i backend som "svarer til" denne. 
+	// Vet ikke om denne metoden skal være slik - har kopiert litt fra andre lignende metoder
+	
 	public static String getName(String username) { //returns the name belonging to the phonenumber(username)
 		
 		String name = "failure";
@@ -34,6 +37,10 @@ public final class LoggedInModel {
 		return name;
 	}
 
+	// må få en metode i backend som "svarer til" denne. 
+	// Vet ikke om denne metoden skal være slik - har kopiert litt fra andre lignende metoder (har brukt getAthletesForSport(String sport) i CoachModel)
+	
+	//used for creating the table with the athlete's workouts
 	public static List<Workout> getWorkoutsForAthlete(String username){ //returns a list of the athlete's workouts 
 		ArrayList<Workout> returnList = new ArrayList();
 	
@@ -48,10 +55,10 @@ public final class LoggedInModel {
         				JSONObject obj = objectArray.getJSONObject(i); 
         				Sport sport = new Sport(obj.getString("sport"));
         				int duration = Integer.parseInt(obj.getString("duration"));
-        				List<Integer> pulses = checkPulse(obj.getString("pulses"));
+        				List<Integer> pulses = getPulsesAsList(obj.getString("pulses"));
         				boolean privacy = (obj.getString("privacy").equals("1")) ? true:false;
         				String goal = obj.getString("goal");
-        				Date date = stringToDate(obj.getString("date")); //date = dd:mm:yyyy
+        				Date date = stringToDate(obj.getString("date")); //date = yyyy:mm:dd
         				
         				Workout workout = new Workout(sport, privacy);
         				workout.setDate(date);
@@ -65,24 +72,53 @@ public final class LoggedInModel {
             e.printStackTrace();
         }	
 		return returnList;
-	}  
+	} 
+	
+	// må få en metode i backend som "svarer til" denne. Snakket litt med Håkon om den. 
+	// Vet ikke om denne metoden skal være slik - har kopiert litt fra andre lignende metoder (har brukt getAthletesForSport(String sport) i CoachModel)
+		
+	// used to create the chart that displays the athlete's duration in the different pulsezones
+	public static List<List<Integer>> getPulseZones(String username) {
+		List<List<Integer>> returnList = new ArrayList();
+		
+		HashMap requestParam = new HashMap<String, String>();
+	    requestParam.put("username", username);
+	    try {
+	    JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, ""); //må endres
+	    if (response.get("status").equals("success")) {
+	    		JSONArray objectArray = response.getJSONArray("pulsezones"); // må endres?
+	    		for (int i = 0; i < objectArray.length(); i++) {
+	    			JSONObject obj = objectArray.getJSONObject(i);
+	    			String pulsezones = obj.get("").toString();
+	    			returnList.add(getPulsesAsList(pulsezones));
+	    		}
+	    	}
+	    	} catch (Exception e) {
+	    		returnList = null;
+			e.printStackTrace();
+		}
+	    return returnList;
+		}
+	
+	// må sjekke at strengen vi mottar fra backend i getWorkoutsForAthlete() (metoden over) er på formen yyyy:mm:dd. 
+	// hvis ikke må metoden endres
 	
 	@SuppressWarnings("deprecation")
-	public static Date stringToDate(String s) {
+	public static Date stringToDate(String s) { //returns the string as an Date object. 
 		Date date = null;
 		try {
 			String[] list = s.split(":");
-			date = new Date(Integer.parseInt(list[0]), Integer.parseInt(list[1]), Integer.parseInt(list[2])); // year, month, day
+			date = new Date(Integer.parseInt(list[0]), Integer.parseInt(list[1]), Integer.parseInt(list[2])); // s of the form "year:month:day"
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return date;
 	}
 	
-	public static List<Integer> checkPulse(String pulses) {
+	
+	public static List<Integer> getPulsesAsList(String pulses) { // returns the String as a list of integers. 
+		List<Integer> pulsesList = new ArrayList<Integer>();
 		try {
-			List<Integer> pulsesList = new ArrayList<Integer>();
-			String[] p = pulses.split(",");
+			String[] p = pulses.split(","); // pulses of the form "i ,i,i,i...,i" where i is an integer. 
 			for (String i : p) {
 				i.trim();
 				int pulseInt = Integer.parseInt(i);
@@ -91,50 +127,11 @@ public final class LoggedInModel {
 				}
 				pulsesList.add(pulseInt);
 			}
-			return pulsesList;
 		} catch (Exception e) {
+			pulsesList = null;
 			throw new IllegalArgumentException("Pulsene må være heltall");
 		}
-	}
-	
-	public static List<List<Integer>> getPulseZones(String username) {
-		List<List<Integer>> returnList = new ArrayList();
-		
-		HashMap requestParam = new HashMap<String, String>();
-        requestParam.put("username", username);
-        try {
-        	JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, ""); //må endres
-    		if (response.get("status").equals("success")) {
-    			JSONArray objectArray = response.getJSONArray("pulsezones"); // må endres?
-    			for (int i = 0; i < objectArray.length(); i++) {
-    				JSONObject obj = objectArray.getJSONObject(i);
-    				String pulsezones = obj.get("").toString();
-    				returnList.add(getDurationInZones(pulsezones));
-    			}
-    		}
-    		} catch (Exception e) {
-    			returnList = null;
-			e.printStackTrace();
-		}
-        return returnList;
-	}
-	
-	public static List<Integer> getDurationInZones(String pulsezones) {
-		List<Integer> returnList = new ArrayList();
-		try {
-			String[] durations = pulsezones.split(",");
-			if (durations.length != 5) {
-				throw new Exception();
-			}
-			for (int i = 0; i < 5; i++) {
-				returnList.add(Integer.parseInt(durations[i]));
-			}
-			
-		} catch (Exception e) {
-			returnList = null;
-			e.printStackTrace();
-		}
-		return returnList;
+		return pulsesList;
 	}
 	
 }

@@ -48,5 +48,10 @@ public class LoggedInControllerTest {
 	public void testSetWorkoutsInTable() {
 		
 	}
+	
+	@Test
+	public void testSetChart() {
+		
+	}
 
 }

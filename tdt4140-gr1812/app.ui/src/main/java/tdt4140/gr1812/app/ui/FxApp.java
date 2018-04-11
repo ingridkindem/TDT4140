@@ -21,13 +21,13 @@ public class FxApp extends Application {
     
 	private FXMLLoader fxmlLoader;
 	private Stage stage;
-	private String currentUser; 
-	private boolean coach;
+	private String currentUser = "Caroline Lysebo"; 
+	private boolean coach = false;
 
     @Override
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
-        goToLogin();
+        goToLoggedIn();
     }
     
     public void setCurrentUser(String user) {
