@@ -17,22 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 
 public class ServerController {
+	
+	
 	// Maps to signup-endpoint
 	@RequestMapping("/signup")
     //@RequestMapping(method = RequestMethod.POST)
     public String signup(@RequestParam("username") String username, //gets all parameters from request-body
                         @RequestParam("password") String password,
-                        @RequestParam("sport") String sport,
                         @RequestParam("firstname") String firstname,
                         @RequestParam("surname") String surname,
                         @RequestParam("maxpulse") String maxpulse,
                         @RequestParam("weight") String weight,
-                        @RequestParam("gender") String gender
+                        @RequestParam("gender") String gender,
+                        @RequestParam("sport") String sport
                         ) {
      String feedback = ""; //Variable letting user know outcome. Only success/failure implemented.
    
 		try {
-        ServerLogic.signup(username, password, sport, firstname, surname, maxpulse, weight, gender);
+        ServerLogic.signup(username, password, firstname, surname, maxpulse, weight, gender, sport);
         feedback = new JSONObject()
                   .put("status", "success").toString();
 		} catch (Exception e) { // Catches all outcomes that are not successful. Should be specified in more detail in later versions.

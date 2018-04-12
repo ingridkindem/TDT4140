@@ -21,12 +21,12 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 
         public static void signup(String username,
                                   String password,
-                                  String sport,
                                   String firstname,
                                   String surname,
                                   String maxpulse,
                                   String weight,
-                                  String gender) {
+                                  String gender,
+                                  String sport) {
         		//connecting to database
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser(Config.dbUser);
@@ -36,13 +36,18 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             dataSource.setDatabaseName(Config.dbName);
 
 
+
             	//query to database
             String sql = "Insert into users" + "(username, password, firstname, surname, maxpuls, weight, gender, sport)" +
                     "values (?, ?, ?, ?, ?, ?, ?, ?)";
 
             Connection conn = null;
+            
+            
 
             try {
+                
+
                 conn = dataSource.getConnection(); // attempting to establish connection to databse
                 PreparedStatement ps = conn.prepareStatement(sql); // compile rfor SQL-statement
                 ps.setInt(1, Integer.parseInt(username)); // Setting variables listet as "?" in SQL-string
@@ -53,12 +58,17 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                 ps.setInt(6, Integer.parseInt(weight));
                 ps.setString(7, gender);
                 ps.setString(8, sport);
+                
                 ps.executeUpdate(); //Updating database
                 ps.close();
+                
 
             } catch (SQLException e) { // E. g. already existing Primary Key will be caught here
-                throw new RuntimeException(e);
+                
+            		throw new RuntimeException(e);
             } finally {
+                
+
                 if (conn != null) {
                     try {
                         conn.close();
@@ -76,6 +86,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
              dataSource.setServerName(Config.dbHost);
              dataSource.setPort(Config.dbPort);
              dataSource.setDatabaseName(Config.dbName);
+
              
              String sql = "select * from users where username = ? and password = ?";
              
@@ -122,6 +133,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
            dataSource.setServerName(Config.dbHost);
            dataSource.setPort(Config.dbPort);
            dataSource.setDatabaseName(Config.dbName);
+
            
            String sql = "insert into workouts (username, duration, pulses, goal, sport, privacy, extraField)" +
            		"values (?, ?, ?, ?, ?, ?, ?)";
@@ -172,6 +184,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        dataSource.setPort(Config.dbPort);
        dataSource.setDatabaseName(Config.dbName);
 
+
        String sql = "select firstname, surname, username from users where sport = ?";
 
        Connection conn = null;
@@ -215,6 +228,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             dataSource.setServerName(Config.dbHost);
             dataSource.setPort(Config.dbPort);
             dataSource.setDatabaseName(Config.dbName);
+
             
             String sql = "select sport from users where username = ?";
             
