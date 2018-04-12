@@ -90,7 +90,7 @@ public class ServerController {
     									 @RequestParam("duration") String duration,
     									 @RequestParam("pulses") String pulses,
     									 @RequestParam("goal") String goal,
-									     @RequestParam("extraField") String extraField,
+									 @RequestParam("extraField") String extraField,
     									 @RequestParam("sport") String sport,
     									 @RequestParam("privacy") String privacy) {
     	
