@@ -76,23 +76,32 @@ public class CoachModel {
 	}  
 	
 	
-	public static String getAthletesFullName(String cellPhoneNumber){
+	public static String getAthletesFullName(String cellPhoneNumber, String sport){
         
         String returnName = "";
         
         HashMap requestParam = new HashMap<String, String>();
         requestParam.put("username", cellPhoneNumber);
+        requestParam.put("sport", sport);
+        
         
         try {
-
+                //Hva er relasjonen mellom username og person? Er det riktig at det skal stå username der? 
                 JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
                 if (response.get("status").equals("success")) {
+   
+                    //Oppretter JSONArray som kjører gjennom alle atletene.
                     JSONArray objectArray = response.getJSONArray("athletes");
                     for (int i = 0; i < objectArray.length(); i++) {
                         JSONObject obj = objectArray.getJSONObject(i); 
-                        String firstname = obj.getString("firstname");
-                        String surname = obj.getString("surname");
-                        returnName = firstname + surname;
+                        
+                        //Sjekker hvis string == cellphonenumber input. Hvis så -> Legg til navn.
+                        if (obj.getString("username").equals(cellPhoneNumber)) {
+                            String firstname = obj.getString("firstname");
+                            String surname = obj.getString("surname");
+                            returnName = firstname + " " + surname;
+                        }
+                        
                     }
                 }
         }catch (Exception e){
@@ -102,4 +111,8 @@ public class CoachModel {
         return returnName;
     }  
 	
+	public static void main(String[] args) {
+        System.out.println(getAthletesFullName("12345678", "basket"));
+        
+    }
 }
