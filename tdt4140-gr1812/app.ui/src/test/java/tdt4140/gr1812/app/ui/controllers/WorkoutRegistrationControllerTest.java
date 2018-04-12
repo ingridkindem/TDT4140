@@ -1,4 +1,4 @@
-package tdt4140.gr1812.app.ui.controllers;
+ package tdt4140.gr1812.app.ui.controllers;
 
 import static org.junit.Assert.*;
 
@@ -38,7 +38,6 @@ public class WorkoutRegistrationControllerTest {
 		controller.langrenn.setSelected(false);
 		controller.lengdePaaOkt.setText("30");
 		controller.puls.setText("-50,60,70");
-		controller.extraField.setText("-50,60,70");
 		controller.maal.setText("mål");
 		assertFalse(controller.handleRegistrer());
 
@@ -47,7 +46,6 @@ public class WorkoutRegistrationControllerTest {
 		controller.langrenn.setSelected(false);
 		controller.lengdePaaOkt.setText("-10");
 		controller.puls.setText("50,60,70");
-		controller.extraField.setText("50,60,70");
 		controller.maal.setText("mål");
 		assertFalse(controller.handleRegistrer());
 		
@@ -56,20 +54,8 @@ public class WorkoutRegistrationControllerTest {
 		controller.langrenn.setSelected(true);
 		controller.lengdePaaOkt.setText("10");
 		controller.puls.setText("-50,60,70");
-		controller.extraField.setText("-50,60,70");
 		controller.maal.setText("mål");
 		assertFalse(controller.handleRegistrer());
-	}
-
-	@Test
-	public void testSetField() {
-		controller.setField();
-	}
-	
-	
-	@Test
-	public void testUpdate() {
-		controller.update();
 	}
 	
 	@Test
@@ -88,5 +74,12 @@ public class WorkoutRegistrationControllerTest {
 		assertEquals(app, controller.app);
 	}
 
+	@Test
+	public void testSetCurrentUser() {
+		String currentUser = "11111111";
+		controller.setCurrentUser(currentUser);
+		assertEquals(currentUser, controller.getCurrentUser());
+	}
+	
 }
 

@@ -17,22 +17,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 
 public class ServerController {
+	
+	
 	// Maps to signup-endpoint
 	@RequestMapping("/signup")
     //@RequestMapping(method = RequestMethod.POST)
     public String signup(@RequestParam("username") String username, //gets all parameters from request-body
                         @RequestParam("password") String password,
-                        @RequestParam("sport") String sport,
                         @RequestParam("firstname") String firstname,
                         @RequestParam("surname") String surname,
                         @RequestParam("maxpulse") String maxpulse,
                         @RequestParam("weight") String weight,
-                        @RequestParam("gender") String gender
+                        @RequestParam("gender") String gender,
+                        @RequestParam("sport") String sport
                         ) {
      String feedback = ""; //Variable letting user know outcome. Only success/failure implemented.
    
 		try {
-        ServerLogic.signup(username, password, sport, firstname, surname, maxpulse, weight, gender);
+        ServerLogic.signup(username, password, firstname, surname, maxpulse, weight, gender, sport);
         feedback = new JSONObject()
                   .put("status", "success").toString();
 		} catch (Exception e) { // Catches all outcomes that are not successful. Should be specified in more detail in later versions.
@@ -53,17 +55,18 @@ public class ServerController {
     		
     	String feedback = ""; 
     		try{
-    			boolean loginResult = ServerLogic.login(username, password);
-    			if (loginResult) {
-    				JSONObject responseObject = new JSONObject().put("status", "success");  
-    				feedback = responseObject.toString(); 
-    			}
-    			else {
-    				feedback = new JSONObject()
-  		                  .put("status", "failed").toString();
-    			}
-    			
-    		}catch (Exception e) {
+				Tuple<Boolean, Boolean> loginResult = ServerLogic.login(username, password);
+				if (loginResult.x) {
+					JSONObject responseObject = new JSONObject().put("status", "success");
+					responseObject.put("coach", loginResult.y.toString());
+					feedback = responseObject.toString();
+				}
+				else {
+					feedback = new JSONObject()
+							.put("status", "failed").toString();
+				}
+
+			}catch (Exception e) {
     			e.printStackTrace();
 				try {
 					feedback = new JSONObject()
@@ -87,13 +90,14 @@ public class ServerController {
     									 @RequestParam("duration") String duration,
     									 @RequestParam("pulses") String pulses,
     									 @RequestParam("goal") String goal,
+									 @RequestParam("extraField") String extraField,
     									 @RequestParam("sport") String sport,
     									 @RequestParam("privacy") String privacy) {
     	
     	String feedback = "";
     	
     	try{
-			boolean workoutRegistrationResult = ServerLogic.registerWorkout(username, duration, pulses, goal, sport, privacy);
+			boolean workoutRegistrationResult = ServerLogic.registerWorkout(username, duration, pulses, goal, sport, privacy, extraField);
 			if (workoutRegistrationResult) {
 				JSONObject responseObject = new JSONObject().put("status", "success");  
 				feedback = responseObject.toString(); 
@@ -166,7 +170,9 @@ public class ServerController {
     	try{
 			String getSportForCoachResult = ServerLogic.getSportForCoach(username);
 			if (getSportForCoachResult != "") {
-				JSONObject responseObject = new JSONObject().put("status", getSportForCoachResult);  
+
+				JSONObject responseObject = new JSONObject().put("status", "success");
+				responseObject.put("sport", getSportForCoachResult);
 				feedback = responseObject.toString(); 
 			}
 			else {
@@ -186,9 +192,43 @@ public class ServerController {
 		}
     	
     	
-    	
-    	
     	return feedback; 
 
     }
+    
+    
+    @RequestMapping("/getName")
+    public String requestNameForUser(@RequestParam("username") String username) {
+        
+        String feedback = "";
+        
+        try{
+            String getNameForUserResult = ServerLogic.getNameForUser(username);
+            if (getNameForUserResult != "") {
+                JSONObject responseObject = new JSONObject().put("status", getNameForUserResult);  
+                feedback = responseObject.toString(); 
+            }
+            else {
+                feedback = new JSONObject()
+                          .put("status", "failed").toString();
+            }
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+            try {
+                feedback = new JSONObject()
+                          .put("status", "failed").toString();
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        
+        
+        
+        
+        return feedback; 
+
+    }
+    
 }
