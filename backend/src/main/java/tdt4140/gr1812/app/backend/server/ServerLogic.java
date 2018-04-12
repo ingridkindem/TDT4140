@@ -8,6 +8,9 @@ import tdt4140.gr1812.app.backend.server.ServerController;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.management.RuntimeErrorException;
 
@@ -217,6 +220,60 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 
 
        return users;
+        }
+       
+       public static ArrayList<Workout> getLastWorkouts(String username) {
+    	   
+           MysqlDataSource dataSource = new MysqlDataSource();
+	       dataSource.setUser(Config.dbUser);
+	       dataSource.setPassword(Config.dbPass);
+	       dataSource.setServerName(Config.dbHost);
+	       dataSource.setPort(Config.dbPort);
+	       dataSource.setDatabaseName(Config.dbName);
+
+
+       String sql = "select duration, pulses, sport, goal, privacy, extraField, date from workouts where username = ?";
+
+       Connection conn = null;
+       ResultSet resultSet = null; // needed for reading output from database
+       ArrayList<Workout> workouts = new ArrayList<Workout>();
+
+       try {
+          	 conn = dataSource.getConnection();
+               PreparedStatement ps = conn.prepareStatement(sql);
+               ps.setString(1,  username);
+               resultSet = ps.executeQuery();
+               while (resultSet.next()) {
+                    
+                    Sport sport = new Sport(resultSet.getString(3));
+                    boolean privacy = resultSet.getBoolean(5);
+                    Workout workout = new Workout(sport, privacy);
+                    workout.setDuration(resultSet.getInt(1));
+                    workout.setGoal(resultSet.getString(4));
+                    workout.setDate(resultSet.getDate(7));
+                    String pulsesString = resultSet.getString(2);
+                    List<Integer> pulses = Stream.of(pulsesString.split(","))
+                            .map(Integer::parseInt)
+                            .collect(Collectors.toList());
+                    workout.setPulses(pulses);
+                    workouts.add(workout);
+                    
+                    
+               }
+
+       }catch (SQLException e) {
+      	 	throw new RuntimeException(e);
+       } finally {
+      	 	if (conn!=null) {
+      	 		try {
+      	 			conn.close();
+      	 		}catch (SQLException e) {
+      	 		}
+      	 	}
+       }
+
+
+       return workouts;
         }
        
        
