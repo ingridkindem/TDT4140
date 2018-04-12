@@ -147,6 +147,7 @@ public class ServerTest{
     		String goal = "Stronger";
     		String sport = "fotball";
     		String privacy = "1";
+    		String extraField = "40";
     		
     		mvc.perform(MockMvcRequestBuilders.get("/workoutRegistration")
     				.param("username", username)
@@ -154,7 +155,8 @@ public class ServerTest{
     				.param("pulses", pulses)
     				.param("goal", goal)
     				.param("sport", sport)
-    				.param("privacy", privacy))
+    				.param("privacy", privacy)
+    				.param("extraField", extraField))
     				.andExpect(status().isOk())
     				.andExpect(content().string(containsString("success")));
     }
@@ -168,6 +170,7 @@ public class ServerTest{
     		String goal = "Stronger";
     		String sport = "fotball";
     		String privacy = "1";
+    		String extraField = "40";
     		
     		mvc.perform(MockMvcRequestBuilders.get("/workoutRegistration")
     				.param("username", username)
@@ -175,7 +178,8 @@ public class ServerTest{
     				.param("pulses", pulses)
     				.param("goal", goal)
     				.param("sport", sport)
-    				.param("privacy", privacy))
+    				.param("privacy", privacy)
+    				.param("extraField", extraField))
     				.andExpect(status().isOk())
     				.andExpect(content().string(containsString("failed")));
     }
@@ -208,7 +212,7 @@ public class ServerTest{
 		mvc.perform(MockMvcRequestBuilders.get("/sportForCoach")
 				.param("username", username))
 				.andExpect(status().isOk())
-				.andExpect(content().string(containsString("Basket")));
+				.andExpect(content().string(containsString("success")));
 }
     @Test
     public void TestFailedRequestSportForCoach() throws Exception{
