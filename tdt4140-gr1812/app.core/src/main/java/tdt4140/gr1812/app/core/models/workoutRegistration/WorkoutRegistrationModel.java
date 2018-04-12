@@ -143,7 +143,6 @@ public class WorkoutRegistrationModel {
 				throw new Exception();
 			} return d;
 		} catch (Exception e) {
-			text = "Can't have negative duration.";
 			throw new IllegalArgumentException("Can't have negative duration.");
 		}
 		
