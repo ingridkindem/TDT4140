@@ -73,13 +73,6 @@ public class WorkoutRegistrationControllerTest {
 		controller.setApplication(app);
 		assertEquals(app, controller.app);
 	}
-
-	@Test
-	public void testSetCurrentUser() {
-		String currentUser = "11111111";
-		controller.setCurrentUser(currentUser);
-		assertEquals(currentUser, controller.getCurrentUser());
-	}
 	
 }
 

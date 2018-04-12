@@ -54,12 +54,12 @@ public class CoachController {
 		this.athletesTable.setVisible(false);
 		this.selectAthlete.setVisible(false);
 		
-		//Hvorfor funker det ikke å sette selectTable til false her? 
+		//Hvorfor funker det ikke aa sette selectTable til false her? 
 		//Og hva med infoBut, hvorfor funker ikke den heller?
 		
 		this.setColumnsInTable();
 
-		//Hvis athletesButton blir trykket på, vis TableView (tabellen med utøvere). 
+		//Hvis athletesButton blir trykket paa, vis TableView (tabellen med utoovere). 
 		athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue,
 					Boolean newValue) {
@@ -96,7 +96,7 @@ public class CoachController {
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
 		               
-		               //Setter visibility på knapp og tabell.
+		               //Setter visibility paa knapp og tabell.
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
@@ -125,7 +125,7 @@ public class CoachController {
 		return CoachModel.getSportForCoach(coach);
 	}
 
-	//Setter kolonner i tabell med utøvere. Fornavn og Mobilnummer.
+	//Setter kolonner i tabell med utoovere. Fornavn og Mobilnummer.
 	public void setColumnsInTable() {
 		this.ColumnName.setCellValueFactory(new PropertyValueFactory<Athlete, String>("firstName"));
 		this.ColumnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Athlete, String>("phoneNumber"));
@@ -153,7 +153,7 @@ public class CoachController {
 		observableAthletes.setAll(createAthleteObjectList());
 	}
 
-	//Henter ut atleter som hører til den sporten.
+	//Henter ut atleter som hoorer til den sporten.
 	public List<Athlete> createAthleteObjectList() {
 		return CoachModel.getAthletesForSport(this.currentSport);
 	}
