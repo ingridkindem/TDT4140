@@ -26,7 +26,8 @@ public class FxApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
-        goToLogin();
+    		goToLogin();
+    		//goToWorkoutRegistration();
     }
     
     public void setCurrentUser(String user) {
@@ -104,7 +105,7 @@ public class FxApp extends Application {
 				System.out.println("The currentUser = null :/ ");
 			}
 			controller.setUser(this.currentUser);
-			controller.setApplication(this);
+			controller.setApplication(this); 
 			stage.show();
 		} catch(Exception e) {
 			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;

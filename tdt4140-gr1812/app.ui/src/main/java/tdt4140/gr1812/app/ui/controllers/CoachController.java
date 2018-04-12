@@ -54,12 +54,10 @@ public class CoachController {
 		this.athletesTable.setVisible(false);
 		this.selectAthlete.setVisible(false);
 		
-		//Hvorfor funker det ikke å sette selectTable til false her? 
-		//Og hva med infoBut, hvorfor funker ikke den heller?
 		
 		this.setColumnsInTable();
-
-		//Hvis athletesButton blir trykket på, vis TableView (tabellen med utøvere). 
+		
+		//If athletesButtun are pressed, show TableView (table with athletes)
 		athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue,
 					Boolean newValue) {
@@ -81,28 +79,28 @@ public class CoachController {
 		        //Check whether item is selected and set value of selected item to Label
 		        if(athletesTable.getSelectionModel().getSelectedItem() != null) 
 		        {    
-		            
-		           //Trikser og fikser litt
+		           
 		           TableViewSelectionModel selectionModel = athletesTable.getSelectionModel();
 		           ObservableList selectedCells = selectionModel.getSelectedCells();
 		           TablePosition tablePosition = (TablePosition) selectedCells.get(0);
 		           Object val = tablePosition.getTableColumn().getCellData(newValue);
 		           
-		           //Sjekker om valgt element fra kolonnen er et mobilnummer.
+		           //Checks if a chosen element from the column is a phonenumber
 		           String nummer = (String) val;
 		           if (nummer.matches("[0-9]+")) {
 		               
-		               //Velger en selected athlete
+		              
+		        	   	   //Choses a selected athlete
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
-		               
-		               //Setter visibility på knapp og tabell.
+		               		               
+		               //Sets visibility on button and table
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
 		               System.out.print("current sport = " + currentSport);
 		               
-		               //Setter knappens tekst til person
+		               //Sets the text of the button to a person
 		               athletesButton.setText(CoachModel.getAthletesFullName(nummer, currentSport) + "   Mob: " + selectedAthlete);
 		               
 		           }
@@ -113,18 +111,19 @@ public class CoachController {
 		});
 		
 		update();
+		
 	}
 
 	public void update() {
 		athletesTable.setItems(observableAthletes);
 	}
 
-	//Henter ut sportene til en coach
+	//Fetches the sports of a coach
 	public String handleSport(String coach) {
 		return CoachModel.getSportForCoach(coach);
 	}
 
-	//Setter kolonner i tabell med utøvere. Fornavn og Mobilnummer.
+	//Sets columns in a table of athletes. Firstname and number.
 	public void setColumnsInTable() {
 		this.ColumnName.setCellValueFactory(new PropertyValueFactory<Athlete, String>("firstName"));
 		this.ColumnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Athlete, String>("phoneNumber"));
@@ -145,13 +144,14 @@ public class CoachController {
 	}
 	
 	public void setUser(String username) {
+		System.out.println("-2-");
 		this.coachUsername = username;
 		this.currentSport = handleSport(this.coachUsername);
 		sportLabel.setText(this.currentSport);
 		observableAthletes.setAll(createAthleteObjectList());
 	}
 
-	//Henter ut atleter som hører til den sporten.
+	//Fetches athletes who belong to the sport
 	public List<Athlete> createAthleteObjectList() {
 		return CoachModel.getAthletesForSport(this.currentSport);
 	}

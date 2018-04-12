@@ -17,17 +17,18 @@ public class WorkoutRegistrationControllerTest {
 	private WorkoutRegistrationController controller;
 
 	@Before
-	public void setUp() {
+	public void setUp() {  
 		controller = new WorkoutRegistrationController();
 		final JFXPanel fxPanel = new JFXPanel();
 		controller.lengdePaaOkt = new TextField();
-		controller.puls = new TextField();
+		controller.extraField = new TextField();
 		controller.maal = new TextField();
+		controller.puls = new TextField();
 		controller.basket = new RadioMenuItem();
 		controller.fotball = new RadioMenuItem();
 		controller.langrenn = new RadioMenuItem();
 		controller.feedback = new Text();
-		controller.privatOokt = new CheckBox();
+		controller.privatOkt = new CheckBox();
 	}
 	
 	@Test
@@ -58,17 +59,20 @@ public class WorkoutRegistrationControllerTest {
 	}
 	
 	@Test
+	public void testSetCurrentUser() {
+		String currentUser = "11111111";
+		controller.setCurrentUser(currentUser);
+		assertEquals(currentUser, controller.getCurrentUser());
+	} 
+
+	
+	
+	@Test
 	public void testSetApplication() {
 		FxApp app = new FxApp();
 		controller.setApplication(app);
 		assertEquals(app, controller.app);
 	}
-
-	@Test
-	public void testSetCurrentUser() {
-		String currentUser = "11111111";
-		controller.setCurrentUser(currentUser);
-		assertEquals(currentUser, controller.getCurrentUser());
-	}
 	
 }
+
