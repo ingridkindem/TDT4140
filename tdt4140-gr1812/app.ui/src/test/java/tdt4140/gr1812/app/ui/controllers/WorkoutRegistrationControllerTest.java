@@ -66,10 +66,7 @@ public class WorkoutRegistrationControllerTest {
 		controller.setField();
 	}
 	
-	@Test
-	public void testInitialize() { 
-		
-	}
+	
 	@Test
 	public void testUpdate() {
 		controller.update();
@@ -80,13 +77,9 @@ public class WorkoutRegistrationControllerTest {
 		String currentUser = "11111111";
 		controller.setCurrentUser(currentUser);
 		assertEquals(currentUser, controller.getCurrentUser());
-	}
+	} 
 
 	
-	@Test
-	public void testHandleKryssUt() { 
-		
-	}
 	
 	@Test
 	public void testSetApplication() {
