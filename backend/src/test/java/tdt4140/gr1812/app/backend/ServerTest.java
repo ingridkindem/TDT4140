@@ -69,7 +69,31 @@ public class ServerTest{
     				.param("gender", gender)
     				.param("sport", sport)).andExpect(status().isOk())
     				.andExpect(content().string(containsString("success")));
-    				
+    }  
+    
+    @Test
+    public void TestFailedSignUp() throws Exception{
+    		String username = "12345678";
+    		String password = "98765432";
+    		String firstname = "hakon";
+    		String surname = "collett";
+    		String maxpulse = "200";
+    		String weight = "85";
+    		String gender  = "male";
+    		String sport = "Fotball";
+    		
+    		mvc.perform(MockMvcRequestBuilders.get("/signup")
+    				.param("username", username)
+    				.param("password", password)
+    				.param("firstname", firstname)
+    				.param("surname", surname)
+    				.param("maxpulse", maxpulse)
+    				.param("weight", weight)
+    				.param("gender", gender)
+    				.param("sport", sport)).andExpect(status().isOk())
+    				.andExpect(content().string(containsString("failed")));
+    		
+    			  
     }
     
     @Test
@@ -84,6 +108,22 @@ public class ServerTest{
     				.andExpect(status().isOk())
     				//.andExpect(content().contentType("application/json"))
     	            .andExpect(content().string(containsString("success")));
+    	
+    				
+    }
+    
+    @Test
+    public void TestFailedLogin() throws Exception{
+    	
+    	String username = "00000000";
+    	String password = "12345678";
+    	
+    				mvc.perform(MockMvcRequestBuilders.get("/login")
+    				.param("username", username)
+    				.param("password", password))
+    				.andExpect(status().isOk())
+    				//.andExpect(content().contentType("application/json"))
+    	            .andExpect(content().string(containsString("failed")));
     	
     				
     }
@@ -120,6 +160,27 @@ public class ServerTest{
     }
     
     @Test
+    public void TestFailedWorkoutRegistration() throws Exception{
+    	
+    		String username = "99765432";
+    		String duration = "hei";
+    		String pulses = "100,200,100";
+    		String goal = "Stronger";
+    		String sport = "fotball";
+    		String privacy = "1";
+    		
+    		mvc.perform(MockMvcRequestBuilders.get("/workoutRegistration")
+    				.param("username", username)
+    				.param("duration", duration)
+    				.param("pulses", pulses)
+    				.param("goal", goal)
+    				.param("sport", sport)
+    				.param("privacy", privacy))
+    				.andExpect(status().isOk())
+    				.andExpect(content().string(containsString("failed")));
+    }
+    
+    @Test
     public void TestRequestAthletesInSport() throws Exception{
     	
 		String sport = "Fotball";
@@ -130,6 +191,16 @@ public class ServerTest{
 				.andExpect(content().string(containsString("success")));
 }
     @Test
+    public void TestFailedRequestAthletesInSport() throws Exception{
+    	
+		String sport = "44";
+		
+		mvc.perform(MockMvcRequestBuilders.get("/athletesInSport")
+				.param("sport", sport))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("failed")));
+}
+    @Test
     public void TestRequestSportForCoach() throws Exception{
     	
 		String username = "12345678";
@@ -138,6 +209,18 @@ public class ServerTest{
 				.param("username", username))
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("Basket")));
+}
+    @Test
+    public void TestFailedRequestSportForCoach() throws Exception{
+    	
+		String username = "000000";
+		
+		
+		mvc.perform(MockMvcRequestBuilders.get("/sportForCoach")
+				.param("username", username))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("coach")));
+		
 }
     
     	public String deleteUserFromDB(String username) {
