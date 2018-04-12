@@ -125,7 +125,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
     		   								    String goal,
     		   								    String sport,
     		   								    String privacy,
-                                                String extraField) {
+                                             String extraField) {
     	   
     	   	   MysqlDataSource dataSource = new MysqlDataSource();
            dataSource.setUser(Config.dbUser);
