@@ -170,7 +170,9 @@ public class ServerController {
     	try{
 			String getSportForCoachResult = ServerLogic.getSportForCoach(username);
 			if (getSportForCoachResult != "") {
-				JSONObject responseObject = new JSONObject().put("status", getSportForCoachResult);  
+
+				JSONObject responseObject = new JSONObject().put("status", "success");
+				responseObject.put("sport", getSportForCoachResult);
 				feedback = responseObject.toString(); 
 			}
 			else {
@@ -188,8 +190,6 @@ public class ServerController {
 				e1.printStackTrace();
 			}
 		}
-    	
-    	
     	
     	
     	return feedback; 

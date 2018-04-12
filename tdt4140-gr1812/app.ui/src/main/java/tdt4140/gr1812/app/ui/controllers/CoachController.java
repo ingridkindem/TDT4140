@@ -49,7 +49,6 @@ public class CoachController {
 		this.atCoachView = true;
 		this.athletesTable.setVisible(false);
 		
-		System.out.println("-1-");
 		this.setColumnsInTable();
 
 		athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
@@ -68,7 +67,6 @@ public class CoachController {
 
 	public void update() {
 		athletesTable.setItems(observableAthletes);
-		
 	}
 
 	public String handleSport(String coach) {
