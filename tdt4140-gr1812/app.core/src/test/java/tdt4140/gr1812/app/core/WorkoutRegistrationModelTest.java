@@ -116,7 +116,7 @@ public class WorkoutRegistrationModelTest {
 	@Test
 	public void testWorkoutRegistrationModelInit() {  //failer fortsatt, problem med server?
 		boolean t = model.WorkoutRegistrationModelInit("46643025", "111,12", "10", "123", new Sport("basket"), "Hei", true);
-		assertTrue(t);
+		assertTrue(t); 
 		boolean t2 = model.WorkoutRegistrationModelInit("2020", "110,130", "70", "122", new Sport("basket"), "Hei", false);
 		assertTrue(t2);
 		boolean f = model.WorkoutRegistrationModelInit("20", "20,20", "70","-10", new Sport("fotball"), "Hei", true);

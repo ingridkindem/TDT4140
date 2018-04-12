@@ -17,12 +17,13 @@ public class WorkoutRegistrationControllerTest {
 	private WorkoutRegistrationController controller;
 
 	@Before
-	public void setUp() { //hva blir feil her?
+	public void setUp() { 
 		controller = new WorkoutRegistrationController();
 		final JFXPanel fxPanel = new JFXPanel();
 		controller.lengdePaaOkt = new TextField();
 		controller.extraField = new TextField();
 		controller.maal = new TextField();
+		controller.puls = new TextField();
 		controller.basket = new RadioMenuItem();
 		controller.fotball = new RadioMenuItem();
 		controller.langrenn = new RadioMenuItem();
@@ -66,7 +67,7 @@ public class WorkoutRegistrationControllerTest {
 	}
 	
 	@Test
-	public void testInitialize() { //hvordan teste
+	public void testInitialize() { 
 		
 	}
 	@Test

@@ -47,8 +47,8 @@ public class WorkoutRegistrationModel {
 			HashMap requestParam = new HashMap<String, String>();
 			requestParam.put("duration", String.valueOf(duration));
 			requestParam.put("username", username);
-			requestParam.put("extraField", extraField);
 			requestParam.put("pulses", pulses);
+			requestParam.put("extraField", extraField);
 			requestParam.put("goal", goal);
 			requestParam.put("sport", sport.getSport());
 			requestParam.put("privacy", p);
@@ -151,7 +151,7 @@ public class WorkoutRegistrationModel {
 	
 	//returns text
 	public String getText() { 
-		return text;
+		return text; 
 	}
 	
 	//method to check if the sport is empty
