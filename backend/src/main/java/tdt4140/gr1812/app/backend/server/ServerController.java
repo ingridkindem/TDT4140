@@ -195,4 +195,40 @@ public class ServerController {
     	return feedback; 
 
     }
+    
+    
+    @RequestMapping("/getName")
+    public String requestNameForUser(@RequestParam("username") String username) {
+        
+        String feedback = "";
+        
+        try{
+            String getNameForUserResult = ServerLogic.getNameForUser(username);
+            if (getNameForUserResult != "") {
+                JSONObject responseObject = new JSONObject().put("status", getNameForUserResult);  
+                feedback = responseObject.toString(); 
+            }
+            else {
+                feedback = new JSONObject()
+                          .put("status", "failed").toString();
+            }
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+            try {
+                feedback = new JSONObject()
+                          .put("status", "failed").toString();
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        
+        
+        
+        
+        return feedback; 
+
+    }
+    
 }
