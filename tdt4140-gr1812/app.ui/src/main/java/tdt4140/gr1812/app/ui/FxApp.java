@@ -23,6 +23,7 @@ public class FxApp extends Application {
 	private Stage stage;
 	private String currentUser = "Caroline Lysebo"; 
 	private boolean coach = false;
+	private String selectedAthlete;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -130,7 +131,15 @@ public class FxApp extends Application {
         launch(args);
     }
     
+    public void setSelectedAthlete(String selectedAthlete) {
+    		this.selectedAthlete = selectedAthlete;
+    }
+    
     public String getCurrentUser() {
     		return this.currentUser;
+    }
+    
+    public String getSelectedAthlete() {
+    		return this.selectedAthlete;
     }
 }

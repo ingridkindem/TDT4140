@@ -12,19 +12,21 @@ import tdt4140.gr1812.app.core.models.loggedIn.LoggedInModel;
 
 public class LoggedInModelTest {
 	
+	LoggedInModel model = new LoggedInModel();
+	
 	@Test
 	public void testGetName() { 
-		
+		assertEquals(LoggedInModel.getName(""), "failure");
 	}
 	
 	@Test
 	public void testGetWorkoutsForAthlete() { 
-		
+		assertTrue(LoggedInModel.getWorkoutsForAthlete("").isEmpty());
 	}
 	
 	@Test
 	public void testGetPulseZones() {
-		
+		assertTrue(LoggedInModel.getPulseZones("").isEmpty());
 	}
 	
 	@Test
@@ -40,7 +42,7 @@ public class LoggedInModelTest {
 	}
 	
 	@Test
-	public void testgetPulsesAsList() {
+	public void testGetPulsesAsList() {
 		List<Integer> list = LoggedInModel.getPulsesAsList("50,60,70");
 		assertEquals(list, Arrays.asList(50,60,70));
 		try {
@@ -48,6 +50,12 @@ public class LoggedInModelTest {
 			fail();
 		} catch (IllegalArgumentException e) {	
 		}
+	}
+	
+	@Test
+	public void testHoursToMinutes() {
+		assertEquals(LoggedInModel.hoursToMinutes("2:00"), 120);
+		assertEquals(LoggedInModel.hoursToMinutes("0:10"), 10);
 	}
 
 }

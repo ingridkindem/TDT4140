@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +22,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.dataClasses.Sport;
 import tdt4140.gr1812.app.core.dataClasses.Workout;
@@ -30,21 +35,20 @@ import tdt4140.gr1812.app.ui.FxApp;
 
 /*
  Hva er igjen å gjøre?
- - Endre farge på grafen
- - Endre farge på bakgrunnen av grafen
  - Lage metodene til backend riktig (står mer over hver metode i LoggedInModel)
- - Finne en måte å lagre hvilken utøver man ser på (når man er coach). HEr må vi se på hvordan toralf lagrer utøveren i sin del. 
- - Skrive tester til metodene som kobler til backend
- - Skrive testene som mangler i LoggedInControllerTest
+ - Skrive tester til metodene som kobler til backend - nesten ferdig
+ - Skrive testene som mangler i LoggedInControllerTest - nesten ferdig
  */
 
 public class LoggedInController {
 	
 	private FxApp app;
 	private String currentUser;
+	private String selectedAthlete;
 	private boolean coach;
 	private List<Workout> workouts = new ArrayList<Workout>();
 	private ObservableList<Workout> observableWorkouts = FXCollections.observableArrayList();
+	private boolean atLoggedInView = false;
 	@FXML
 	Text name;
 	@FXML
@@ -54,18 +58,22 @@ public class LoggedInController {
 	@FXML
 	TableView workoutsTable;
 	@FXML
-	TableColumn goal, other, duration, date, maxpulse, sport;
+	TableColumn goal, extraField, duration, date, maxpulse, sport;
 	@FXML
 	SubScene chartScene;
 	
 	public void registrerOkt() { // Registrer Økt hyperlink pressed
+		this.atLoggedInView = false;
 		this.app.goToWorkoutRegistration();
 	}
 	
 	public void update() {
-		name.setText(this.currentUser);//LoggedInModel.getName(this.currentUser)); 
+		this.atLoggedInView = true;
+		name.setText(LoggedInModel.getName(this.currentUser)); 
+		this.selectedAthlete = this.currentUser;
 		if (this.coach) { //check if the logged in user is a coach
 			//hide the "Registrer økt"-button
+			this.selectedAthlete = this.app.getSelectedAthlete();
 			this.blank.setVisible(true); 
 			this.registrerOkt.setVisible(false);
 		} 
@@ -76,7 +84,7 @@ public class LoggedInController {
 	
 	final CategoryAxis xdays = new CategoryAxis();
     final NumberAxis ytime = new NumberAxis();
-    final StackedBarChart<String, Number> chart =
+    StackedBarChart<String, Number> chart =
             new StackedBarChart<String, Number>(xdays, ytime);
 	final XYChart.Series<String, Number> series1 =
             new XYChart.Series<String, Number>();
@@ -100,8 +108,12 @@ public class LoggedInController {
 	public void setChart() {
 		this.xdays.setLabel("Dager");
 		this.ytime.setLabel("Tid");
+		this.xdays.setTickLabelFont(Font.font(14));
+		this.ytime.setTickLabelFont(Font.font(14));
+		this.chart.setBackground(new Background(new BackgroundFill(Color.valueOf("#FFF2E5"), new CornerRadii(1), new Insets(5))));
 		xdays.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(mandag, tirsdag, onsdag, torsdag, fredag, lordag, sondag)));
+		
 		List<List<Integer>> testList = new ArrayList();
 		for (int i = 0; i< 7; i++) {
 			testList.add(new ArrayList());
@@ -110,7 +122,7 @@ public class LoggedInController {
 			}
 		}
 		
-		List<List<Integer>> durationInPulsezones = testList;//LoggedInModel.getPulseZones(this.currentUser);
+		List<List<Integer>> durationInPulsezones = testList;//LoggedInModel.getPulseZones(this.selectedAthlete);
 		List<String> weekdays = Arrays.asList(mandag, tirsdag, onsdag, torsdag, fredag, lordag, sondag);
 		
 		for (int i = 0; i<7; i++) {
@@ -133,20 +145,15 @@ public class LoggedInController {
 			series5.setName("Pulssone " + 5);
 		    series5.getData().add(new XYChart.Data<String, Number>(weekdays.get(i), durationInPulsezones.get(i).get(4)));
 		}
-		chart.getData().addAll(series1, series2, series3, series4, series5);
+		
+		chart.getData().addAll(series5, series4, series3, series2, series1);
 		chartScene.setRoot(chart);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void setWorkoutsInTable() {
 		//get workouts from backend
-		//this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.currentUser)); //for coach - currentuser has to be changed to the athlete
-		Workout w = new Workout(new Sport("Fotball"), false);
-		w.setDate(new Date());
-		w.setDuration(120);
-		w.setGoal("bli raskere");
-		w.setPulses(Arrays.asList(50,60,90));
-		this.observableWorkouts.add(w);
+		this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.selectedAthlete)); 
 		
 		//set values in the workout-table
 		this.workoutsTable.setItems(observableWorkouts);
@@ -155,10 +162,12 @@ public class LoggedInController {
 		this.duration.setCellValueFactory(new PropertyValueFactory<Workout,Integer >("duration"));
 		this.maxpulse.setCellValueFactory(new PropertyValueFactory<Workout, Integer>("maxpulse"));
 		this.sport.setCellValueFactory(new PropertyValueFactory<Workout, Integer>("sport"));
+		//this.extraField.setCellFactory(new PropertyValueFactory<Workout, Integer>("extraField"));
 	}
 	
 	public void loggUt() {
 		app.setCurrentUser(null);
+		this.atLoggedInView = false;
 		app.goToLogin();
 	}
 	
@@ -187,5 +196,14 @@ public class LoggedInController {
 	public boolean getCoach() {
 		return this.coach;
 	}
+	
+	public boolean getAtLoggedInView() {
+		return this.atLoggedInView;
+	}
+	
+	public ObservableList<Workout> getObservableWorkouts() {
+		return this.observableWorkouts;
+	}
+	
 
 }

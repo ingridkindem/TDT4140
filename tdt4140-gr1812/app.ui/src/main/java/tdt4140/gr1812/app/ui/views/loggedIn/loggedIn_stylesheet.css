@@ -1,0 +1,15 @@
+
+#chartScene {
+	-fx-background-color:  #FFF2E5;
+}
+
+.chart-series-line {    
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+ 
+.default-color0.chart-series-line { -fx-stroke: grey; }
+.default-color1.chart-series-line { -fx-stroke: blue; }
+.default-color2.chart-series-line { -fx-stroke: green; }
+.default-color3.chart-series-line { -fx-stroke: yellow; }
+.default-color4.chart-series-line { -fx-stroke: red; }

@@ -48,23 +48,33 @@ public final class LoggedInModel {
         requestParam.put("username", username);
         
         try {
-        		JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "workoutsForAthlete");
+        		JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "lastWorkouts");
         		if (response.get("status").equals("success")) {
         			JSONArray objectArray = response.getJSONArray("workouts");
         			for (int i = 0; i < objectArray.length(); i++) {
         				JSONObject obj = objectArray.getJSONObject(i); 
         				Sport sport = new Sport(obj.getString("sport"));
-        				int duration = Integer.parseInt(obj.getString("duration"));
-        				List<Integer> pulses = getPulsesAsList(obj.getString("pulses"));
+        				int duration = hoursToMinutes(obj.getString("duration")); //h:mm
+        				List<Integer> pulses = getPulsesAsList(obj.getString("pulses")); //[1,1]
         				boolean privacy = (obj.getString("privacy").equals("1")) ? true:false;
-        				String goal = obj.getString("goal");
-        				Date date = stringToDate(obj.getString("date")); //date = yyyy:mm:dd
+        				String goal = obj.getString("goal");  
+        				String date = obj.getString("date"); // 10 apr 2018 22:00:00 GMT
+        				String extraField = obj.getString("extraField");
+        				
+        				if (sport.getSport().equals("langrenn")) {
+        					extraField = "Distanse: " + extraField;
+        				} else if (sport.getSport().equals("basket")) {
+        					extraField = "Antall kast: " + extraField;
+        				} else if (sport.getSport().equals("fotball")) {
+        					extraField = "Spilletid: " + extraField;
+        				}
         				
         				Workout workout = new Workout(sport, privacy);
-        				workout.setDate(date);
+        				//workout.setDate(date);
         				workout.setDuration(duration);
         				workout.setGoal(goal);
         				workout.setPulses(pulses);
+        				//workout.setExtraField(extraField);
         				returnList.add(workout);
         			}
         		}
@@ -94,7 +104,6 @@ public final class LoggedInModel {
 	    		}
 	    	}
 	    	} catch (Exception e) {
-	    		returnList = null;
 			e.printStackTrace();
 		}
 	    return returnList;
@@ -112,6 +121,19 @@ public final class LoggedInModel {
 		} catch (Exception e) {
 		}
 		return date;
+	}
+	
+	public static int hoursToMinutes(String s) { // "h:mm" -> mm
+		String[] min = s.split(":");
+		int minutes;
+		if(Integer.parseInt(min[0]) == 0) {
+			minutes = Integer.parseInt(min[1]); 
+		}
+		else {
+			minutes = Integer.parseInt(min[0])*60 + Integer.parseInt(min[1]);
+		}
+		
+		return minutes; 
 	}
 	
 	
