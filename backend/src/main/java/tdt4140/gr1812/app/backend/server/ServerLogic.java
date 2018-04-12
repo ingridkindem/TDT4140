@@ -2,6 +2,7 @@ package tdt4140.gr1812.app.backend.server;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import tdt4140.gr1812.app.backend.server.ServerController;
 
 import java.sql.*;
@@ -13,24 +14,27 @@ import javax.management.RuntimeErrorException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ServerLogic { // class mainly for handling connection to mySQL
 
+
+
+public class ServerLogic { // class mainly for handling connection to mySQL
 
         public static void signup(String username,
                                   String password,
-                                  String sport,
                                   String firstname,
                                   String surname,
                                   String maxpulse,
                                   String weight,
-                                  String gender) {
+                                  String gender,
+                                  String sport) {
         		//connecting to database
             MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUser("root");
-            dataSource.setPassword("cygnus6cygnus");
-            dataSource.setServerName("localhost");
-            dataSource.setPort(3306);
-            dataSource.setDatabaseName("PU");
+            dataSource.setUser(Config.dbUser);
+            dataSource.setPassword(Config.dbPass);
+            dataSource.setServerName(Config.dbHost);
+            dataSource.setPort(Config.dbPort);
+            dataSource.setDatabaseName(Config.dbName);
+
 
 
             	//query to database
@@ -38,8 +42,12 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                     "values (?, ?, ?, ?, ?, ?, ?, ?)";
 
             Connection conn = null;
+            
+            
 
             try {
+                
+
                 conn = dataSource.getConnection(); // attempting to establish connection to databse
                 PreparedStatement ps = conn.prepareStatement(sql); // compile rfor SQL-statement
                 ps.setInt(1, Integer.parseInt(username)); // Setting variables listet as "?" in SQL-string
@@ -50,12 +58,17 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                 ps.setInt(6, Integer.parseInt(weight));
                 ps.setString(7, gender);
                 ps.setString(8, sport);
+                
                 ps.executeUpdate(); //Updating database
                 ps.close();
+                
 
             } catch (SQLException e) { // E. g. already existing Primary Key will be caught here
-                throw new RuntimeException(e);
+                
+            		throw new RuntimeException(e);
             } finally {
+                
+
                 if (conn != null) {
                     try {
                         conn.close();
@@ -65,14 +78,15 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             }
         }
         
-        public static boolean login(String username, String password) {
+    public static Tuple<Boolean, Boolean> login(String username, String password) {
     			
-        	 	 MysqlDataSource dataSource = new MysqlDataSource();
-             dataSource.setUser("root");
-             dataSource.setPassword("cygnus6cygnus");
-             dataSource.setServerName("localhost");
-             dataSource.setPort(3306);
-             dataSource.setDatabaseName("PU");
+             MysqlDataSource dataSource = new MysqlDataSource();
+             dataSource.setUser(Config.dbUser);
+             dataSource.setPassword(Config.dbPass);
+             dataSource.setServerName(Config.dbHost);
+             dataSource.setPort(Config.dbPort);
+             dataSource.setDatabaseName(Config.dbName);
+
              
              String sql = "select * from users where username = ? and password = ?";
              
@@ -85,11 +99,13 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 	                 ps.setInt(1, Integer.parseInt(username));
 	                 ps.setString(2,  password);
 	                 resultSet = ps.executeQuery();
+
 	                 if (resultSet.next() ) { //seeing if query returns empty table of data, meaning that user/pw-combo doesn't exist and login not possible
-	                	    return true;
+                         return new Tuple(true, resultSet.getBoolean("trener"));
+
 	                	} 
 	                 else {
-	                	 	return false; 
+                         return new Tuple(false, false);
 	                 }
              }catch (SQLException e) {            	 
             	 	throw new RuntimeException(e);
@@ -101,8 +117,6 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             	 		}
             	 	}
              }
-             
-      
     }
         
        public static boolean registerWorkout(String username,
@@ -110,17 +124,19 @@ public class ServerLogic { // class mainly for handling connection to mySQL
     		   								    String pulses,
     		   								    String goal,
     		   								    String sport,
-    		   								    String privacy) {
+    		   								    String privacy,
+                                             String extraField) {
     	   
     	   	   MysqlDataSource dataSource = new MysqlDataSource();
-           dataSource.setUser("root");
-           dataSource.setPassword("cygnus6cygnus");
-           dataSource.setServerName("localhost");
-           dataSource.setPort(3306);
-           dataSource.setDatabaseName("PU");
+           dataSource.setUser(Config.dbUser);
+           dataSource.setPassword(Config.dbPass);
+           dataSource.setServerName(Config.dbHost);
+           dataSource.setPort(Config.dbPort);
+           dataSource.setDatabaseName(Config.dbName);
+
            
-           String sql = "insert into workouts (username, duration, pulses, goal, sport, privacy)" +
-           		"values (?, ?, ?, ?, ?, ?)";
+           String sql = "insert into workouts (username, duration, pulses, goal, sport, privacy, extraField)" +
+           		"values (?, ?, ?, ?, ?, ?, ?)";
            
            Connection conn = null;
            Boolean success = true;
@@ -134,6 +150,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
         	   		ps.setString(4,  goal);
         	   		ps.setString(5,  sport);
         	   		ps.setString(6,  privacy);
+        	   		ps.setString(7,  extraField);
         	   		int ex = ps.executeUpdate();
         	   		if (ex>=1) {
         	   			success = true;
@@ -161,11 +178,12 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        
        public static ArrayList<Athlete> getAthletesInSport(String sport) {
            MysqlDataSource dataSource = new MysqlDataSource();
-       dataSource.setUser("root");
-       dataSource.setPassword("cygnus6cygnus");
-       dataSource.setServerName("localhost");
-       dataSource.setPort(3306);
-       dataSource.setDatabaseName("PU");
+       dataSource.setUser(Config.dbUser);
+       dataSource.setPassword(Config.dbPass);
+       dataSource.setServerName(Config.dbHost);
+       dataSource.setPort(Config.dbPort);
+       dataSource.setDatabaseName(Config.dbName);
+
 
        String sql = "select firstname, surname, username from users where sport = ?";
 
@@ -204,12 +222,13 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        
        public static String getSportForCoach(String username) {
    			
-       	     MysqlDataSource dataSource = new MysqlDataSource();
-            dataSource.setUser("root");
-            dataSource.setPassword("cygnus6cygnus");
-            dataSource.setServerName("localhost");
-            dataSource.setPort(3306);
-            dataSource.setDatabaseName("PU");
+       	 	 MysqlDataSource dataSource = new MysqlDataSource();
+            dataSource.setUser(Config.dbUser);
+            dataSource.setPassword(Config.dbPass);
+            dataSource.setServerName(Config.dbHost);
+            dataSource.setPort(Config.dbPort);
+            dataSource.setDatabaseName(Config.dbName);
+
             
             String sql = "select sport from users where username = ?";
             

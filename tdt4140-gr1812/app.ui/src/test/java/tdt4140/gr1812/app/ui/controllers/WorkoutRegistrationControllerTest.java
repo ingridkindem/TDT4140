@@ -1,4 +1,4 @@
-package tdt4140.gr1812.app.ui.controllers;
+ package tdt4140.gr1812.app.ui.controllers;
 
 import static org.junit.Assert.*;
 
@@ -30,38 +30,31 @@ public class WorkoutRegistrationControllerTest {
 		controller.privatOokt = new CheckBox();
 	}
 	
-//	@Test
-//	public void testHandleRegistrer() {
-//		controller.basket.setSelected(true);
-//		controller.fotball.setSelected(false);
-//		controller.langrenn.setSelected(false);
-//		controller.lengdePåØkt.setText("30");
-//		controller.puls.setText("50,60,70");
-//		controller.mål.setText("mål");
-//		assertTrue(controller.handleRegistrer());
-//
-//		controller.basket.setSelected(false);
-//		controller.fotball.setSelected(true);
-//		controller.langrenn.setSelected(false);
-//		controller.lengdePåØkt.setText("-10");
-//		controller.puls.setText("50,60,70");
-//		controller.mål.setText("mål");
-//		assertFalse(controller.handleRegistrer());
-		
-//		controller.basket.setSelected(false);
-//		controller.fotball.setSelected(false);
-//		controller.langrenn.setSelected(true);
-//		controller.lengdePåØkt.setText("10");
-//		controller.puls.setText("-50,60,70");
-//		controller.mål.setText("mål");
-//		assertFalse(controller.handleRegistrer());
-		
-		
-//	}
-	
 	@Test
-	public void testHandleKryssUt() {
+	public void testHandleRegistrer() {
+		controller.basket.setSelected(true);
+		controller.fotball.setSelected(false);
+		controller.langrenn.setSelected(false);
+		controller.lengdePaaOkt.setText("30");
+		controller.puls.setText("-50,60,70");
+		controller.maal.setText("mål");
+		assertFalse(controller.handleRegistrer());
+
+		controller.basket.setSelected(false);
+		controller.fotball.setSelected(true);
+		controller.langrenn.setSelected(false);
+		controller.lengdePaaOkt.setText("-10");
+		controller.puls.setText("50,60,70");
+		controller.maal.setText("mål");
+		assertFalse(controller.handleRegistrer());
 		
+		controller.basket.setSelected(false);
+		controller.fotball.setSelected(false);
+		controller.langrenn.setSelected(true);
+		controller.lengdePaaOkt.setText("10");
+		controller.puls.setText("-50,60,70");
+		controller.maal.setText("mål");
+		assertFalse(controller.handleRegistrer());
 	}
 	
 	@Test
@@ -71,4 +64,11 @@ public class WorkoutRegistrationControllerTest {
 		assertEquals(app, controller.app);
 	}
 
+	@Test
+	public void testSetCurrentUser() {
+		String currentUser = "11111111";
+		controller.setCurrentUser(currentUser);
+		assertEquals(currentUser, controller.getCurrentUser());
+	}
+	
 }

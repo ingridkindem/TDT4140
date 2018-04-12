@@ -57,7 +57,6 @@ public class CoachController {
 		//Hvorfor funker det ikke å sette selectTable til false her? 
 		//Og hva med infoBut, hvorfor funker ikke den heller?
 		
-		System.out.println("-1-");
 		this.setColumnsInTable();
 
 		//Hvis athletesButton blir trykket på, vis TableView (tabellen med utøvere). 
