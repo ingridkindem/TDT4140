@@ -53,17 +53,18 @@ public class ServerController {
     		
     	String feedback = ""; 
     		try{
-    			boolean loginResult = ServerLogic.login(username, password);
-    			if (loginResult) {
-    				JSONObject responseObject = new JSONObject().put("status", "success");  
-    				feedback = responseObject.toString(); 
-    			}
-    			else {
-    				feedback = new JSONObject()
-  		                  .put("status", "failed").toString();
-    			}
-    			
-    		}catch (Exception e) {
+				Tuple<Boolean, Boolean> loginResult = ServerLogic.login(username, password);
+				if (loginResult.x) {
+					JSONObject responseObject = new JSONObject().put("status", "success");
+					responseObject.put("coach", loginResult.y.toString());
+					feedback = responseObject.toString();
+				}
+				else {
+					feedback = new JSONObject()
+							.put("status", "failed").toString();
+				}
+
+			}catch (Exception e) {
     			e.printStackTrace();
 				try {
 					feedback = new JSONObject()
@@ -87,13 +88,14 @@ public class ServerController {
     									 @RequestParam("duration") String duration,
     									 @RequestParam("pulses") String pulses,
     									 @RequestParam("goal") String goal,
+									     @RequestParam("extraField") String extraField,
     									 @RequestParam("sport") String sport,
     									 @RequestParam("privacy") String privacy) {
     	
     	String feedback = "";
     	
     	try{
-			boolean workoutRegistrationResult = ServerLogic.registerWorkout(username, duration, pulses, goal, sport, privacy);
+			boolean workoutRegistrationResult = ServerLogic.registerWorkout(username, duration, pulses, goal, sport, privacy, extraField);
 			if (workoutRegistrationResult) {
 				JSONObject responseObject = new JSONObject().put("status", "success");  
 				feedback = responseObject.toString(); 
