@@ -227,6 +227,31 @@ public class ServerTest{
 		
 }
     
+    @Test
+    public void TestLastWorkouts() throws Exception{
+    	
+		String username = "12345678";
+		
+		
+		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts")
+				.param("username", username))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("success")));
+		
+}
+    @Test
+    public void TestFailedLastWorkouts() throws Exception{
+    	
+		String username = "000000";
+		
+		
+		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts")
+				.param("username", username))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("failed")));
+		
+}
+    
     	public String deleteUserFromDB(String username) {
     		
     		     MysqlDataSource dataSource = new MysqlDataSource();
