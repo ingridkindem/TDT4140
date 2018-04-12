@@ -17,7 +17,7 @@ public class WorkoutRegistrationControllerTest {
 	private WorkoutRegistrationController controller;
 
 	@Before
-	public void setUp() { 
+	public void setUp() {  
 		controller = new WorkoutRegistrationController();
 		final JFXPanel fxPanel = new JFXPanel();
 		controller.lengdePaaOkt = new TextField();
