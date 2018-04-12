@@ -29,9 +29,7 @@ public class CoachModel {
 	    
 	    HashMap requestParam = new HashMap<String, String>();
 
-	    requestParam.put("username", caochName); // This has to be changed to username, but
-
-	    //coach currently has no field "username" !!!!!!!
+	    requestParam.put("username", caochName);
 	    System.out.println(requestParam.toString());
 	    try {
 	        JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "sportForCoach");
@@ -86,16 +84,17 @@ public class CoachModel {
         
         
         try {
-                //Hva er relasjonen mellom username og person? Er det riktig at det skal stå username der? 
+                
                 JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
                 if (response.get("status").equals("success")) {
    
-                    //Oppretter JSONArray som kjører gjennom alle atletene.
+                    
+                		//Creates a JSONArray who runs through all the athletes
                     JSONArray objectArray = response.getJSONArray("athletes");
                     for (int i = 0; i < objectArray.length(); i++) {
                         JSONObject obj = objectArray.getJSONObject(i); 
                         
-                        //Sjekker hvis string == cellphonenumber input. Hvis så -> Legg til navn.
+                        //Checks if String == cellphonenumber input. If so --> add name                  
                         if (obj.getString("username").equals(cellPhoneNumber)) {
                             String firstname = obj.getString("firstname");
                             String surname = obj.getString("surname");

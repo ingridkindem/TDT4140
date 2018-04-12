@@ -43,7 +43,7 @@ public class WorkoutRegistrationModel {
 			} else {
 				p = "0";
 			}
-			//send to database. Hvis godkjent - return true. Hvis feil - return false
+			//send to database. If accepted - return true. If declined - return false
 			HashMap requestParam = new HashMap<String, String>();
 			requestParam.put("duration", String.valueOf(duration));
 			requestParam.put("username", username);
