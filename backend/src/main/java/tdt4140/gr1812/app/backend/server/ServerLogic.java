@@ -172,7 +172,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
            MysqlDataSource dataSource = new MysqlDataSource();
        dataSource.setUser("pu");
        dataSource.setPassword("ZAmrUsPWD3vd");
-       dataSource.setServerName("http://larserikfagernaes.com");
+       dataSource.setServerName("larserikfagernaes.com");
        dataSource.setPort(3306);
        dataSource.setDatabaseName("PU");
 
@@ -216,7 +216,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        	 	 MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("pu");
             dataSource.setPassword("ZAmrUsPWD3vd");
-            dataSource.setServerName("http://larserikfagernaes.com");
+            dataSource.setServerName("larserikfagernaes.com");
             dataSource.setPort(3306);
             dataSource.setDatabaseName("PU");
             
