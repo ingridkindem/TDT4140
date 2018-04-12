@@ -195,4 +195,54 @@ public class ServerController {
     	return feedback; 
 
     }
+    
+    @RequestMapping("lastWorkouts")
+    public String getLastWorkouts(@RequestParam("username") String username) {
+    	
+    	JSONObject feedback = new JSONObject();
+
+		try{
+			ArrayList<Workout> workouts = ServerLogic.getLastWorkouts(username);
+			System.out.print("the return = "  + workouts.toString());
+			if (workouts.size()<1) {
+				feedback.put("status", "failed");
+				feedback.put("message", "No workouts for user");
+			}else if (workouts.size()>=1) {
+				JSONArray jArray = new JSONArray();
+				for (Workout workout: workouts){
+						JSONObject workoutJson = new JSONObject();
+						boolean privacy = workout.getPrivacy();
+						workoutJson.put("duration", workout.getDuration());
+						workoutJson.put("goal", workout.getGoal());
+						workoutJson.put("pulses", workout.getPulses());
+						if (privacy) {
+							workoutJson.put("privacy", "1");
+						}else {
+							workoutJson.put("privacy", "0");
+						}
+						workoutJson.put("date", workout.getDate().toGMTString());
+						workoutJson.put("sport", workout.getSport().getSport());
+						jArray.put(workoutJson);
+				}
+				feedback.put("status", "success");
+				feedback.put("workouts", jArray);
+			}
+			else {
+				feedback.put("status", "failed");
+			}
+			
+		}catch (Exception e) {
+    		try{
+    				e.printStackTrace();
+				feedback.put("status", "failed");
+			}
+			catch (Exception es){
+
+			}
+		}
+		System.out.println(feedback.toString());
+    	 return feedback.toString();
+    }
+    
+    
 }
