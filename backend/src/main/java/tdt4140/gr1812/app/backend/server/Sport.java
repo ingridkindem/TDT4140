@@ -1,4 +1,4 @@
-package tdt4140.gr1812.app.core.dataClasses;
+package tdt4140.gr1812.app.backend.server;
 
 public class Sport {
 
@@ -13,5 +13,5 @@ public class Sport {
     public String getSport() {
         return this.sportsName;
     }
-    
+
 }

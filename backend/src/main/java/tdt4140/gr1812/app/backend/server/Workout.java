@@ -1,9 +1,10 @@
-package tdt4140.gr1812.app.core.dataClasses;
+package tdt4140.gr1812.app.backend.server;
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import tdt4140.gr1812.app.core.dataClasses.Sport;
+
 
 public class Workout {
 	
@@ -13,6 +14,7 @@ public class Workout {
 	private String goal;
 	private Date date;
 	private boolean privacy; //true=private
+	private String extraField;
 	
 	//Constructor to create a workout. Initialized with sport and possibilty for privacy mode.
 	public Workout(Sport sport, boolean privacy) {
@@ -31,6 +33,12 @@ public class Workout {
 	}
 	
 	public void setPulses(List<Integer> pulses) {
+//		for (int pulse : pulses) {
+//			if (pulse<=0 || pulse>250) {
+//				throw new IllegalArgumentException("See a doctor.");
+//			}
+//			this.pulses.add(pulse);
+//		}
 		this.pulses=pulses;
 	}
 	
@@ -92,3 +100,4 @@ public class Workout {
 		return goal;
 	}
 }
+
