@@ -8,10 +8,10 @@ import org.junit.Test;
 import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.models.signup.SignUpModel;
 
-//HUSK Å LEGGE INN SPORT KLASSEN
-//Hvilke tester skal du kjøre? 
-//Test at alle Exceptions kjører som de skal
-//Test at alle Getters og Setters kjører som de skal.
+	//HUSK Å LEGGE INN SPORT KLASSEN
+	//Hvilke tester skal du kjøre? 
+	//Test at alle Exceptions kjører som de skal
+	//Test at alle Getters og Setters kjører som de skal.
 
 public class SignUpModelTest {
 	

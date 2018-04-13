@@ -31,12 +31,6 @@ public class Workout {
 	}
 	
 	public void setPulses(List<Integer> pulses) {
-//		for (int pulse : pulses) {
-//			if (pulse<=0 || pulse>250) {
-//				throw new IllegalArgumentException("See a doctor.");
-//			}
-//			this.pulses.add(pulse);
-//		}
 		this.pulses=pulses;
 	}
 	
