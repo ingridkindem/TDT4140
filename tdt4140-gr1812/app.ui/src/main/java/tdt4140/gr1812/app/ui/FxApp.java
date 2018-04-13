@@ -30,7 +30,7 @@ public class FxApp extends Application {
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
         goToLoggedIn();
-    }
+   }
     
     public void setCurrentUser(String user) {
     		this.currentUser = user; 
