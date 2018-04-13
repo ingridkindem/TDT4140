@@ -25,7 +25,7 @@ public class FxApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
-        goToLogin();
+    		goToLogin();
     }
     
     public void setCurrentUser(String user) {
