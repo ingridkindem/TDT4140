@@ -47,8 +47,8 @@ public class WorkoutTest {
 	
 	@Test
 	public void testSetGoal() {
-		workout.setGoal("Dette var en fin økt!");
-		assertEquals("Dette var en fin økt!", workout.getGoal());
+		workout.setGoal("Dette var en fin ookt!");
+		assertEquals("Dette var en fin ookt!", workout.getGoal());
 	}
 	
 	@Test
@@ -60,13 +60,6 @@ public class WorkoutTest {
 	public void testGetPrivacy() {
 		assertEquals(true, workout.getPrivacy());
 	}
-	
-	@After
-	public void tearDown() throws Exception {
-		
-	}
-	
-	
 	
 	
 

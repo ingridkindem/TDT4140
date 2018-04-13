@@ -8,10 +8,6 @@ import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 
 public class coachModelTest {
 
-    
-    
-//    getSportForCoach(String name){
-//      public static List<Athlete> getAthletesForSport(Coach coach){
     @Test
     public void getSportForCoachTest() {
     		System.out.println(CoachModel.getSportForCoach("46643025") + " is the sport");
@@ -29,9 +25,4 @@ public class coachModelTest {
         }
     }
     
-    
-    
-    
-    
-
 }
