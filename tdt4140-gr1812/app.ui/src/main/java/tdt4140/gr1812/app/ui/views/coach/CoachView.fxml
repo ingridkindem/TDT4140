@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../../../../../../../../target/classes/tdt4140/gr1812/app/ui/views/coach/coach_stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@css/coach_stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0">
          <image>
@@ -52,7 +52,7 @@
             <Font name="Futura Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="infoBut" layoutX="94.0" layoutY="565.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="397.0" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO" textFill="#2b2d44">
+      <TextField fx:id="infoText" layoutX="119.0" layoutY="563.0" prefHeight="44.0" prefWidth="386.0" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font>
