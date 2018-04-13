@@ -5,6 +5,9 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import tdt4140.gr1812.app.backend.server.ServerController;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.stream.Stream;
 
 import javax.management.RuntimeErrorException;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,7 +25,24 @@ import org.json.JSONObject;
 
 
 public class ServerLogic { // class mainly for handling connection to mySQL
+	public static String sha256(String base) {
+	    try{
+	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	        byte[] hash = digest.digest(base.getBytes("UTF-8"));
+	        StringBuffer hexString = new StringBuffer();
 
+	        for (int i = 0; i < hash.length; i++) {
+	            String hex = Integer.toHexString(0xff & hash[i]);
+	            if(hex.length() == 1) hexString.append('0');
+	            hexString.append(hex);
+	        }
+
+	        return hexString.toString();
+	    } catch(Exception ex){
+	       throw new RuntimeException(ex);
+	    }
+	}
+	
         public static void signup(String username,
                                   String password,
                                   String firstname,
@@ -37,6 +58,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
             dataSource.setServerName(Config.dbHost);
             dataSource.setPort(Config.dbPort);
             dataSource.setDatabaseName(Config.dbName);
+            password = ServerLogic.sha256(password + Config.serverSalt).substring(0,25);
 
 
 
@@ -45,11 +67,11 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                     "values (?, ?, ?, ?, ?, ?, ?, ?)";
 
             Connection conn = null;
-            
-            
+
+
 
             try {
-                
+
 
                 conn = dataSource.getConnection(); // attempting to establish connection to databse
                 PreparedStatement ps = conn.prepareStatement(sql); // compile rfor SQL-statement
@@ -61,16 +83,16 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                 ps.setInt(6, Integer.parseInt(weight));
                 ps.setString(7, gender);
                 ps.setString(8, sport);
-                
+
                 ps.executeUpdate(); //Updating database
                 ps.close();
-                
+
 
             } catch (SQLException e) { // E. g. already existing Primary Key will be caught here
-                
+
             		throw new RuntimeException(e);
             } finally {
-                
+
 
                 if (conn != null) {
                     try {
@@ -80,16 +102,21 @@ public class ServerLogic { // class mainly for handling connection to mySQL
                 }
             }
         }
-        
+
     public static Tuple<Boolean, Boolean> login(String username, String password) {
-    			
-             MysqlDataSource dataSource = new MysqlDataSource();
+
+
+
+
+
+
+        MysqlDataSource dataSource = new MysqlDataSource();
              dataSource.setUser(Config.dbUser);
              dataSource.setPassword(Config.dbPass);
              dataSource.setServerName(Config.dbHost);
              dataSource.setPort(Config.dbPort);
              dataSource.setDatabaseName(Config.dbName);
-
+             password = ServerLogic.sha256(password + Config.serverSalt).substring(0,25);
              
              String sql = "select * from users where username = ? and password = ?";
              

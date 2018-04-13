@@ -9,4 +9,5 @@ public class Config {
     static String dbHost = "larserikfagernaes.com";
     static String dbName = "PU";
     static int dbPort = 3306;
+    static String serverSalt = "someRandomStringToPreventRainbows";
 }
