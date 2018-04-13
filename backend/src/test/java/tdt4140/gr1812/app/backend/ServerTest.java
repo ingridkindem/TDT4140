@@ -257,7 +257,7 @@ public class ServerTest{
 		String username = "12345678";
 		
 		
-		mvc.perform(MockMvcRequestBuilders.get("graph")
+		mvc.perform(MockMvcRequestBuilders.get("/graph")
 				.param("username", username))
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("success")));
@@ -269,7 +269,7 @@ public class ServerTest{
 		String username = "00000";
 		
 		
-		mvc.perform(MockMvcRequestBuilders.get("graph")
+		mvc.perform(MockMvcRequestBuilders.get("/graph")
 				.param("username", username))
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
