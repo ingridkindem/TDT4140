@@ -2,6 +2,8 @@ package tdt4140.gr1812.app.ui.controllers;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -74,6 +76,19 @@ public class LoggedInControllerTest {
 		controller.setCurrentUser("testuser");
 		controller.update();
 		assertTrue(controller.getAtLoggedInView());
+	}
+	
+	@Test
+	public void getDay() {
+		assertEquals("Fredag", controller.getDay(5));
+		assertEquals("Onsdag", controller.getDay(3));
+		assertEquals("Sondag", controller.getDay(0));
+		assertEquals("Mandag", controller.getDay(1));
+	}
+	
+	@Test
+	public void testGetDate() {
+		assertEquals(controller.getDate(0), "2018-04-13");
 	}
 
 }

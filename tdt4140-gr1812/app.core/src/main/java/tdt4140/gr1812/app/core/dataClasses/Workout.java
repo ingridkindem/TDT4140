@@ -1,9 +1,12 @@
 package tdt4140.gr1812.app.core.dataClasses;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tdt4140.gr1812.app.core.dataClasses.Sport;
+import tdt4140.gr1812.app.core.models.loggedIn.LoggedInModel;
 
 public class Workout {
 	
@@ -14,6 +17,7 @@ public class Workout {
 	private Date date;
 	private boolean privacy; //true=private
 	private int maxPulse;
+	private String dateString;
 	
 	//Constructor to create a workout. Initialized with sport and possibilty for privacy mode.
 	public Workout(Sport sport, boolean privacy) {
@@ -54,6 +58,10 @@ public class Workout {
 	
 	public void setDate(Date date) {
 		this.date=date;
+	}
+	
+	public void setDateString(String date) {
+		this.dateString = date;
 	}
 	
 	public void setGoal(String goal) {
@@ -111,5 +119,9 @@ public class Workout {
 	
 	public String getGoal() {
 		return goal;
+	}
+	
+	public String getDateString() {
+		return this.dateString;
 	}
 }

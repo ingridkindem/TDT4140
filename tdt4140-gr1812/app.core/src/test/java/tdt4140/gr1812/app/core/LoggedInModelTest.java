@@ -2,6 +2,8 @@ package tdt4140.gr1812.app.core;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +33,10 @@ public class LoggedInModelTest {
 	
 	@Test
 	public void testStringToDate() {
-		Date date = LoggedInModel.stringToDate("2017:12:24");
-		assertEquals(date, new Date(2017, 12, 24));
+		String date = LoggedInModel.stringToDate("10 apr 2018 22:00:00 GMT");
+		assertEquals(date, "2018-04-10");
 		try {
-			Date d = LoggedInModel.stringToDate("");
+			String d = LoggedInModel.stringToDate("");
 			assertNull(d);
 		} catch (Exception e) {	
 			fail();
@@ -42,14 +44,14 @@ public class LoggedInModelTest {
 	}
 	
 	@Test
-	public void testGetPulsesAsList() {
-		List<Integer> list = LoggedInModel.getPulsesAsList("50,60,70");
+	public void testGetStringAsList() {
+		List<Integer> list = LoggedInModel.getStringAsList("50,60,70");
 		assertEquals(list, Arrays.asList(50,60,70));
 		try {
-			LoggedInModel.getPulsesAsList("-1");
+			LoggedInModel.getStringAsList("-1");
 			fail();
 		} catch (IllegalArgumentException e) {	
-		}
+		}  
 	}
 	
 	@Test

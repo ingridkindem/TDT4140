@@ -1,8 +1,12 @@
 package tdt4140.gr1812.app.ui.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -32,13 +36,6 @@ import tdt4140.gr1812.app.core.dataClasses.Sport;
 import tdt4140.gr1812.app.core.dataClasses.Workout;
 import tdt4140.gr1812.app.core.models.loggedIn.LoggedInModel;
 import tdt4140.gr1812.app.ui.FxApp;
-
-/*
- Hva er igjen å gjøre?
- - Lage metodene til backend riktig (står mer over hver metode i LoggedInModel)
- - Skrive tester til metodene som kobler til backend - nesten ferdig
- - Skrive testene som mangler i LoggedInControllerTest - nesten ferdig
- */
 
 public class LoggedInController {
 	
@@ -72,8 +69,8 @@ public class LoggedInController {
 		name.setText(LoggedInModel.getName(this.currentUser)); 
 		this.selectedAthlete = this.currentUser;
 		if (this.coach) { //check if the logged in user is a coach
-			//hide the "Registrer økt"-button
 			this.selectedAthlete = this.app.getSelectedAthlete();
+			//hide the "Registrer økt"-button
 			this.blank.setVisible(true); 
 			this.registrerOkt.setVisible(false);
 		} 
@@ -82,6 +79,7 @@ public class LoggedInController {
 	}
 	
 	
+	// fields needed to create the chart
 	final CategoryAxis xdays = new CategoryAxis();
     final NumberAxis ytime = new NumberAxis();
     StackedBarChart<String, Number> chart =
@@ -104,27 +102,63 @@ public class LoggedInController {
     final static String lordag = "Lordag";
     final static String sondag = "Sondag";
 	
-	@SuppressWarnings("unchecked")
-	public void setChart() {
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public void setChart() { //set values to the chart
+		
+		// change the layout
 		this.xdays.setLabel("Dager");
 		this.ytime.setLabel("Tid");
 		this.xdays.setTickLabelFont(Font.font(14));
 		this.ytime.setTickLabelFont(Font.font(14));
 		this.chart.setBackground(new Background(new BackgroundFill(Color.valueOf("#FFF2E5"), new CornerRadii(1), new Insets(5))));
-		xdays.setCategories(FXCollections.<String>observableArrayList(
-                Arrays.asList(mandag, tirsdag, onsdag, torsdag, fredag, lordag, sondag)));
 		
-		List<List<Integer>> testList = new ArrayList();
+		xdays.setCategories(FXCollections.<String>observableArrayList(
+                Arrays.asList(
+        				this.mandag, this.tirsdag, this.onsdag,  this.torsdag, this.fredag, this.lordag, this.sondag)));
+		List<String> weekdays = Arrays.asList(this.mandag, this.tirsdag, this.onsdag,  this.torsdag, this.fredag, this.lordag, this.sondag);
+		
+		// for testing without backend
+		/*HashMap<String, List<Integer>> testHashMap = new HashMap();
 		for (int i = 0; i< 7; i++) {
-			testList.add(new ArrayList());
+			List<Integer> testList = new ArrayList();
 			for (int j= 0; j<5; j++) {
-				testList.get(i).add(7);
+				testList.add(7);
+			}
+			testHashMap.put(getDate(i), testList);
+		}*/
+		
+		// get duration in pulsezones from backend
+		HashMap<String, List<Integer>> durationInPulsezonesHashMap = LoggedInModel.getPulseZones(this.selectedAthlete);
+		
+		List<List<Integer>> durationInPulsezones = new ArrayList();
+		
+		// create list with the dates for this week
+		int todayInt = Calendar.getInstance().getTime().getDay();
+		
+		List<String> dates = new ArrayList();
+		for (int i = 6; i >= 0; i--) {
+			if (i > todayInt) {
+				dates.add("");
+			}
+			else {
+				dates.add(getDate(todayInt-i));
 			}
 		}
+	    
+		int a = 0;
+		for (String d : dates) { // go through the last 7 dates
+			for (String date: durationInPulsezonesHashMap.keySet()) { // go through the dates in the HashMap from backend
+				if (d.equals(date)) { // check if the dates are the same
+					durationInPulsezones.add(durationInPulsezonesHashMap.get(date)); // add the duration in pulsezones-list to the list
+				}
+			}
+			if (durationInPulsezones.size() == a ) { // if nothing has been added to that date - add a list of zeroes (no workout that day)
+				durationInPulsezones.add(Arrays.asList(0,0,0,0,0));
+			}
+			a++;	
+		}
 		
-		List<List<Integer>> durationInPulsezones = testList;//LoggedInModel.getPulseZones(this.selectedAthlete);
-		List<String> weekdays = Arrays.asList(mandag, tirsdag, onsdag, torsdag, fredag, lordag, sondag);
-		
+		// create the series for the chart
 		for (int i = 0; i<7; i++) {
 			series1.setName("Pulssone " + 1);
 		    series1.getData().add(new XYChart.Data<String, Number>(weekdays.get(i), durationInPulsezones.get(i).get(0)));
@@ -150,15 +184,47 @@ public class LoggedInController {
 		chartScene.setRoot(chart);
 	}
 	
+	public String getDay(int dayNumber) {
+		if (dayNumber == 0) {
+			return this.sondag;
+		}
+		else if (dayNumber == 1) {
+			return this.mandag;
+		}
+		else if (dayNumber == 2) {
+			return this.tirsdag;
+		}
+		else if (dayNumber == 3) {
+			return this.onsdag;
+		}
+		else if (dayNumber == 4) {
+			return this.torsdag;
+		}
+		else if (dayNumber == 5) {
+			return this.fredag;
+		}
+		else {
+			return this.lordag;
+		}
+	}
+	
+	public String getDate(int i) {
+	    final Calendar cal = Calendar.getInstance();
+	    cal.add(Calendar.DATE, -i);
+	    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    System.out.println(dateFormat.format(cal.getTime()));
+	    return dateFormat.format(cal.getTime());
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void setWorkoutsInTable() {
 		//get workouts from backend
 		this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.selectedAthlete)); 
 		
-		//set values in the workout-table
+		//set values in the workouts-table
 		this.workoutsTable.setItems(observableWorkouts);
 		this.goal.setCellValueFactory(new PropertyValueFactory<Workout, String>("goal"));
-		this.date.setCellValueFactory(new PropertyValueFactory<Workout, Date>("date"));
+		this.date.setCellValueFactory(new PropertyValueFactory<Workout, Date>("dateString"));
 		this.duration.setCellValueFactory(new PropertyValueFactory<Workout,Integer >("duration"));
 		this.maxpulse.setCellValueFactory(new PropertyValueFactory<Workout, Integer>("maxpulse"));
 		this.sport.setCellValueFactory(new PropertyValueFactory<Workout, Integer>("sport"));
@@ -204,6 +270,5 @@ public class LoggedInController {
 	public ObservableList<Workout> getObservableWorkouts() {
 		return this.observableWorkouts;
 	}
-	
 
 }

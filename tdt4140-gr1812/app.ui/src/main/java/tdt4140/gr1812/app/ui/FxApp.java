@@ -21,8 +21,8 @@ public class FxApp extends Application {
     
 	private FXMLLoader fxmlLoader;
 	private Stage stage;
-	private String currentUser = "Caroline Lysebo"; 
-	private boolean coach = false;
+	private String currentUser; 
+	private boolean coach;
 	private String selectedAthlete;
 
     @Override
