@@ -99,8 +99,8 @@ public class ServerTest{
     @Test
     public void TestLogin() throws Exception{
     	
-    	String username = "12345678";
-    	String password = "12345678";
+    	String username = "22223333";
+    	String password = "22223333";
     	
     				mvc.perform(MockMvcRequestBuilders.get("/login")
     				.param("username", username)
