@@ -281,12 +281,12 @@ public class ServerController {
     	 return feedback.toString();
     }
     
-    @RequestMapping("graph")
+    @RequestMapping("/graph")
     public String getGraphInformation(@RequestParam ("username") String username) {
     	JSONObject feedback = new JSONObject();
 
 		try{
-			Map <Date, List<Double>> pulsInformation = ServerLogic.getGraphInformation(username);
+			Map <Date, List<Integer>> pulsInformation = ServerLogic.getGraphInformation(username);
 			
 			if (pulsInformation.keySet().size()<1) {
 				feedback.put("status", "failed");
