@@ -281,7 +281,7 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        return workouts;
         }
        
-public static Map <Date, List<Double>> getGraphInformation(String username) {
+public static Map <Date, List<Integer>> getGraphInformation(String username) {
     	   
            MysqlDataSource dataSource = new MysqlDataSource();
 	       dataSource.setUser(Config.dbUser);
@@ -293,7 +293,7 @@ public static Map <Date, List<Double>> getGraphInformation(String username) {
 	   Calendar date = Calendar.getInstance();
 	   date.add(Calendar.DATE, -7);
 	   Date dato = new Date(date.getTime().getTime());
-       String sql = "select pulses, date, duration from workouts where username = ? and date >= ?";
+       String sql = "select pulses, date, duration from workouts where username = ? and date >= ? order by date asc";
        String sqlMaxpuls = "select maxpuls from users where username = ?";
        
 
@@ -301,7 +301,7 @@ public static Map <Date, List<Double>> getGraphInformation(String username) {
        ResultSet resultSet = null; 
        ResultSet resultMaxpuls = null;// needed for reading output from database
        Map <Date, List<Integer>> trening = new HashMap <Date, List<Integer>>();
-       Map <Date, List<Double>> dateandintesity = new HashMap <Date, List<Double>>();
+       Map <Date, List<Integer>> dateandintesity = new HashMap <Date, List<Integer>>();
        int Maxpuls;
        try {
           	 conn = dataSource.getConnection();
@@ -384,7 +384,7 @@ public static Map <Date, List<Double>> getGraphInformation(String username) {
   			//System.out.println(numberofpulses.toString());
    	   	List<Double> precentageinsone = Arrays.asList(p1, p2, p3, p4, p5);
    	   	//System.out.println(datoMongo.toGMTString());
-   	   	dateandintesity.put(datoMongo, precentageinsone);
+   	   	dateandintesity.put(datoMongo, numberofpulses);
 	   	}      
 	    System.out.println(dateandintesity.toString());
 	       return dateandintesity;
