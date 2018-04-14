@@ -47,11 +47,11 @@ public class LoggedInController {
 	private ObservableList<Workout> observableWorkouts = FXCollections.observableArrayList();
 	private boolean atLoggedInView = false;
 	@FXML
-	Text name;
+	Text name, tilbakeknapptekst;
 	@FXML
-	ImageView blank;
+	ImageView blank, tilbakeknapp;
 	@FXML
-	Hyperlink registrerOkt;
+	Hyperlink registrerOkt, tilbake;
 	@FXML
 	TableView workoutsTable;
 	@FXML
@@ -70,9 +70,13 @@ public class LoggedInController {
 		this.selectedAthlete = this.currentUser;
 		if (this.coach) { //check if the logged in user is a coach
 			this.selectedAthlete = this.app.getSelectedAthlete();
-			//hide the "Registrer økt"-button
+			//hide the "Registrer okt"-button
 			this.blank.setVisible(true); 
 			this.registrerOkt.setVisible(false);
+			//make the "tilbakeknapp" visible
+			this.tilbakeknapp.setVisible(true);
+			this.tilbakeknapptekst.setVisible(true);
+			this.tilbake.setVisible(true);
 		} 
 		this.setWorkoutsInTable(); //update workouts-table
 		this.setChart(); //update chart
@@ -118,7 +122,8 @@ public class LoggedInController {
 		List<String> weekdays = Arrays.asList(this.mandag, this.tirsdag, this.onsdag,  this.torsdag, this.fredag, this.lordag, this.sondag);
 		
 		// for testing without backend
-		/*HashMap<String, List<Integer>> testHashMap = new HashMap();
+		/*
+		HashMap<String, List<Integer>> testHashMap = new HashMap();
 		for (int i = 0; i< 7; i++) {
 			List<Integer> testList = new ArrayList();
 			for (int j= 0; j<5; j++) {
@@ -212,7 +217,6 @@ public class LoggedInController {
 	    final Calendar cal = Calendar.getInstance();
 	    cal.add(Calendar.DATE, -i);
 	    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    System.out.println(dateFormat.format(cal.getTime()));
 	    return dateFormat.format(cal.getTime());
 	}
 	
@@ -235,6 +239,11 @@ public class LoggedInController {
 		app.setCurrentUser(null);
 		this.atLoggedInView = false;
 		app.goToLogin();
+	}
+	
+	public void tilbake() {
+		this.atLoggedInView = false;
+		app.goToCoachView();
 	}
 	
 	//set-methods:
