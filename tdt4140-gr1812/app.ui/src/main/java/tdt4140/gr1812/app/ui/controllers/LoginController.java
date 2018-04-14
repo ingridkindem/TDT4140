@@ -63,6 +63,12 @@ public class LoginController {
 		return false;
 	}
 	
+   @FXML
+    public void goToHome() {
+        app.goToHome();
+        this.atLoginView = false;
+    }
+	
 	@FXML
 	public void handleSignup() {
 		app.goToSignup();

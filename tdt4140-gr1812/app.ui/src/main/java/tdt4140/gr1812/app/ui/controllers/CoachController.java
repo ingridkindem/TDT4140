@@ -12,7 +12,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tdt4140.gr1812.app.core.dataClasses.Athlete;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
@@ -39,8 +41,10 @@ public class CoachController {
 	private TableColumn<Athlete, String> ColumnPhoneNumber;
 	@FXML
 	private Label sportLabel;
+	@FXML
+	private Button selectAthlete, infoBut;
 	
-	
+	private String selectedAthlete;
 	private String currentSport; 
 	private String coachUsername;  
 
@@ -48,10 +52,12 @@ public class CoachController {
 	public void initialize() {
 		this.atCoachView = true;
 		this.athletesTable.setVisible(false);
+		this.selectAthlete.setVisible(false);
 		
-		System.out.println("-1-");
+		
 		this.setColumnsInTable();
-
+		
+		//If athletesButtun are pressed, show TableView (table with athletes)
 		athletesButton.showingProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue,
 					Boolean newValue) {
@@ -63,29 +69,67 @@ public class CoachController {
 			}
 
 		});
+		
+		//This is retrieved from Googlio
+		//Fetches the value that has been clicked in the view and returns it.
+		athletesTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+
+            @Override
+		    public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
+		        //Check whether item is selected and set value of selected item to Label
+		        if(athletesTable.getSelectionModel().getSelectedItem() != null) 
+		        {    
+		           
+		           TableViewSelectionModel selectionModel = athletesTable.getSelectionModel();
+		           ObservableList selectedCells = selectionModel.getSelectedCells();
+		           TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+		           Object val = tablePosition.getTableColumn().getCellData(newValue);
+		           
+		           //Checks if a chosen element from the column is a phonenumber
+		           String nummer = (String) val;
+		           if (nummer.matches("[0-9]+")) {
+		               
+		              
+		        	   	   //Choses a selected athlete
+		               selectedAthlete = nummer;
+		               System.out.println(selectedAthlete);
+		               		               
+		               //Sets visibility on button and table
+		               selectAthlete.setVisible(true);
+		               athletesTable.setVisible(false);
+		               
+		               System.out.print("current sport = " + currentSport);
+		               
+		               //Sets the text of the button to a person
+		               athletesButton.setText(CoachModel.getAthletesFullName(nummer, currentSport) + "   Mob: " + selectedAthlete);
+		               
+		           }
+		           
+		           
+		        }
+            }   
+		});
+		
 		update();
+		
 	}
 
 	public void update() {
 		athletesTable.setItems(observableAthletes);
-		
 	}
 
+	//Fetches the sports of a coach
 	public String handleSport(String coach) {
 		return CoachModel.getSportForCoach(coach);
-//		List<String> sports = CoachModel.getSportForCoach(coach);
-//		if (sports.size() > 0) {
-//			String returen = sports.get(0); 
-//			return returen; 
-//		}
-//		return "No sports for coach"; 
 	}
 
+	//Sets columns in a table of athletes. Firstname and number.
 	public void setColumnsInTable() {
 		this.ColumnName.setCellValueFactory(new PropertyValueFactory<Athlete, String>("firstName"));
 		this.ColumnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Athlete, String>("phoneNumber"));
 	}
-
+	
+	//For testing
 	@FXML
 	public void athletesButtonAction() {
 		System.out.println("We are in Athlete click");
@@ -100,25 +144,50 @@ public class CoachController {
 	}
 	
 	public void setUser(String username) {
+		System.out.println("-2-");
 		this.coachUsername = username;
 		this.currentSport = handleSport(this.coachUsername);
 		sportLabel.setText(this.currentSport);
 		observableAthletes.setAll(createAthleteObjectList());
 	}
 
-	private class athleteObject {
-		private final String fullName;
-		private final String phoneNumber;
-
-		public athleteObject(String fullName, String phoneNumber) {
-			this.fullName = fullName;
-			this.phoneNumber = phoneNumber;
-		}
-	}
-
+	//Fetches athletes who belong to the sport
 	public List<Athlete> createAthleteObjectList() {
 		return CoachModel.getAthletesForSport(this.currentSport);
 	}
+	
+	/*
+	 * class MyEventHandler implements EventHandler<MouseEvent> {
+ w
+        @Override
+        public void handle(MouseEvent t) {
+            TableCell c = (TableCell) t.getSource();
+            int index = c.getIndex();
+            System.out.println("id = " + recordList.get(index).getId());
+            System.out.println("name = " + recordList.get(index).getName());
+            System.out.println("lastName = " + recordList.get(index).getLastName());
+            System.out.println("email = " + recordList.get(index).getEmail());
+        }
+    }
+    
+    
+     Callback<TableColumn, TableCell> stringCellFactory =
+                new Callback<TableColumn, TableCell>() {
+            @Override
+            public TableCell call(TableColumn p) {
+                MyStringTableCell cell = new MyStringTableCell();
+                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
+                return cell;
+            }
+        };
+        
+        //      List<String> sports = CoachModel.getSportForCoach(coach);
+//      if (sports.size() > 0) {
+//          String returen = sports.get(0); 
+//          return returen; 
+//      }
+//      return "No sports for coach"; 
+	 */
 
 
 }

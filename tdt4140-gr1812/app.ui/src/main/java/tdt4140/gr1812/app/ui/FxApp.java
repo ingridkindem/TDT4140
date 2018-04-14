@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 import tdt4140.gr1812.app.ui.controllers.CoachController;
-import tdt4140.gr1812.app.ui.controllers.LoggedInController;
+import tdt4140.gr1812.app.ui.controllers.HomeScreenController;
 import tdt4140.gr1812.app.ui.controllers.LoginController;
 import tdt4140.gr1812.app.ui.controllers.SignupController;
 import tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController;
@@ -73,6 +73,17 @@ public class FxApp extends Application {
     		} 		
     }
     
+    public void goToHome() {
+        try {
+            replaceSceneContent("views/homeScreen/HomeScreen.fxml"); //path to homeScreen-view
+             HomeScreenController controller = this.fxmlLoader.getController();
+             controller.setApplication(this);
+            stage.show();
+        } catch(Exception e) {
+            Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
+        }           
+    }
+    
     public void goToLogin() {
     		try {
 			replaceSceneContent("views/login/login.fxml"); //path to login-view
@@ -104,7 +115,7 @@ public class FxApp extends Application {
 				System.out.println("The currentUser = null :/ ");
 			}
 			controller.setUser(this.currentUser);
-			controller.setApplication(this);
+			controller.setApplication(this); 
 			stage.show();
 		} catch(Exception e) {
 			Logger.getLogger(FxApp.class.getName()).log(Level.SEVERE, null, e);;
