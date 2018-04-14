@@ -2,6 +2,9 @@ package tdt4140.gr1812.app.ui.controllers;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -85,10 +88,14 @@ public class LoggedInControllerTest {
 		assertEquals("Sondag", controller.getDay(0));
 		assertEquals("Mandag", controller.getDay(1));
 	}
-	/*
+	
 	@Test
 	public void testGetDate() {
-		assertEquals(controller.getDate(0), "2018-04-13");
-	}*/
+		final Calendar cal = Calendar.getInstance();
+	    cal.add(Calendar.DATE, -0);
+	    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String date = dateFormat.format(cal.getTime());
+		assertEquals(controller.getDate(0), date);
+	}
 
 }

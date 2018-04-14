@@ -17,9 +17,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.dataClasses.Athlete;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
 import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
+import tdt4140.gr1812.app.core.models.loggedIn.LoggedInModel;
 import tdt4140.gr1812.app.ui.FxApp;
 
 public class CoachController {
@@ -43,9 +45,9 @@ public class CoachController {
 	@FXML
 	private Label sportLabel;
 	@FXML
-	private Button selectAthlete;
+	private Button selectAthlete, infoBut;
 	@FXML
-	private TextField infoText, infoText1;
+	private Text name;
 	
 	private String selectedAthlete;
 	private String currentSport; 
@@ -53,6 +55,7 @@ public class CoachController {
 
 	@FXML
 	public void initialize() {
+		this.name.setText(LoggedInModel.getName(this.coachUsername));
 		this.atCoachView = true;
 		this.athletesTable.setVisible(false);
 		this.selectAthlete.setVisible(false);
@@ -117,6 +120,16 @@ public class CoachController {
 		
 		update();
 		
+	}
+	
+	public void loggUt() {
+		this.atCoachView = false;
+		app.goToLogin();
+	}
+	
+	public void utforskUtover() {
+		this.atCoachView = false;
+		app.goToLoggedIn();
 	}
 
 	public void update() {
