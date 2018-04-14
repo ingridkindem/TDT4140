@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 import tdt4140.gr1812.app.ui.controllers.CoachController;
 import tdt4140.gr1812.app.ui.controllers.HomeScreenController;
+import tdt4140.gr1812.app.ui.controllers.LoggedInController;
 import tdt4140.gr1812.app.ui.controllers.LoginController;
 import tdt4140.gr1812.app.ui.controllers.SignupController;
 import tdt4140.gr1812.app.ui.controllers.WorkoutRegistrationController;
