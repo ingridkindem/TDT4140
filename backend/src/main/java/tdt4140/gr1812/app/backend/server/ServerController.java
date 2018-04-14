@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tdt4140.gr1812.app.backend.dataclasses.Athlete;
+import tdt4140.gr1812.app.backend.dataclasses.Workout;
+import tdt4140.gr1812.app.backend.helpers.Tuple;
+
 import java.lang.reflect.Array;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -16,9 +20,13 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RestController
+@RestController //Allows @RequestMapping
 
 public class ServerController {
+	
+	/* All endpoints work in ish the same way. See comments in signup() for common 
+	features. Only endpoint specific comments at other endpoints.
+	*/
 	
 	
 	// Maps to signup-endpoint
@@ -33,53 +41,52 @@ public class ServerController {
                         @RequestParam("gender") String gender,
                         @RequestParam("sport") String sport
                         ) {
-     String feedback = ""; //Variable letting user know outcome. Only success/failure implemented.
+     JSONObject feedback = new JSONObject(); //Object server returns 
    
 		try {
-        ServerLogic.signup(username, password, firstname, surname, maxpulse, weight, gender, sport);
-        feedback = new JSONObject()
-                  .put("status", "success").toString();
-		} catch (Exception e) { // Catches all outcomes that are not successful. Should be specified in more detail in later versions.
+			// ServerLogic handles queries to DB
+	        ServerLogic.signup(username, password, firstname, surname, maxpulse, weight, gender, sport); 
+	        feedback.put("status", "success");
+                  
+		} catch (Exception e) { // Catches all outcomes that are not successful.
 			try {
-				feedback = new JSONObject()
-				          .put("status", "failed").toString();
+				feedback.put("status", "failed");
+				          
 			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
-        return feedback;
+        return feedback.toString(); // What the server sends back to client
     }
 	
-    @RequestMapping("/login") //mapping to login endpoint
+    @RequestMapping("/login") 
     public String login(@RequestParam("username") String username,
     					   @RequestParam("password") String password) {
     		
-    	String feedback = ""; 
+    	JSONObject feedback = new JSONObject(); 
     		try{
-				Tuple<Boolean, Boolean> loginResult = ServerLogic.login(username, password);
-				if (loginResult.x) {
-					JSONObject responseObject = new JSONObject().put("status", "success");
-					responseObject.put("coach", loginResult.y.toString());
-					feedback = responseObject.toString();
+				Tuple<Boolean, Boolean> loginResult = ServerLogic.login(username, password); //Tuple-class defined in backend/.../helpers
+				
+				if (loginResult.x) { //loginresult.x = successful login true/false
+					feedback.put("status", "success");
+					feedback.put("coach", loginResult.y.toString()); //loginresult.y = user is coach true/false
+					
 				}
 				else {
-					feedback = new JSONObject()
-							.put("status", "failed").toString();
+					feedback.put("status", "failed").toString();
 				}
 
 			}catch (Exception e) {
     			e.printStackTrace();
 				try {
-					feedback = new JSONObject()
-					          .put("status", "failed").toString();
+					feedback.put("status", "failed").toString();
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
     		}
     		
-        return feedback;
+        return feedback.toString();
     }
     @RequestMapping("")
     public String index() {
@@ -87,8 +94,8 @@ public class ServerController {
     }
     
     
-    @RequestMapping("workoutRegistration")
-    public String workoutRegistration(@RequestParam("username") String username, //need this from model
+    @RequestMapping("/workoutRegistration")
+    public String workoutRegistration(@RequestParam("username") String username, 
     									 @RequestParam("duration") String duration,
     									 @RequestParam("pulses") String pulses,
     									 @RequestParam("goal") String goal,
@@ -96,37 +103,32 @@ public class ServerController {
     									 @RequestParam("sport") String sport,
     									 @RequestParam("privacy") String privacy) {
     	
-    	String feedback = "";
+    	JSONObject feedback = new JSONObject();
     	
     	try{
 			boolean workoutRegistrationResult = ServerLogic.registerWorkout(username, duration, pulses, goal, sport, privacy, extraField);
 			if (workoutRegistrationResult) {
-				JSONObject responseObject = new JSONObject().put("status", "success");  
-				feedback = responseObject.toString(); 
+				feedback.put("status", "success");  
+				
 			}
 			else {
-				feedback = new JSONObject()
-		                  .put("status", "failed").toString();
+				feedback.put("status", "failed").toString();
 			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 			try {
-				feedback = new JSONObject()
-				          .put("status", "failed").toString();
+				feedback.put("status", "failed").toString();
 			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
     	
-    	
-    	
-    	
-    	return feedback;
+    	return feedback.toString();
 
     }
-    @RequestMapping("athletesInSport")
+    
+    @RequestMapping("/athletesInSport")
     public String requestAthletesInSport(@RequestParam("sport") String sport) {
     	
     	JSONObject feedback = new JSONObject();
@@ -137,9 +139,9 @@ public class ServerController {
 			if (athletesInSport.size()<1) {
 				feedback.put("status", "failed");
 				feedback.put("message", "No athletes in sport");
-			}else if (athletesInSport.size()>=1) {
+			}else if (athletesInSport.size()>=1) { 
 				JSONArray jArray = new JSONArray();
-				for (Athlete athlete: athletesInSport){
+				for (Athlete athlete: athletesInSport){ //iteration through athletes objects
 						JSONObject athleteJson = new JSONObject();
 						athleteJson.put("firstname", athlete.firstname);
 						athleteJson.put("surname", athlete.surname);
@@ -161,40 +163,36 @@ public class ServerController {
 
 			}
 		}
-    	 return feedback.toString();
+    	 return feedback.toString(); //returning status and list of athletes as one continuous String
     }
    
     @RequestMapping("sportForCoach")
     public String requestSportForCoach(@RequestParam("username") String username) {
     	
-    	String feedback = "";
+    	JSONObject feedback = new JSONObject();
     	
     	try{
 			String getSportForCoachResult = ServerLogic.getSportForCoach(username);
 			if (getSportForCoachResult != "") {
 
-				JSONObject responseObject = new JSONObject().put("status", "success");
-				responseObject.put("sport", getSportForCoachResult);
-				feedback = responseObject.toString(); 
+				feedback.put("status", "success");
+				feedback.put("sport", getSportForCoachResult); 
 			}
 			else {
-				feedback = new JSONObject()
-		                  .put("status", "failed").toString();
+				feedback.put("status", "failed").toString();
 			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 			try {
-				feedback = new JSONObject()
-				          .put("status", "failed").toString();
+				feedback.put("status", "failed").toString();
 			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
     	
     	
-    	return feedback; 
+    	return feedback.toString(); 
 
     }
     
@@ -202,34 +200,28 @@ public class ServerController {
     @RequestMapping("/getName")
     public String requestNameForUser(@RequestParam("username") String username) {
         
-        String feedback = "";
+        JSONObject feedback = new JSONObject();
         
         try{
             String getNameForUserResult = ServerLogic.getNameForUser(username);
-            if (getNameForUserResult != "") {
-                JSONObject responseObject = new JSONObject().put("status", getNameForUserResult);  
-                feedback = responseObject.toString(); 
+            if (getNameForUserResult != "Couldn't find user") {
+                feedback.put("name", getNameForUserResult);  
+                feedback.put("status", "success"); 
             }
             else {
-                feedback = new JSONObject()
-                          .put("status", "failed").toString();
+                feedback.put("status", "failed").toString();
             }
             
         }catch (Exception e) {
             e.printStackTrace();
             try {
-                feedback = new JSONObject()
-                          .put("status", "failed").toString();
+                feedback.put("status", "failed").toString();
             } catch (JSONException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }
-        
-        
-        
-        
-        return feedback; 
+       
+        return feedback.toString(); 
 
     }
     
@@ -240,12 +232,11 @@ public class ServerController {
 
 		try{
 			ArrayList<Workout> workouts = ServerLogic.getLastWorkouts(username);
-			System.out.print("the return = "  + workouts.toString());
 			if (workouts.size()<1) {
 				feedback.put("status", "failed");
 				feedback.put("message", "No workouts for user");
 			}else if (workouts.size()>=1) {
-				JSONArray jArray = new JSONArray();
+				JSONArray jArray = new JSONArray(); //Array of JSONObject. One for each workout.
 				for (Workout workout: workouts){
 						JSONObject workoutJson = new JSONObject();
 						boolean privacy = workout.getPrivacy();
@@ -269,15 +260,13 @@ public class ServerController {
 			}
 			
 		}catch (Exception e) {
-    		try{
-    				e.printStackTrace();
+			try {
 				feedback.put("status", "failed");
-			}
-			catch (Exception es){
-
+			} catch (JSONException e1) {
+				
+				e1.printStackTrace();
 			}
 		}
-		System.out.println(feedback.toString());
     	 return feedback.toString();
     }
     
@@ -296,7 +285,8 @@ public class ServerController {
 				for (Date dato : pulsInformation.keySet()){
 						JSONObject pulsJson = new JSONObject();
 						pulsJson.put("Dato", dato);
-						pulsJson.put("pulses", pulsInformation.get(dato));	
+						//Retrieving pulses for given date (key)
+						pulsJson.put("pulses", pulsInformation.get(dato)); 
 						jArray.put(pulsJson);
 				}
 				feedback.put("status", "success");
@@ -315,8 +305,6 @@ public class ServerController {
 
 			}
 		}
-		System.out.println(feedback.toString());
-		
     	 return feedback.toString();
    
     }
