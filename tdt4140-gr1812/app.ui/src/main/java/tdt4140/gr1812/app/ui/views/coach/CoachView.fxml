@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,15 +12,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@css/coach_stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.CoachController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0">
          <image>
             <Image url="@trenerView1.jpg" />
          </image>
       </ImageView>
-      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="586.0" text="UTØVERE" textFill="WHITE" wrapText="true">
+      <MenuButton fx:id="athletesButton" layoutX="207.0" layoutY="240.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="586.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="UTØVERE" textFill="#fcf5f5" wrapText="true">
          <font>
             <Font name="Futura Medium" size="17.0" />
          </font>
@@ -37,9 +32,9 @@
             <Insets left="10.0" />
          </opaqueInsets>
       </MenuButton>
-      <TableView id="testid" fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0">
+      <TableView id="athletesTable" fx:id="athletesTable" layoutX="210.0" layoutY="287.0" prefHeight="194.0" prefWidth="575.0" style="-fx-background-radius: 15;">
          <columns>
-            <TableColumn id="kolonnenavn" fx:id="ColumnPhoneNumber" prefWidth="292.5146179199219" text="MOBILNUMMER" />
+            <TableColumn id="ColumnPhoneNumber" fx:id="ColumnPhoneNumber" prefWidth="292.5146179199219" text="MOBILNUMMER" />
             <TableColumn fx:id="ColumnName" prefWidth="261.4853820800781" text="NAVN" />
          </columns>
       </TableView>
@@ -47,20 +42,37 @@
          <font>
             <Font name="Futura Bold" size="24.0" />
          </font></Label>
-      <Button fx:id="selectAthlete" layoutX="723.0" layoutY="567.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="198.0" text="UTFORSK UTØVER" textFill="WHITE">
+      <Button fx:id="selectAthlete" layoutX="723.0" layoutY="567.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="198.0" style="-fx-background-radius: 11; -fx-background-color: #2B2D44;" text="UTFORSK UTØVER" textFill="WHITE">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font>
       </Button>
-      <TextField fx:id="infoText" layoutX="119.0" layoutY="563.0" prefHeight="44.0" prefWidth="386.0" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO">
+      <Button fx:id="infoBut" layoutX="94.0" layoutY="565.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="397.0" style="-fx-background-radius: 11; -fx-background-color: #70dbdb;" text="TRYKK PÅ UTØVERS MOBILNUMMER FOR MER INFO" textFill="WHITE">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font>
-      </TextField>
-      <TextField fx:id="infoText1" layoutX="99.0" layoutY="592.0" prefHeight="44.0" prefWidth="413.0" text="TRYKK PÅ UTØVERS NAVN FOR NAVIGERING MED PILTASTER">
+      </Button>
+      <ImageView fitHeight="55.0" fitWidth="184.0" layoutX="453.0" layoutY="39.0">
+         <image>
+            <Image url="@loggUt.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="511.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGG UT ">
          <font>
-            <Font name="Futura Bold" size="12.0" />
+            <Font name="Futura Medium" size="14.0" />
          </font>
-      </TextField>
+      </Text>
+      <ImageView fitHeight="40.0" fitWidth="154.0" layoutX="50.0" layoutY="60.0">
+         <image>
+            <Image url="@Blank.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="name" layoutX="38.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="174.21875">
+         <font>
+            <Font name="Futura Medium" size="22.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="466.0" layoutY="51.0" onAction="#loggUt" prefHeight="32.0" prefWidth="154.0" />
+      <Hyperlink layoutX="723.0" layoutY="565.0" onAction="#utforskUtover" prefHeight="46.0" prefWidth="198.0" />
    </children>
 </AnchorPane>
