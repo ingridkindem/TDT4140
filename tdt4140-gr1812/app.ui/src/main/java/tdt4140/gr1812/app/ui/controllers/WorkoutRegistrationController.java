@@ -106,7 +106,7 @@ public class WorkoutRegistrationController {
 		}
 		boolean action = model.WorkoutRegistrationModelInit(currentUser, p, eF, lengde, s, m, c); //WorkoutRegistrationModelInit() returns true if a register is handled
 		if (action) {
-			app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+			app.goToLoggedIn(); 
 			return true;
 		}
 		else {
@@ -128,7 +128,7 @@ public class WorkoutRegistrationController {
 	//method to handle exit from site
 	@FXML
 	public void handleKryssUt() {
-		app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+		app.goToLoggedIn(); 
 	}
 	
 	//method to communicate with the FxApp 

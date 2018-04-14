@@ -14,4 +14,8 @@ public class Sport {
         return this.sportsName;
     }
     
+    public String toString() {
+    	return this.sportsName;
+    }
+
 }
