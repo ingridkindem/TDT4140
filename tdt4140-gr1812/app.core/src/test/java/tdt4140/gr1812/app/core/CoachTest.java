@@ -12,7 +12,6 @@ import tdt4140.gr1812.app.core.dataClasses.Sport;
 public class CoachTest {
     
     private Coach coach;
-    
     private Sport sport;
     
     @Before
