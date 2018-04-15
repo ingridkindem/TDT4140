@@ -10,7 +10,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -303,6 +308,119 @@ public class ServerLogic { // class mainly for handling connection to mySQL
        return workouts;
         }
        
+public static Map <Date, List<Integer>> getGraphInformation(String username) {
+    	   
+           MysqlDataSource dataSource = new MysqlDataSource();
+	       dataSource.setUser(Config.dbUser);
+	       dataSource.setPassword(Config.dbPass);
+	       dataSource.setServerName(Config.dbHost);
+	       dataSource.setPort(Config.dbPort);
+	       dataSource.setDatabaseName(Config.dbName);
+
+	   Calendar date = Calendar.getInstance();
+	   date.add(Calendar.DATE, -7);
+	   Date dato = new Date(date.getTime().getTime());
+       String sql = "select pulses, date, duration from workouts where username = ? and date >= ? order by date asc";
+       String sqlMaxpuls = "select maxpuls from users where username = ?";
+       
+
+       Connection conn = null;
+       ResultSet resultSet = null; 
+       ResultSet resultMaxpuls = null;// needed for reading output from database
+       Map <Date, List<Integer>> trening = new HashMap <Date, List<Integer>>();
+       Map <Date, List<Integer>> dateandintesity = new HashMap <Date, List<Integer>>();
+       int Maxpuls;
+       try {
+          	 conn = dataSource.getConnection();
+               PreparedStatement ps = conn.prepareStatement(sql);
+               ps.setString(1,  username);
+               ps.setDate(2, dato);
+               resultSet = ps.executeQuery();
+               PreparedStatement mp = conn.prepareStatement(sqlMaxpuls);
+               mp.setString(1, username);
+               resultMaxpuls = mp.executeQuery();
+               resultMaxpuls.next();
+               Maxpuls = resultMaxpuls.getInt(1);
+               
+               while (resultSet.next()) {
+            	   		String puls = resultSet.getString(1);
+            	   		List<Integer> pulses = Stream.of(puls.split(","))
+                           .map(Integer::parseInt)
+                           .collect(Collectors.toList());
+            	   		Date workoutDate = resultSet.getDate(2);
+            	   		if (trening.containsKey(workoutDate)) {
+            	   			trening.get(workoutDate).addAll(pulses);
+            	   			
+            	   		} else {
+            	   			trening.put(workoutDate, pulses);
+            	   			
+            	   		}
+               }
+       }catch (SQLException e) {
+      	 	throw new RuntimeException(e);
+       } finally {
+      	 	if (conn!=null) {
+      	 		try {
+      	 			conn.close();
+      	 		}catch (SQLException e) {
+      	 		}
+      	 	}
+       }
+
+	   	int s1 = (int) (Maxpuls*0.72);
+	   	int s2 = (int) (Maxpuls*0.82);
+	   	int s3 = (int) (Maxpuls*0.87);
+	   	int s4 = (int) (Maxpuls*0.92);
+	   	
+	   	List<Integer> numberofpulses = new ArrayList<Integer>(Collections.nCopies(5, 0));
+	   	//System.out.println(trening.keySet().toString());
+	   	for (Date datoMongo : trening.keySet()) {
+	   		int length = trening.get(datoMongo).size();
+	   		
+	   		for (int mong : trening.get(datoMongo)) {
+	   			if (mong<s1) {
+	   				int temp = numberofpulses.get(0);
+	   				temp += 1;
+	   				numberofpulses.set(0, temp);
+	   			} else if (mong<s2) {
+	   				int temp = numberofpulses.get(1);
+	   				temp += 1;
+	   				numberofpulses.set(1, temp);
+	   			} else if (mong<s3) {
+	   				int temp = numberofpulses.get(2);
+	   				temp += 1;
+	   				numberofpulses.set(2, temp);
+	   			} else if (mong<s4) {
+	   				int temp = numberofpulses.get(3);
+	   				temp += 1;
+	   				numberofpulses.set(3, temp);
+	   			} else {
+	   				int temp = numberofpulses.get(4);
+	   				temp += 1;
+	   				numberofpulses.set(4, temp);
+	   			}
+	   			
+	   		}
+	   		//System.out.println(numberofpulses.toString());
+	   		double p1 = (double) numberofpulses.get(0)/(double) length;
+	   		double p2 = (double) numberofpulses.get(1)/(double) length;
+	   		double p3 = (double) numberofpulses.get(2)/(double) length;
+	   		double p4 = (double) numberofpulses.get(3)/(double) length;
+	   		double p5 = (double) numberofpulses.get(4)/(double) length;
+  			
+  			//System.out.println(numberofpulses.toString());
+   	   	List<Double> precentageinsone = Arrays.asList(p1, p2, p3, p4, p5);
+   	   	//System.out.println(datoMongo.toGMTString());
+   	   	dateandintesity.put(datoMongo, numberofpulses);
+	   	}      
+	    System.out.println(dateandintesity.toString());
+	       return dateandintesity;
+	        
+       
+  }
+
+      
+       
        
        public static String getSportForCoach(String username) {
    			
@@ -347,11 +465,11 @@ public class ServerLogic { // class mainly for handling connection to mySQL
 public static String getNameForUser(String username) {
            
           MysqlDataSource dataSource = new MysqlDataSource();
-          dataSource.setUser("root");
-          dataSource.setPassword("cygnus6cygnus");
-          dataSource.setServerName("localhost");
-          dataSource.setPort(3306);
-          dataSource.setDatabaseName("PU");
+          dataSource.setUser(Config.dbUser);
+          dataSource.setPassword(Config.dbPass);
+          dataSource.setServerName(Config.dbHost);
+          dataSource.setPort(Config.dbPort);
+          dataSource.setDatabaseName(Config.dbName);
           
           String sql = "select firstname, surname from users where username = ?";
           
@@ -389,7 +507,7 @@ public static String getNameForUser(String username) {
           
    return feedback;
  } 
-       
+
        
 }
 

@@ -251,6 +251,30 @@ public class ServerTest{
 				.andExpect(content().string(containsString("failed")));
 		
 }
+    @Test
+    public void TestGraphInformation() throws Exception{
+    	
+		String username = "12345678";
+		
+		
+		mvc.perform(MockMvcRequestBuilders.get("/graph")
+				.param("username", username))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("success")));
+		
+}
+    @Test
+    public void TestFailedGraphInformation() throws Exception{
+    	
+		String username = "00000";
+		
+		
+		mvc.perform(MockMvcRequestBuilders.get("/graph")
+				.param("username", username))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("failed")));
+		
+}
     
     	public String deleteUserFromDB(String username) {
     		

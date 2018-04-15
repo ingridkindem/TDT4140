@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Array;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -279,5 +281,45 @@ public class ServerController {
     	 return feedback.toString();
     }
     
+    @RequestMapping("/graph")
+    public String getGraphInformation(@RequestParam ("username") String username) {
+    	JSONObject feedback = new JSONObject();
+
+		try{
+			Map <Date, List<Integer>> pulsInformation = ServerLogic.getGraphInformation(username);
+			
+			if (pulsInformation.keySet().size()<1) {
+				feedback.put("status", "failed");
+				feedback.put("message", "No pulses for user");
+			}else if (pulsInformation.keySet().size()>=1) {
+				JSONArray jArray = new JSONArray();
+				for (Date dato : pulsInformation.keySet()){
+						JSONObject pulsJson = new JSONObject();
+						pulsJson.put("Dato", dato);
+						pulsJson.put("pulses", pulsInformation.get(dato));	
+						jArray.put(pulsJson);
+				}
+				feedback.put("status", "success");
+				feedback.put("workouts", jArray);
+			}
+			else {
+				feedback.put("status", "failed");
+			}
+			
+		}catch (Exception e) {
+    		try{
+    				e.printStackTrace();
+				feedback.put("status", "failed");
+			}
+			catch (Exception es){
+
+			}
+		}
+		System.out.println(feedback.toString());
+		
+    	 return feedback.toString();
+   
+    }
+   
     
 }
