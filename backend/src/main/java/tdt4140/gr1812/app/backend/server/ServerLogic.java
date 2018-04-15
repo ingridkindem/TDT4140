@@ -485,7 +485,6 @@ public class ServerLogic {
          try {
 	            	 conn = dataSource.getConnection();
 	                 PreparedStatement ps = conn.prepareStatement(sql);
-
 	                 ps.setInt(1,  Integer.parseInt(username));
 	                 ps.execute();
 	                 ps.close();
@@ -505,7 +504,7 @@ public class ServerLogic {
          }
 		return feedback;
          
-
+  
 }
 	
 	public static String deleteWorkoutFromDB(String username) {
