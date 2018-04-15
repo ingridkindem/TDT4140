@@ -59,7 +59,7 @@ public class LoggedInController {
 	@FXML
 	SubScene chartScene;
 	
-	public void registrerOkt() { // Registrer Økt hyperlink pressed
+	public void registrerOkt() { // Registrer ookt hyperlink pressed
 		this.atLoggedInView = false;
 		this.app.goToWorkoutRegistration();
 	}
