@@ -14,7 +14,9 @@ import static org.hamcrest.Matchers.containsString;
 
 import org.json.JSONObject;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,23 +42,27 @@ import tdt4140.gr1812.app.backend.server.ServerLogic;
 
 public class BackendTests {
 
-	private String usernameTest = "12233445"; 
-	private String passwordTest = "12233445";
+	private static String usernameTest = "12233445"; 
+	private static String passwordTest = "12233445";
 
 	@Autowired 
 	private MockMvc mvc; // object for creating mock-requests to server
 
-	@Before //runs before each @Test
-	public void Before() {
-		ServerLogic.signup(this.usernameTest, this.passwordTest, "test", "user", "200", "80", "male", "Fotball");
-
+	@BeforeClass //runs tests 
+	public static void Before() {
+		try {
+		ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
+		ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
+		} catch (Exception e) {
+			System.out.println("Error in @BeforeClass");
+		}
 	}
 
-	@After //runs after each @Test
-	public void After() {
-		ServerLogic.deleteUserFromDB("99765432"); //has to be deleted for TestSignup to pass more than once
+	@AfterClass //runs after tests
+	public static void After() {
+		
 		ServerLogic.deleteWorkoutFromDB("99765432"); // to avoid entries in db from testing
-		ServerLogic.deleteUserFromDB(this.usernameTest);// deleting test user after tests
+		ServerLogic.deleteUserFromDB(BackendTests.usernameTest);// deleting test user after tests
 	}
 	
 	@Test
@@ -78,7 +84,7 @@ public class BackendTests {
 
 	@Test
 	public void TestFailedSignUp() throws Exception {
-		String username = this.usernameTest;
+		String username = BackendTests.usernameTest;
 		String password = "98765432";
 		String firstname = "hakon";
 		String surname = "collett";
@@ -97,8 +103,8 @@ public class BackendTests {
 	@Test
 	public void TestLogin() throws Exception {
 
-		String username = this.usernameTest;
-		String password = this.passwordTest;
+		String username = BackendTests.usernameTest;
+		String password = BackendTests.passwordTest;
 
 		mvc.perform(MockMvcRequestBuilders.get("/login").param("username", username).param("password", password))
 				.andExpect(status().isOk())
@@ -110,7 +116,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedLogin() throws Exception {
 
-		String username = this.usernameTest;
+		String username = BackendTests.usernameTest;
 		String password = "12345678";
 
 		mvc.perform(MockMvcRequestBuilders.get("/login").param("username", username).param("password", password))
@@ -131,7 +137,7 @@ public class BackendTests {
 	@Test
 	public void TestWorkoutRegistration() throws Exception {
 
-		String username = this.usernameTest;
+		String username = BackendTests.usernameTest;
 		String duration = "100";
 		String pulses = "100,200,100";
 		String goal = "Stronger";
@@ -148,7 +154,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedWorkoutRegistration() throws Exception {
 
-		String username = this.usernameTest;
+		String username = BackendTests.usernameTest;
 		String duration = "hei"; // this is the error
 		String pulses = "100,200,100";
 		String goal = "Stronger";
@@ -242,7 +248,7 @@ public class BackendTests {
 	@Test
 	public void TestGetName() throws Exception {
 
-		String username = this.usernameTest;
+		String username = BackendTests.usernameTest;
 
 		mvc.perform(MockMvcRequestBuilders.get("/getName").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("success")));
