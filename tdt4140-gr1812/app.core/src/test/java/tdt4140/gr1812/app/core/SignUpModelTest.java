@@ -8,6 +8,7 @@ import org.junit.Test;
 import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.models.signup.SignUpModel;
 
+
 public class SignUpModelTest {
 	
 	SignUpModel model = new SignUpModel();
