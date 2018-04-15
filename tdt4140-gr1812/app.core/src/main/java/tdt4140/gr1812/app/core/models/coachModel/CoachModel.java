@@ -87,6 +87,9 @@ public class CoachModel {
                 JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
                 if (response.get("status").equals("success")) {
    
+                    
+                		//Creates a JSONArray who runs through all the athletes
+
                     JSONArray objectArray = response.getJSONArray("athletes");
                     for (int i = 0; i < objectArray.length(); i++) {
                         JSONObject obj = objectArray.getJSONObject(i); 
