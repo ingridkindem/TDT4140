@@ -40,7 +40,7 @@ import tdt4140.gr1812.app.backend.server.ServerLogic;
 
 public class BackendTests {
 
-	private String usernameTest = "12233445";
+	private String usernameTest = "12233445"; 
 	private String passwordTest = "12233445";
 
 	@Autowired 
@@ -49,6 +49,7 @@ public class BackendTests {
 	@Before //runs before each @Test
 	public void Before() {
 		ServerLogic.signup(this.usernameTest, this.passwordTest, "test", "user", "200", "80", "male", "Fotball");
+
 	}
 
 	@After //runs after each @Test
@@ -191,7 +192,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedRequestSportForCoach() throws Exception {
 
-		String username = "000000"; // this is the error
+		String username = "743216"; // this is the error
 
 		mvc.perform(MockMvcRequestBuilders.get("/sportForCoach").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("coach")));
@@ -211,7 +212,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedLastWorkouts() throws Exception {
 
-		String username = "000000"; // this is the error
+		String username = "743216"; // this is the error
 
 		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
@@ -231,7 +232,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedGraphInformation() throws Exception {
 
-		String username = "00000"; // This is the error
+		String username = "743216"; // This is the error
 
 		mvc.perform(MockMvcRequestBuilders.get("/graph").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
@@ -251,7 +252,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedGetName() throws Exception {
 
-		String username = "000000"; // this is the error
+		String username = "743216"; // this is the error
 
 		mvc.perform(MockMvcRequestBuilders.get("/getName").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
