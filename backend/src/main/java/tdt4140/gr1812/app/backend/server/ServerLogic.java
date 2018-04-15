@@ -485,26 +485,73 @@ public class ServerLogic {
          try {
 	            	 conn = dataSource.getConnection();
 	                 PreparedStatement ps = conn.prepareStatement(sql);
-	                 ps.setInt(1,  Integer.parseInt(username));
-	                 ps.execute();
-	                 ps.close();
-	                 feedback = "success";
-	                 
-         }catch (SQLException e) {
-        	 	feedback = "failure";
-        	 	throw new RuntimeException(e);
-         } finally {
-        	 	if (conn!=null) {
-        	 		try {
-        	 			conn.close();
-        	 		}catch (SQLException e) {
-        	 			
-        	 		}
-        	 	}
-         }
-		return feedback;
-         
-  
+	                 ps.setString(1,  username);
+	                 resultSet = ps.executeQuery();
+	                 if (resultSet.next() ) { //seeing if query returns empty table of data	    
+	                	    feedback = resultSet.getString(1);
+	                	} 
+	                 else {
+	                	 feedback = "Not a registered coach";
+	                 }
+            }catch (SQLException e) {            	 
+           	 	throw new RuntimeException(e);
+            } finally {
+           	 	if (conn!=null) {
+           	 		try {
+           	 			conn.close();
+           	 		}catch (SQLException e) {
+           	 		}
+           	 	}
+            }
+            
+     return feedback;
+   }       
+       
+public static String getNameForUser(String username) {
+           
+          MysqlDataSource dataSource = new MysqlDataSource();
+          dataSource.setUser(Config.dbUser);
+          dataSource.setPassword(Config.dbPass);
+          dataSource.setServerName(Config.dbHost);
+          dataSource.setPort(Config.dbPort);
+          dataSource.setDatabaseName(Config.dbName);
+          
+          String sql = "select firstname, surname from users where username = ?";
+          
+          Connection conn = null;
+          ResultSet resultSet = null; // needed for reading output from database
+          String feedback = "";
+          
+          try {
+                   conn = dataSource.getConnection();
+                   PreparedStatement ps = conn.prepareStatement(sql);
+                   ps.setString(1,  username);
+                   resultSet = ps.executeQuery();
+                   if (resultSet.next() ) { //seeing if query returns empty table of data  
+ 
+                          feedback = resultSet.getString(1);
+                          feedback += " ";
+                          feedback+= resultSet.getString(2);
+                          
+                      } 
+                   else {
+                       feedback = "Couldnt find user";
+                   }
+          }catch (SQLException e) {                
+              throw new RuntimeException(e);
+          } finally {
+              if (conn!=null) {
+                  try {
+                      conn.close();
+                  }catch (SQLException e) {
+                  }
+              }
+          }
+          
+   return feedback;
+ } 
+
+       
 }
 	
 	public static String deleteWorkoutFromDB(String username) {

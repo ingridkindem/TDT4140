@@ -8,50 +8,93 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.models.signup.SignUpModel;
+import tdt4140.gr1812.app.core.models.workoutRegistration.WorkoutRegistrationModel;
 import tdt4140.gr1812.app.ui.FxApp;
-
-
 
 public class SignupController {
     @FXML
-    private TextField mobilnummer ;
+    TextField mobilnummer ;
+    @FXML
+    Button registerButton;
+    @FXML
+    TextField fornavn; 
+    @FXML
+    TextField etternavn;
+    @FXML
+    PasswordField passord;
+    @FXML
+    TextField makspuls;
+    @FXML
+    TextField vekt;
+    @FXML
+    ToggleButton kvinneToggle;
+    @FXML
+    ToggleButton manToggle;
+    @FXML
+	MenuButton idretter;
+	@FXML
+	RadioMenuItem basket;
+	@FXML
+	RadioMenuItem langrenn;
+	@FXML
+	RadioMenuItem fotball;
+	@FXML
+	Text feedback;
+		
+	private String selectedSport = "";
+	
+	
+	SignUpModel model = new SignUpModel();
+	
+	FxApp app;
     
     @FXML
-    private Button registerButton;
-    
+	public void initialize() {
+		idretter.setText(setField());
+	}
+	
+  //updates the feedback text in the FXMLfile
+  	@FXML
+  	public void update() {
+  		feedback.setText(model.getText());
+  	}
+  	
     @FXML
-    private TextField fornavn; 
-    
-    @FXML
-    private TextField etternavn;
-    
-    @FXML
-    private TextField passord;
-    
-    @FXML
-    private TextField makspuls;
-    
-    @FXML
-    private TextField vekt;
-    
-    @FXML
-    private MenuButton idretter;
-    
-    @FXML
-    private ToggleButton kvinneToggle;
-
-    @FXML
-    private ToggleButton manToggle;
+	public String setField() {
+		boolean b = basket.isSelected();
+		boolean f = fotball.isSelected();
+		boolean l = langrenn.isSelected();
+		
+		String bas = basket.getText();
+		String lang = langrenn.getText();
+		String fot = fotball.getText();
+		
+		if (b) {
+			selectedSport = "basket";
+			return bas;
+		}
+		if (f) {
+			selectedSport = "fotball";
+			return fot;
+		}if (l) {
+			selectedSport = "langrenn";
+			return lang;
+		}
+		return "Idrett";
+    }
+		
     
     @FXML
     private void registerButtonClicked(ActionEvent event) {
         // Button was clicked, do something...
-        SignUpModel model = new SignUpModel();
-
         
         Gender gender;
         if (manToggle.isSelected()){
@@ -65,23 +108,20 @@ public class SignupController {
                 selectedSport, fornavn.getText(), etternavn.getText(), Integer.parseInt(makspuls.getText()), Integer.parseInt(vekt.getText()), gender);
         
         if(registerSuccess) {
-        		app.setCurrentUser(mobilnummer.getText());
-            app.goToLoggedIn();
+        	app.setCurrentUser(mobilnummer.getText());
+            app.goToWorkoutRegistration(); //will eventually go to athlete-profile
         }
         else {
-            System.out.println("No success in register :,( ");
+           update();
+           System.out.println("No success in register :,( ");  
         }
     }
-    
-    private String selectedSport = "Basket";
-    private FxApp app; 
-    
-    
+           
     public void setApplication(FxApp app) {
         this.app = app; 
     }
     
-    public void initialize() {
+    public void init() {
         // do initialization and configuration work...
         Iterator<MenuItem> it = idretter.getItems().iterator(); 
         while (it.hasNext()){

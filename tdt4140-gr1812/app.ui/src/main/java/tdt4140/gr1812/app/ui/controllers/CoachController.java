@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tdt4140.gr1812.app.core.dataClasses.Athlete;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
@@ -42,7 +43,9 @@ public class CoachController {
 	@FXML
 	private Label sportLabel;
 	@FXML
-	private Button selectAthlete, infoBut;
+	private Button selectAthlete;
+	@FXML
+	private TextField infoText, infoText1;
 	
 	private String selectedAthlete;
 	private String currentSport; 
@@ -89,18 +92,20 @@ public class CoachController {
 		           String nummer = (String) val;
 		           if (nummer.matches("[0-9]+")) {
 		               
-		              
-		        	   	   //Choses a selected athlete
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
 		               		               
 		               //Sets visibility on button and table
+
+
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
 		               System.out.print("current sport = " + currentSport);
 		               
+
 		               //Sets the text of the button to a person
+
 		               athletesButton.setText(CoachModel.getAthletesFullName(nummer, currentSport) + "   Mob: " + selectedAthlete);
 		               
 		           }

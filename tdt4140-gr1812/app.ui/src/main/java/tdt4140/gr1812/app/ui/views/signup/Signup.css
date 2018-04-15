@@ -1,0 +1,55 @@
+/*sets the color for the idrett-menu */
+#idretter.menu-item .label {
+    -fx-text-fill: #70dbdb;
+   
+}
+
+#idretter.menu-item:focused {
+     -fx-background-color: black;
+}
+
+/*sets the color of the sport-text when sport is focused */
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
+/*sets the color of the background when sport is focused */
+.menu-item:focused {
+	-fx-background-color: #70dbdb;
+}
+
+/*sets font, size, radius and width for the sport-fields */
+#fotball {
+	-fx-font: 17px Futura;
+	-fx-background-size:8.0cm; 
+	-fx-background-radius: 1.0cm; 
+	-fx-pref-width: 9.8cm; /*makes the menu items the same length as the menu */
+}
+
+#basket {
+	-fx-font: 17px Futura;
+	-fx-background-size:8.0cm; 
+	-fx-background-radius: 1.0cm;
+}
+
+#langrenn {
+	-fx-font: 17px Futura;
+	-fx-background-size:8.0cm; 
+	-fx-background-radius: 1.0cm;
+}
+
+/*sets the font for the "idrett"-field */
+#idretter {
+	-fx-font: 25px Futura;
+}
+
+
+
+
+/*sets the background color and border on the drop down menu */
+.context-menu {
+    -fx-background-color:  #a9e9e9;
+    -fx-border-color: gray;
+}
+
+

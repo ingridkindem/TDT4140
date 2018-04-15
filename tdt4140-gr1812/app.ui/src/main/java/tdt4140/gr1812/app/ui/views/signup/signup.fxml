@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@Signup.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@signupViewBackground.jpg" />
+            <Image url="@signup.jpg" />
          </image>
       </ImageView>
-      <TextField id="mobilnummer" fx:id="mobilnummer" layoutX="121.0" layoutY="229.0" prefHeight="46.0" prefWidth="373.0" promptText="MOBILNUMMER">
+      <TextField id="mobilnummer" fx:id="mobilnummer" layoutX="102.0" layoutY="228.0" prefHeight="48.0" prefWidth="381.0" promptText="MOBILNUMMER">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="fornavn" fx:id="fornavn" layoutX="121.0" layoutY="305.0" prefHeight="46.0" prefWidth="373.0" promptText="FORNAVN">
+      <TextField id="fornavn" fx:id="fornavn" layoutX="102.0" layoutY="302.0" prefHeight="48.0" prefWidth="381.0" promptText="FORNAVN">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="etternavn" fx:id="etternavn" layoutX="120.0" layoutY="384.0" prefHeight="46.0" prefWidth="373.0" promptText="ETTERNAVN">
+      <TextField id="etternavn" fx:id="etternavn" layoutX="102.0" layoutY="382.0" prefHeight="48.0" prefWidth="381.0" promptText="ETTERNAVN">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="makspuls" fx:id="makspuls" layoutX="509.0" layoutY="384.0" prefHeight="46.0" prefWidth="373.0" promptText="MAKSPULS">
+      <TextField id="makspuls" fx:id="makspuls" layoutX="501.0" layoutY="382.0" prefHeight="48.0" prefWidth="381.0" promptText="MAKSPULS">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField id="vekt" fx:id="vekt" layoutX="510.0" layoutY="460.0" prefHeight="46.0" prefWidth="373.0" promptText="VEKT (KG)">
+      <TextField id="vekt" fx:id="vekt" layoutX="501.0" layoutY="457.0" prefHeight="48.0" prefWidth="381.0" promptText="VEKT (KG)">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
       <Hyperlink id="registerButton2" layoutX="390.0" layoutY="541.0" onAction="#registerButtonClicked" prefHeight="43.0" prefWidth="226.0" />
-      <MenuButton id="idretter" fx:id="idretter" layoutX="509.0" layoutY="229.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="350.0" style="-fx-background-color: TRANSPARENT">
+      <MenuButton fx:id="idretter" cache="true" layoutX="501.0" layoutY="227.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="381.0" style="-fx-background-color: #70dbdb;" textFill="WHITE">
         <items>
-          <MenuItem mnemonicParsing="false" text="Langrenn" />
-          <MenuItem mnemonicParsing="false" text="Fotball" />
-            <MenuItem mnemonicParsing="false" text="Basket" />
+            <RadioMenuItem fx:id="langrenn" mnemonicParsing="false" onAction="#initialize" text="Langrenn" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <RadioMenuItem fx:id="fotball" mnemonicParsing="false" onAction="#initialize" text="Fotball" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <RadioMenuItem fx:id="basket" mnemonicParsing="false" onAction="#initialize" text="Basket" />
         </items>
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor>
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
       </MenuButton>
-      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="453.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN" />
-      <ToggleButton id="kvinneToggle" layoutX="308.0" layoutY="454.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" />
-      <TextField id="passord" fx:id="passord" layoutX="509.0" layoutY="309.0" prefHeight="46.0" prefWidth="373.0" promptText="PASSORD">
+      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN" />
+      <ToggleButton id="kvinneToggle" fx:id="kvinneToggle" layoutX="310.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" />
+      <Text fx:id="feedback" fill="#ff0303" layoutX="104.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <PasswordField fx:id="passord" layoutX="498.0" layoutY="302.0" prefHeight="48.0" prefWidth="381.0" promptText="PASSORD">
          <font>
             <Font size="18.0" />
          </font>
-      </TextField>
+      </PasswordField>
    
    </children>
 </AnchorPane>
