@@ -1,6 +1,6 @@
 # Work out application for Lier IL
 
-**Version 1.1.0**
+**Version 1.1.1**
 
 We shall develop a program for Lier IL, which collects data about the work outs, 
 to the athletes in this team. The collected data is shown in a way that both the athlete
@@ -12,7 +12,7 @@ should be visible for the coach.
 
 ## Motivation
 
-In the subject TDT4180 at NTNU we will work together as a team to create an application. We could choose what kind of 
+In the subject TDT4140 at NTNU we will work together as a team to create an application. We could choose what kind of 
 application we wanted to make, and our team agreed upon making a workout-application for Lier IL. 
 We are working with Scrum in our team, and the main motivation is to make a working application together. 
 
@@ -36,25 +36,6 @@ All our issues are hashtagged with a specific number, e.g #14, #16. These number
 
 When an issue is completed we make a merge request into the develop branch with a message containing the steps taken to complete the issue. After the merge request is made, it is the test managers responsibility to merge the current branch into the develop branch. After the merging is completed, we can close the issue.
 
-### Internal guidelines for GitLab
-
-1. All communication on gitblab should be in English. E. g. commit messages, comments on issues, this readme and so on. If you are in doubt - go English.
-
-2. Every issue related to the project should be solved in a branch named "NameOfISsue"+"#"+"issue number". Notice the camel case in issue name. E. g. your issue is login controller, and your issue number is 23. Your branch name should the be LoginController#23.
-
-3. !!The master branch is sacred and is not to be trifled with!! 
-
-4. We will have two main branches; master and develop. When branching out for your issues, make sure your current branch is develop. Before branching use "git pull" in terminal or pull directly in eclipse, to make sure you have the must updated version of our project.
-
-5. When commiting to your branch, make sure your commit message is descriptive enough for the other group members to understand what you have done, and to some extent how you have done it.
-
-6. When you have completed your commits and feel ready to close the issue. Create a pull request to develop branch. 
-
-7. Each group member is responsible for updating their own issues. When you start working on your issue, move it from to-do to doing. Leave a comment and close the issue when you finish.
-
-8. Avoid acronyms and initialism. Even though your shortening might seem obivious to you, that is not necessarliy the case for the rest of the group.
-
-
 --- 
 
 ## Code style
@@ -70,10 +51,27 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 * [TestFx](https://github.com/TestFX/TestFX)
 * [JSON](https://github.com/stleary/JSON-java)
 * [Spring](https://spring.io/)
+* [EclEmma](https://www.eclemma.org/)
 
 ### Built with
 
 * [Maven](https://maven.apache.org/)
+
+---
+
+## EclEmma
+
+We have used EclEmma to get information about over code covarege. Our goal was to keep the covarege abouve 70 %. 
+
+
+
+
+---
+## Continous Integration
+
+"*build passing*" indicates that the project's tests all pass as expected.
+
+[![Build Status](https://travis-ci.org/{tdt4140-2018}/{12}.png?branch=master)](https://travis-ci.org/{tdt4140-2018}/{12})
 
 --- 
 ## API refrences
@@ -153,6 +151,11 @@ Here is an example of how we test the code above.
 		Sport tester = new Sport("Basket"); 
 		assertEquals("Basket", tester.getSport());
 	}
+
+
+---
+
+## Installation
 
 
 ---
