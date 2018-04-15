@@ -98,6 +98,7 @@ public class CoachController {
 		               System.out.println(selectedAthlete);
 		               		               
 		               //Sets visibility on button and table
+
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
