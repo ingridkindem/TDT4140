@@ -365,9 +365,7 @@ public static String getNameForUser(String username) {
                    ps.setString(1,  username);
                    resultSet = ps.executeQuery();
                    if (resultSet.next() ) { //seeing if query returns empty table of data  
-                      
-                           //Bruker firstname og surname her ettersom at det så ut som de ikke var rad 1 og 2 i databasen
-                           //Er dette riktig? 
+ 
                           feedback = resultSet.getString(1);
                           feedback += " ";
                           feedback+= resultSet.getString(2);

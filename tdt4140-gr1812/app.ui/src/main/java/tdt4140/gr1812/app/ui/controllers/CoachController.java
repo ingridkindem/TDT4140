@@ -92,18 +92,14 @@ public class CoachController {
 		           String nummer = (String) val;
 		           if (nummer.matches("[0-9]+")) {
 		               
-		              
-		        	   	   //Choses a selected athlete
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
-		               		               
-		               //Sets visibility on button and table
+		               
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
 		               System.out.print("current sport = " + currentSport);
 		               
-		               //Sets the text of the button to a person
 		               athletesButton.setText(CoachModel.getAthletesFullName(nummer, currentSport) + "   Mob: " + selectedAthlete);
 		               
 		           }
