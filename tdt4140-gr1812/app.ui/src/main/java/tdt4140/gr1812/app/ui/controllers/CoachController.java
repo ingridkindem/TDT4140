@@ -97,11 +97,15 @@ public class CoachController {
 		               		               
 		               //Sets visibility on button and table
 
+
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
 		               System.out.print("current sport = " + currentSport);
 		               
+
+		               //Sets the text of the button to a person
+
 		               athletesButton.setText(CoachModel.getAthletesFullName(nummer, currentSport) + "   Mob: " + selectedAthlete);
 		               
 		           }

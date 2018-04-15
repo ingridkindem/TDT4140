@@ -31,6 +31,7 @@ public class FxApp extends Application {
     		this.stage = stage;
         goToLoggedIn();
    }
+
     
     public void setCurrentUser(String user) {
     		this.currentUser = user; 
