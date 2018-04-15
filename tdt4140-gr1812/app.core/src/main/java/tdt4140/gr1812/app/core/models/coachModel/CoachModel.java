@@ -85,17 +85,14 @@ public class CoachModel {
         requestParam.put("sport", sport);
         
         
-        try {
-                //Hva er relasjonen mellom username og person? Er det riktig at det skal stå username der? 
+        try { 
                 JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
                 if (response.get("status").equals("success")) {
    
-                    //Oppretter JSONArray som kjører gjennom alle atletene.
                     JSONArray objectArray = response.getJSONArray("athletes");
                     for (int i = 0; i < objectArray.length(); i++) {
                         JSONObject obj = objectArray.getJSONObject(i); 
                         
-                        //Sjekker hvis string == cellphonenumber input. Hvis så -> Legg til navn.
                         if (obj.getString("username").equals(cellPhoneNumber)) {
                             String firstname = obj.getString("firstname");
                             String surname = obj.getString("surname");
