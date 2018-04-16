@@ -52,12 +52,27 @@ public class BackendTests {
 	public static void Before() {
 		try {
             ServerLogic.signup("98765432", passwordTest, "test", "user", "200", "80", "male", "Fotball");
-			ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
-			ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
-			ServerLogic.deleteWorkoutFromDB("99765432"); // to avoid entries in db from testing
 		} catch (Exception e) {
 			System.out.println("Error in @BeforeClass");
 		}
+		try {
+			
+		} catch(Exception e) {
+			ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
+		}
+		try {
+			ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once			
+		}
+		catch (Exception e) {
+			
+		}
+		try {
+			ServerLogic.deleteWorkoutFromDB("99765432"); // to avoid entries in db from testing
+		}
+		catch (Exception e) {
+			
+		}
+		
 	}
 
 	@AfterClass //runs after tests
@@ -79,7 +94,7 @@ public class BackendTests {
 		String sport = "Fotball";
 
 
-        ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
+//        ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
 
 		mvc.perform(MockMvcRequestBuilders.get("/signup").param("username", username).param("password", password)
 				.param("firstname", firstname).param("surname", surname).param("maxpulse", maxpulse)
