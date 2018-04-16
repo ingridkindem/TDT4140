@@ -264,7 +264,6 @@ public class BackendTests {
 	public void TestFailedGetName() throws Exception {
 
 		String username = "743216"; // this is the error
-        ServerLogic.signup(username, passwordTest, "test", "user", "200", "80", "male", "Fotball");
 		mvc.perform(MockMvcRequestBuilders.get("/getName").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
 
