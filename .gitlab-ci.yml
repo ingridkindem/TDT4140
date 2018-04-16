@@ -14,14 +14,14 @@ variables:
   MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -Dgitlab-ci=true"
 
-build-job:
+blow-job:
   stage: build
   script:
     - "mvn clean compile -f tdt4140-gr1812/pom.xml $MAVEN_CLI_OPTS"
     - "mvn clean compile -f backend/pom.xml $MAVEN_CLI_OPTS"
 
 unittest-job:
-  stage: test
+  stage: unittest
   dependencies:
     - build-job
   script:
@@ -30,7 +30,7 @@ unittest-job:
     #- "cat tdt4140-gr1800/app.core/target/site/jacoco/index.html"
 
 integrationtest-job:
-  stage: test
+  stage: integrationtest
   dependencies:
     - build-job
   script:
