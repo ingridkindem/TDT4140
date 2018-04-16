@@ -4,6 +4,8 @@ image: krissrex/docker-java8-maven-testfxmonocle:1.0
 
 # most of this taken from https://stackoverflow.com/questions/37785154/how-to-enable-maven-artifact-caching-for-gitlab-ci-runner
 
+# Altered stages or our project as gitlab was running intergrationtest-job and unittest-job simultaniously. This was causing
+# Our tests to fail, as our backendtests are inserting and deliting and adding to DB, causing fuckups when urn simultainiously.
 
 stages:
   - build
