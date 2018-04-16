@@ -64,15 +64,6 @@ We decided to write in the [google java style](https://google.github.io/stylegui
 We have used EclEmma to get information about over code covarege. Our goal was to keep the covarege abouve 70 %. 
 
 
-
-
----
-## Continous Integration
-
-"*build passing*" indicates that the project's tests all pass as expected.
-
-[![Build Status](https://travis-ci.org/{tdt4140-2018}/{12}.png?branch=master)](https://travis-ci.org/{tdt4140-2018}/{12})
-
 --- 
 ## API refrences
 
@@ -155,15 +146,65 @@ Here is an example of how we test the code above.
 
 ---
 
-## Installation
+## Installation guide
+
+This is what you need to have installed to run our application:  
+
+For Mac, Windows and Linus; download and install [java](https://www.java.com/en/download/help/download_options.xml)
+* Click on your Operation System
+* Choose "How do I install java on "*your operation system*"
+* Follow the step by step guide to get the full experience
+
+Furthermore, you have to be able to run a [.jar](https://www.wikihow.com/Run-a-.Jar-Java-File) file. This should work just fine without any further ado, but click on "*.jar*" if you are in trouble.
+
+To make sure that the dependencies are correct, install [maven](https://maven.apache.org/install.html)
+
+This project is build with the IDE [Eclipse](https://wiki.eclipse.org/Eclipse_Installer), but you can also use the IDE [IntelliJ](https://www.jetbrains.com/idea/). 
 
 
 ---
 
 ## How to run our application
 
-* Run file: tdt4140-gr1812/executable/treningsapp1.1.0.jar or 
-* Open and run file within compiler: tdt4140.gr1812.app.ui.FxApp.java
+1. Download an IDE, for example [IntelliJ](https://www.jetbrains.com/idea/)
+2. In use of IntelliJ, choose import project from the welcome-menu
+3. Choose the "tdt-4140-gr1812", 
+4. Choose import project from external modul and choose maven and click next, and next again
+5. ... and next again. 
+6. Then click finished 
+7. Navigate to the file tdt4041-gr1812/app.ui/src/main/java/tdt4140.gr1812.app.ui/FxApp
+8. Then press run from the top navigation menu, and select run...
+
+Or
+
+1. Download the IDE [Eclipse](https://wiki.eclipse.org/Eclipse_Installer) 
+2. For installation, run the file you downloaded, and choose library tdt4180
+3. Click install
+4. Click accept
+5. Click accept again
+6. Click launch
+6. Choose your perferred workspace
+7. Click launch
+8. Then you should see project explorer in the top left corner
+9. Right click, and choose import
+10. Open the folder called general, and choose "existing projects into workspace"
+11. Hit next
+12. Hit "browse" next to select "root directory"
+13. Navigate to where you downloaded the project, usually in downloads
+14. Select the folder you downloaded, and hit "open". This should be named "12-master(...)"
+15. Click finish
+16. Then you should see a folder named 12! 
+17. Navigate to tdt4140-gr1812 and right click on app.core
+18. Select import 
+19. Select "existing projects into workspace" and hit next, and then finish. 
+20. Repeat step 18 and 19 for app.ui. 
+21. In app.ui navigate to "app.ui/src/main/java/tdt4140.gr1812.app.ui"
+22. Run FxApp.java as Java Application
+
+
+Or
+
+* Run file: tdt4140-gr1812/executable/treningsapp1.1.0.jar 
 
 ---
 
