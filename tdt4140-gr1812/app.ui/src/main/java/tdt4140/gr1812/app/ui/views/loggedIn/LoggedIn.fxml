@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.LoggedInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@css/loggedin_stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.LoggedInController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-1.0" layoutY="-4.0">
          <image>
@@ -29,7 +35,7 @@
             <Image url="@Blank.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="workoutsTable" layoutX="102.0" layoutY="450.0" prefHeight="190.0" prefWidth="793.0" style="-fx-background-color: #dbdbdb;">
+      <TableView fx:id="workoutsTable" layoutX="102.0" layoutY="450.0" prefHeight="190.0" prefWidth="793.0">
         <columns>
           <TableColumn fx:id="date" prefWidth="151.28355407714844" text="DATO" />
             <TableColumn fx:id="sport" prefWidth="151.28355407714844" text="IDRETT" />
