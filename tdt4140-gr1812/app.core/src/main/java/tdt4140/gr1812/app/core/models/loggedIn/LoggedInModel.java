@@ -58,11 +58,11 @@ public final class LoggedInModel {
         				String extraField = obj.getString("extraField");
         				
         				if (sport.getSport().equals("langrenn")) {
-        					extraField = "Distanse: " + extraField;
+        					extraField = "Distanse: " + extraField + " km";
         				} else if (sport.getSport().equals("basket")) {
         					extraField = "Antall kast: " + extraField;
         				} else if (sport.getSport().equals("fotball")) {
-        					extraField = "Spilletid: " + extraField;
+        					extraField = "Spilletid: " + extraField + " min";
         				}
         				
         				Workout workout = new Workout(sport, privacy);
@@ -70,7 +70,7 @@ public final class LoggedInModel {
         				workout.setDuration(duration);
         				workout.setGoal(goal);
         				workout.setPulses(pulses);
-        				//workout.setExtraField(extraField);
+        				workout.setExtraField(extraField);
         				returnList.add(workout);
         			}
         		}
@@ -144,7 +144,6 @@ public final class LoggedInModel {
 			for (String i : p) {
 				i.trim();
 				i.replace(" ","");
-				System.out.println(i);
 				int pulseInt = Integer.parseInt(i);
 				System.out.println(pulseInt);
 				if (pulseInt < 0) {

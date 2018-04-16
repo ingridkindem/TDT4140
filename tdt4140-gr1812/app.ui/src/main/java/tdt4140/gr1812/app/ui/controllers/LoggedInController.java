@@ -230,11 +230,11 @@ public class LoggedInController {
 		//set values in the workouts-table
 		this.workoutsTable.setItems(observableWorkouts);
 		this.goal.setCellValueFactory(new PropertyValueFactory<Workout, String>("goal"));
-		this.date.setCellValueFactory(new PropertyValueFactory<Workout, Date>("dateString"));
+		this.date.setCellValueFactory(new PropertyValueFactory<Workout, String>("dateString"));
 		this.duration.setCellValueFactory(new PropertyValueFactory<Workout,Integer >("duration"));
 		this.maxpulse.setCellValueFactory(new PropertyValueFactory<Workout, Integer>("maxpulse"));
-		this.sport.setCellValueFactory(new PropertyValueFactory<Workout, Integer>("sport"));
-		//this.extraField.setCellFactory(new PropertyValueFactory<Workout, Integer>("extraField"));
+		this.sport.setCellValueFactory(new PropertyValueFactory<Workout, Sport>("sport"));
+		this.extraField.setCellValueFactory(new PropertyValueFactory<Workout, String>("extraField"));
 	}
 	
 	public void loggUt() {

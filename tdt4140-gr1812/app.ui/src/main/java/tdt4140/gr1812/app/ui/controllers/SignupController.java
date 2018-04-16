@@ -109,7 +109,7 @@ public class SignupController {
         
         if(registerSuccess) {
         	app.setCurrentUser(mobilnummer.getText());
-            app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+            app.goToLoggedIn(); 
         }
         else {
            update();
