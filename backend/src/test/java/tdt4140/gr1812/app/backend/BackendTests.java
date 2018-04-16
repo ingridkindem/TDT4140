@@ -51,8 +51,7 @@ public class BackendTests {
 	@BeforeClass //runs tests 
 	public static void Before() {
 		try {
-		ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
-		ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
+		ServerLogic.deleteUserFromDB("99999999");  //has to be deleted for TestSignup to pass more than once
 		} catch (Exception e) {
 			System.out.println("Error in @BeforeClass");
 		}
@@ -61,13 +60,13 @@ public class BackendTests {
 	@AfterClass //runs after tests
 	public static void After() {
 		
-		ServerLogic.deleteWorkoutFromDB("99765432"); // to avoid entries in db from testing
+		ServerLogic.deleteWorkoutFromDB("99999999"); // to avoid entries in db from testing
 		ServerLogic.deleteUserFromDB(BackendTests.usernameTest);// deleting test user after tests
 	}
 	
 	@Test
 	public void TestSignUp() throws Exception {
-		String username = "99765432";
+		String username = "99999999";
 		String password = "98765432";
 		String firstname = "hakon";
 		String surname = "collett";
@@ -84,7 +83,7 @@ public class BackendTests {
 
 	@Test
 	public void TestFailedSignUp() throws Exception {
-		String username = BackendTests.usernameTest;
+		String username = "12345678";
 		String password = "98765432";
 		String firstname = "hakon";
 		String surname = "collett";
@@ -103,8 +102,8 @@ public class BackendTests {
 	@Test
 	public void TestLogin() throws Exception {
 
-		String username = BackendTests.usernameTest;
-		String password = BackendTests.passwordTest;
+		String username = "12345678";
+		String password = "12345678";
 
 		mvc.perform(MockMvcRequestBuilders.get("/login").param("username", username).param("password", password))
 				.andExpect(status().isOk())
@@ -116,8 +115,8 @@ public class BackendTests {
 	@Test
 	public void TestFailedLogin() throws Exception {
 
-		String username = BackendTests.usernameTest;
-		String password = "12345678";
+		String username = "12345678";
+		String password = "18";
 
 		mvc.perform(MockMvcRequestBuilders.get("/login").param("username", username).param("password", password))
 				.andExpect(status().isOk())
@@ -137,7 +136,7 @@ public class BackendTests {
 	@Test
 	public void TestWorkoutRegistration() throws Exception {
 
-		String username = BackendTests.usernameTest;
+		String username = "12345678";
 		String duration = "100";
 		String pulses = "100,200,100";
 		String goal = "Stronger";
@@ -154,7 +153,7 @@ public class BackendTests {
 	@Test
 	public void TestFailedWorkoutRegistration() throws Exception {
 
-		String username = BackendTests.usernameTest;
+		String username = "12345678";
 		String duration = "hei"; // this is the error
 		String pulses = "100,200,100";
 		String goal = "Stronger";
@@ -248,7 +247,7 @@ public class BackendTests {
 	@Test
 	public void TestGetName() throws Exception {
 
-		String username = BackendTests.usernameTest;
+		String username = "12345678";
 
 		mvc.perform(MockMvcRequestBuilders.get("/getName").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("success")));
