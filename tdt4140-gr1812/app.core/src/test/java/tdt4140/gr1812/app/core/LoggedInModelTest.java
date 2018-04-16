@@ -61,26 +61,5 @@ public class LoggedInModelTest {
 		assertEquals(LoggedInModel.hoursToMinutes("2:00"), 120);
 		assertEquals(LoggedInModel.hoursToMinutes("0:10"), 10);
 	}
-	
-	@Test
-	public void testGetMonth() {
-		assertEquals(LoggedInModel.getMonth("Jan"), 0);
-		assertEquals(LoggedInModel.getMonth("Feb"), 1);
-		assertEquals(LoggedInModel.getMonth("Mar"), 2);
-		assertEquals(LoggedInModel.getMonth("Apr"), 3);
-		assertEquals(LoggedInModel.getMonth("May"), 4);
-		assertEquals(LoggedInModel.getMonth("Jun"), 5);
-		assertEquals(LoggedInModel.getMonth("Jul"), 6);
-		assertEquals(LoggedInModel.getMonth("Aug"), 7);
-		assertEquals(LoggedInModel.getMonth("Sep"), 8);
-		assertEquals(LoggedInModel.getMonth("Oct"), 9);
-		assertEquals(LoggedInModel.getMonth("Nov"), 10);
-		assertEquals(LoggedInModel.getMonth("Des"), 11);
-	}
-	
-	@Test
-	public void testDeleteUser() {
-		assertFalse(LoggedInModel.deleteUser(""));
-	}
 
 }

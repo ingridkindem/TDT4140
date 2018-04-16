@@ -10,10 +10,10 @@ import tdt4140.gr1812.app.core.helpers.Method;
 public class LoginModel {
 
 	public static Tuple<Boolean, Boolean> login(String phoneNumber, String password) {
-		if (phoneNumber == null) {
+		if (phoneNumber.equals(null)) {
 			throw new NullPointerException("Phone number cannot bo blank");
 		}
-		if (password == null) {
+		if (password.equals(null)) {
 			throw new NullPointerException("Password cannot be blank");
 		}
 		HashMap myMap = new HashMap<String, String>();

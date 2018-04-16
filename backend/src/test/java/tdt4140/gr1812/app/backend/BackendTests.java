@@ -51,10 +51,8 @@ public class BackendTests {
 	@BeforeClass //runs tests 
 	public static void Before() {
 		try {
-            ServerLogic.signup("98765432", passwordTest, "test", "user", "200", "80", "male", "Fotball");
-			ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
-			ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
-			ServerLogic.deleteWorkoutFromDB("99765432"); // to avoid entries in db from testing
+		ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
+		ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
 		} catch (Exception e) {
 			System.out.println("Error in @BeforeClass");
 		}
@@ -77,9 +75,6 @@ public class BackendTests {
 		String weight = "85";
 		String gender = "male";
 		String sport = "Fotball";
-
-
-        ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
 
 		mvc.perform(MockMvcRequestBuilders.get("/signup").param("username", username).param("password", password)
 				.param("firstname", firstname).param("surname", surname).param("maxpulse", maxpulse)
@@ -107,13 +102,13 @@ public class BackendTests {
 
 	@Test
 	public void TestLogin() throws Exception {
-        String username = BackendTests.usernameTest;
-		String password = BackendTests.passwordTest;
 
-		ServerLogic.signup(username, password, "test", "user", "200", "80", "male", "Fotball");
+		String username = BackendTests.usernameTest;
+		String password = BackendTests.passwordTest;
 
 		mvc.perform(MockMvcRequestBuilders.get("/login").param("username", username).param("password", password))
 				.andExpect(status().isOk())
+				// .andExpect(content().contentType("application/json"))
 				.andExpect(content().string(containsString("success")));
 
 	}
@@ -264,6 +259,7 @@ public class BackendTests {
 	public void TestFailedGetName() throws Exception {
 
 		String username = "743216"; // this is the error
+
 		mvc.perform(MockMvcRequestBuilders.get("/getName").param("username", username)).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
 

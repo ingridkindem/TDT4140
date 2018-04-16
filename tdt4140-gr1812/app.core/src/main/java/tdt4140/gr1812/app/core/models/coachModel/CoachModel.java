@@ -109,4 +109,9 @@ public class CoachModel {
         
         return returnName;
     }  
+	
+	public static void main(String[] args) {
+        System.out.println(getAthletesFullName("12345678", "basket"));
+        
+    }
 }
