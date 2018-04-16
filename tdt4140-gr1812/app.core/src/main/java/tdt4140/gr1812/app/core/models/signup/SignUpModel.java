@@ -24,8 +24,20 @@ public class SignUpModel {
             checkSport(sport);
             checkWeight(String.valueOf(weight));
             checkMaxPulse(String.valueOf(maxpulse));
+               
+            //String genderString = gender == gender.FEMALE ? "female" : "male";
+            String genderString = "";
 
-            String genderString = gender == gender.FEMALE ? "female" : "male";
+            if (gender == gender.FEMALE) {
+                genderString = "female";
+            }
+            else if (gender == gender.MALE) {
+                genderString = "male";
+            }
+            else {
+                genderString = "other";
+            }
+            
 
             HashMap requestParam = new HashMap<String, String>();
             requestParam.put("username", String.valueOf(phonenumber));
@@ -94,6 +106,10 @@ public class SignUpModel {
             text = "Phone number must be 8 numbers.";
             throw new IllegalArgumentException("Et telefonnummer maa vaere 8 sifre langt.");
         }
+//        if (number.length() != 8) {
+//            text = "Phone number is already registered";
+//            throw new IllegalArgumentException("Telefon");
+//        }
         for (int i = 0; i < number.length(); i++) {
             char c = number.charAt(i);
             if (!Character.isDigit(c)) {

@@ -13,6 +13,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import tdt4140.gr1812.app.core.helpers.Gender;
 import tdt4140.gr1812.app.core.models.signup.SignUpModel;
@@ -38,6 +39,10 @@ public class SignupController {
     ToggleButton kvinneToggle;
     @FXML
     ToggleButton manToggle;
+    @FXML
+    ToggleButton annetToggle;
+    @FXML
+    ToggleGroup gender;
     @FXML
 	MenuButton idretter;
 	@FXML
@@ -96,16 +101,20 @@ public class SignupController {
     private void registerButtonClicked(ActionEvent event) {
         // Button was clicked, do something...
         
-        Gender gender;
-        if (manToggle.isSelected()){
-            gender = Gender.MALE; 
+
+        Gender genderE;
+        if (gender.getSelectedToggle() == manToggle) {
+            genderE = Gender.MALE;
+        }
+        else if (gender.getSelectedToggle() == kvinneToggle) {
+            genderE = Gender.FEMALE;
         }
         else {
-            gender = Gender.FEMALE; 
+            genderE = Gender.OTHER; 
         }
         
         boolean registerSuccess = model.signupUser(Integer.parseInt(mobilnummer.getText()), passord.getText(), 
-                selectedSport, fornavn.getText(), etternavn.getText(), Integer.parseInt(makspuls.getText()), Integer.parseInt(vekt.getText()), gender);
+                selectedSport, fornavn.getText(), etternavn.getText(), Integer.parseInt(makspuls.getText()), Integer.parseInt(vekt.getText()), genderE);
         
         if(registerSuccess) {
         	app.setCurrentUser(mobilnummer.getText());
@@ -113,7 +122,7 @@ public class SignupController {
         }
         else {
            update();
-           System.out.println("No success in register :,( ");  
+           feedback.setText("Bruker med telefonnummer er allerede registrert.");  
         }
     }
            

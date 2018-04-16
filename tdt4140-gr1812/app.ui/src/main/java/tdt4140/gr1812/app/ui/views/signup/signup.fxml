@@ -7,6 +7,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,7 +22,7 @@
             <Image url="@signup.jpg" />
          </image>
       </ImageView> 
-      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;"/>
+      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;" />
       <TextField id="mobilnummer" fx:id="mobilnummer" layoutX="102.0" layoutY="228.0" prefHeight="48.0" prefWidth="381.0" promptText="MOBILNUMMER">
          <font>
             <Font size="18.0" />
@@ -68,11 +69,15 @@
             <Blend />
          </effect>
       </MenuButton>
-      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN" />
-      <ToggleButton id="kvinneToggle" fx:id="kvinneToggle" layoutX="310.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" />
+      <ToggleButton id="manToggle" fx:id="manToggle" layoutX="104.0" layoutY="460.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="MANN">
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup></ToggleButton>
+      <ToggleButton id="kvinneToggle" fx:id="kvinneToggle" layoutX="233.0" layoutY="460.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="KVINNE" toggleGroup="$gender" />
+      <ToggleButton id="annetToggle" fx:id="annetToggle" layoutX="363.0" layoutY="460.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="ANNET" toggleGroup="$gender" />
       <Text fx:id="feedback" fill="#ff0303" layoutX="104.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" />
 
-      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;"/>
+      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;" />
    
    </children>
 </AnchorPane>
