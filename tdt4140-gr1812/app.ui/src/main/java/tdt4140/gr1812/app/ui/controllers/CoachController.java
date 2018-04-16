@@ -98,6 +98,7 @@ public class CoachController {
 		               
 		               selectedAthlete = nummer;
 		               System.out.println(selectedAthlete);
+		               app.setSelectedAthlete(selectedAthlete);
 		               		               
 		               //Sets visibility on button and table
 
@@ -134,6 +135,13 @@ public class CoachController {
 
 	public void update() {
 		athletesTable.setItems(observableAthletes);
+	}
+	
+	public void slettBruker() {
+		if (LoggedInModel.deleteUser(this.coachUsername)) {
+			this.atCoachView = false;
+			app.goToLogin();
+		}
 	}
 
 	//Fetches the sports of a coach

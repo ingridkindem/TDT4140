@@ -15,10 +15,10 @@
             <Image url="@login_view.jpg" />
          </image>
       </ImageView>
-      <Hyperlink layoutX="329.0" layoutY="527.0" onAction="#handleLogin" prefHeight="39.0" prefWidth="146.0" />
-      <Hyperlink layoutX="528.0" layoutY="527.0" onAction="#handleSignup" prefHeight="39.0" prefWidth="146.0" />
-      <PasswordField fx:id="setPassword" layoutX="312.0" layoutY="430.0" prefHeight="45.0" prefWidth="375.0" promptText="Passord" />
+      <Hyperlink layoutX="329.0" layoutY="527.0" onAction="#handleLogin" prefHeight="39.0" prefWidth="146.0" style="-fx-border-color: TRANSPARENT;"/>
+      <Hyperlink layoutX="528.0" layoutY="527.0" onAction="#handleSignup" prefHeight="39.0" prefWidth="146.0" style="-fx-border-color: TRANSPARENT;"/>
       <TextField fx:id="setPhoneNumber" layoutX="312.0" layoutY="365.0" prefHeight="45.0" prefWidth="375.0" promptText="Mobilnummer" />
+      <PasswordField fx:id="setPassword" layoutX="312.0" layoutY="430.0" prefHeight="45.0" prefWidth="375.0" promptText="Passord" />
       <Text fx:id="prompt" fill="RED" layoutX="315.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="369.73077392578125" />
       <Hyperlink fx:id="homeB" layoutX="70.0" layoutY="79.0" onAction="#goToHome" prefHeight="122.0" prefWidth="120.0" style="-fx-border-radius: 100; -fx-border-color: TRANSPARENT;" />
    </children>

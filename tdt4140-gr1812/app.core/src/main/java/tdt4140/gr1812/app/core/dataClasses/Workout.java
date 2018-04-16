@@ -18,6 +18,7 @@ public class Workout {
 	private boolean privacy; //true=private
 	private int maxPulse;
 	private String dateString;
+	private String extraField;
 	
 	//Constructor to create a workout. Initialized with sport and possibilty for privacy mode.
 	public Workout(Sport sport, boolean privacy) {
@@ -68,7 +69,17 @@ public class Workout {
 		this.goal=goal;
 	}
 	
+	public void setExtraField(String extraField) {
+		this.extraField = extraField;
+	}
+	
 	//getters for attributes
+	
+	public String getExtraField() {
+		return this.extraField;
+	}
+	
+	
 	public String getDuration() {
 		
 		String min="";

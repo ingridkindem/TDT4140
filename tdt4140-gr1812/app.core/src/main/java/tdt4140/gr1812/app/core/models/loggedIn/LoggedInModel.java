@@ -58,11 +58,11 @@ public final class LoggedInModel {
         				String extraField = obj.getString("extraField");
         				
         				if (sport.getSport().equals("langrenn")) {
-        					extraField = "Distanse: " + extraField;
+        					extraField = "Distanse: " + extraField + " km";
         				} else if (sport.getSport().equals("basket")) {
         					extraField = "Antall kast: " + extraField;
         				} else if (sport.getSport().equals("fotball")) {
-        					extraField = "Spilletid: " + extraField;
+        					extraField = "Spilletid: " + extraField + " min";
         				}
         				
         				Workout workout = new Workout(sport, privacy);
@@ -70,7 +70,7 @@ public final class LoggedInModel {
         				workout.setDuration(duration);
         				workout.setGoal(goal);
         				workout.setPulses(pulses);
-        				//workout.setExtraField(extraField);
+        				workout.setExtraField(extraField);
         				returnList.add(workout);
         			}
         		}
@@ -95,7 +95,6 @@ public final class LoggedInModel {
 	    			String durationInPulsezones = obj.get("pulses").toString().replace("[", "").replace("]", ""); // pulses: "[p,p,p,p,p]"
 	    			List<Integer> durationInPulsezonesList = getStringAsList(durationInPulsezones);
 	    			String date = stringToDate(obj.get("Dato").toString());
-	    			System.out.println(date);
 	    			returnHashMap.put(date, durationInPulsezonesList);
 	    		}
 	    	}
@@ -104,7 +103,24 @@ public final class LoggedInModel {
 		}
 	    System.out.println(returnHashMap.toString());
 	    return returnHashMap;
-		}
+	}
+	
+	public static boolean deleteUser(String username) {
+		HashMap requestparam = new HashMap<String, String>();
+		requestparam.put("username", username);
+		try {
+			JSONObject response = BackendConnector.makeRequest(requestparam, Method.POST, "deleteUser"); 
+			if (response.get("status").equals("success")) {
+				System.out.println("User deleted.");
+				return true;
+			} else if (response.get("status").equals("failure")) {
+				System.out.println("Couldn't delete user.");
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} return false;
+	}
 	
 	public static int hoursToMinutes(String s) { // turns a string, s, of the form "h:mm" to an integer(number of minutes)
 		String[] min = s.split(":");
@@ -127,7 +143,9 @@ public final class LoggedInModel {
 			String[] p = pulses.split(", "); // pulses of the form "i ,i,i,i...,i" where i is an integer. 
 			for (String i : p) {
 				i.trim();
+				i.replace(" ","");
 				int pulseInt = Integer.parseInt(i);
+				System.out.println(pulseInt);
 				if (pulseInt < 0) {
 					throw new Exception();
 				}
@@ -156,37 +174,37 @@ public final class LoggedInModel {
 	}
 	
 	public static int getMonth(String s) {
-		if (s.equals("jan")) {
+		if (s.equals("Jan")) {
 			return 0;
 		}
-		else if (s.equals("feb")) {
+		else if (s.equals("Feb")) {
 			return 1;
 		}
-		else if (s.equals("mar")) {
+		else if (s.equals("Mar")) {
 			return 2;
 		}
-		else if (s.equals("apr")) {
+		else if (s.equals("Apr")) {
 			return 3;
 		}
-		else if (s.equals("may")) {
+		else if (s.equals("May")) {
 			return 4;
 		}
-		else if (s.equals("jun")) {
+		else if (s.equals("Jun")) {
 			return 5;
 		}
-		else if (s.equals("jul")) {
+		else if (s.equals("Jul")) {
 			return 6;
 		}
-		else if (s.equals("aug")) {
+		else if (s.equals("Aug")) {
 			return 7;
 		}
-		else if (s.equals("sep")) {
+		else if (s.equals("Sep")) {
 			return 8;
 		}
-		else if (s.equals("okt")) {
+		else if (s.equals("Okt")) {
 			return 9;
 		}
-		else if (s.equals("nov")) {
+		else if (s.equals("Nov")) {
 			return 10;
 		}
 		else {

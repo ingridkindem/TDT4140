@@ -109,7 +109,7 @@ public class SignupController {
         
         if(registerSuccess) {
         	app.setCurrentUser(mobilnummer.getText());
-            app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+            app.goToLoggedIn(); 
         }
         else {
            update();
@@ -119,6 +119,11 @@ public class SignupController {
            
     public void setApplication(FxApp app) {
         this.app = app; 
+    }
+    
+    @FXML
+    public void handleBack() {
+        app.goToLogin();
     }
     
     public void init() {

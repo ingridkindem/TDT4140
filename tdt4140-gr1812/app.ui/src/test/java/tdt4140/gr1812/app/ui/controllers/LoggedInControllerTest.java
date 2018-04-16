@@ -34,6 +34,7 @@ public class LoggedInControllerTest {
 		controller.duration = new TableColumn();
 		controller.maxpulse = new TableColumn();
 		controller.sport = new TableColumn();
+		controller.extraField = new TableColumn();
 		controller.chart = new StackedBarChart(controller.xdays, controller.ytime);
 		controller.chartScene = new SubScene(controller.chart,50,50);
 	}
