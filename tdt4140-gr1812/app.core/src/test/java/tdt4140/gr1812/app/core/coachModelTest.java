@@ -3,45 +3,26 @@ package tdt4140.gr1812.app.core;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
+import tdt4140.gr1812.app.core.dataClasses.Sport;
 import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 
 public class coachModelTest {
 
-    
-    
-//    getSportForCoach(String name){
-//      public static List<Athlete> getAthletesForSport(Coach coach){
     @Test
     public void getSportForCoachTest() {
-        assert(CoachModel.getSportForCoach("46643025") == "basketball");
-        assert(CoachModel.getSportForCoach("46643025") != "fotball");
-        assert(CoachModel.getSportForCoach("123") == "Couldn't load sport");
+    		System.out.println(CoachModel.getSportForCoach("46643025") + " is the sport");
+        assert(CoachModel.getSportForCoach("46643025").equals("basket") );
+        assert(CoachModel.getSportForCoach("46643025").equals("fotball") == false);
+        assert(CoachModel.getSportForCoach("12345").equals("Not a registered coach"));
     }
     
     @Test
-    public void getAthletesForSportCoachTest(Coach coach) {
+    public void getAthletesForSportCoachTest() {
+    		Coach coach = new Coach("Larry", new Sport("basket"));
         if (coach.getName().equals("Larry")) {
-            assert(coach.getSport().equals("basketball"));
+            assert(coach.getSport().getSport().equals("basket"));
             assert(!coach.getSport().equals("fotball"));
         }
-        
     }
     
-    @Test
-    public void getAthletesForSportTest(Coach coach) {
-        if (coach.getName().equals("Larry")) {
-//            assert(CoachModel.getAthletesForSport(coach) != null);
-//            assert(CoachModel.getAthletesForSport(coach));
-        }
-    }
-    
-    @Test
-    public void constructorTest(Coach coach) {
-        CoachModel modell = new CoachModel(coach);
-//        assert(modell == coach);
-    }
-    
-    
-    
-
 }

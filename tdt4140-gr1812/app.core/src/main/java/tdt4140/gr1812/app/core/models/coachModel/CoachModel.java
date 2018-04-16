@@ -29,9 +29,7 @@ public class CoachModel {
 	    
 	    HashMap requestParam = new HashMap<String, String>();
 
-	    requestParam.put("username", caochName); // This has to be changed to username, but
-
-	    //coach currently has no field "username" !!!!!!!
+	    requestParam.put("username", caochName);
 	    System.out.println(requestParam.toString());
 	    try {
 	        JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "sportForCoach");
@@ -75,4 +73,45 @@ public class CoachModel {
 		return returnList;
 	}  
 	
+	
+	public static String getAthletesFullName(String cellPhoneNumber, String sport){
+        
+        String returnName = "";
+        
+        HashMap requestParam = new HashMap<String, String>();
+        requestParam.put("username", cellPhoneNumber);
+        requestParam.put("sport", sport);
+        
+        
+        try { 
+                JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "athletesInSport");
+                if (response.get("status").equals("success")) {
+   
+                    
+                		//Creates a JSONArray who runs through all the athletes
+
+
+                    JSONArray objectArray = response.getJSONArray("athletes");
+                    for (int i = 0; i < objectArray.length(); i++) {
+                        JSONObject obj = objectArray.getJSONObject(i); 
+                        
+                        if (obj.getString("username").equals(cellPhoneNumber)) {
+                            String firstname = obj.getString("firstname");
+                            String surname = obj.getString("surname");
+                            returnName = firstname + " " + surname;
+                        }
+                        
+                    }
+                }
+        }catch (Exception e){
+            e.printStackTrace();
+        }   
+        
+        return returnName;
+    }  
+	
+	public static void main(String[] args) {
+        System.out.println(getAthletesFullName("12345678", "basket"));
+        
+    }
 }

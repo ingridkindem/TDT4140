@@ -47,11 +47,12 @@ public class LoginController {
 			p = "";
 			boolean coach = checkInput.y; //check if a coach is logging in
 			app.setCurrentUser(phoneNumber);
+			app.setCoach(coach);
 			if (coach) {
 				app.goToCoachView();
 			} 
 			else {
-				app.goToWorkoutRegistration(); //will eventually go to athlete-profile
+				app.goToLoggedIn();
 			}
 			this.atLoginView = false;
 			return true;
@@ -61,6 +62,12 @@ public class LoginController {
 		update();
 		return false;
 	}
+	
+   @FXML
+    public void goToHome() {
+        app.goToHome();
+        this.atLoginView = false;
+    }
 	
 	@FXML
 	public void handleSignup() {
