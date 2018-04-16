@@ -4,6 +4,12 @@ image: krissrex/docker-java8-maven-testfxmonocle:1.0
 
 # most of this taken from https://stackoverflow.com/questions/37785154/how-to-enable-maven-artifact-caching-for-gitlab-ci-runner
 
+
+stages:
+  - build
+  - package
+  - verify
+
 cache:
   paths:
     - .m2/repository
