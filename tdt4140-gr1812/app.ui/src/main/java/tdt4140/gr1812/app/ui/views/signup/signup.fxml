@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@Signup.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@Signup.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -76,8 +76,12 @@
       <ToggleButton id="kvinneToggle" fx:id="kvinneToggle" layoutX="233.0" layoutY="460.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="KVINNE" toggleGroup="$gender" />
       <ToggleButton id="annetToggle" fx:id="annetToggle" layoutX="363.0" layoutY="460.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" text="ANNET" toggleGroup="$gender" />
       <Text fx:id="feedback" fill="#ff0303" layoutX="104.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-
-      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;" />
+     <Text fill="#403f3f" layoutX="73.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TILBAKE">
+         <font>
+            <Font name="Futura Medium" size="20.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="70.0" layoutY="53.0" onAction="#handleBack" prefHeight="26.0" prefWidth="83.0" />
    
    </children>
 </AnchorPane>
