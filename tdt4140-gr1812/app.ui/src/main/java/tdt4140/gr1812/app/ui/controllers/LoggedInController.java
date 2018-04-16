@@ -133,7 +133,7 @@ public class LoggedInController {
 		}*/
 		
 		// get duration in pulsezones from backend
-		HashMap<String, List<Integer>> durationInPulsezonesHashMap = LoggedInModel.getPulseZones(this.selectedAthlete);
+		HashMap<String, List<Integer>> durationInPulsezonesHashMap = LoggedInModel.getPulseZones(this.selectedAthlete, this.coach);
 		
 		List<List<Integer>> durationInPulsezones = new ArrayList();
 		
@@ -225,7 +225,7 @@ public class LoggedInController {
 	@SuppressWarnings("unchecked")
 	public void setWorkoutsInTable() {
 		//get workouts from backend
-		this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.selectedAthlete)); 
+		this.observableWorkouts.addAll(LoggedInModel.getWorkoutsForAthlete(this.selectedAthlete, this.coach)); 
 		
 		//set values in the workouts-table
 		this.workoutsTable.setItems(observableWorkouts);
