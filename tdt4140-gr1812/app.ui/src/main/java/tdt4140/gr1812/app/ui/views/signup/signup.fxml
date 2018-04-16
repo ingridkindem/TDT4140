@@ -77,6 +77,8 @@
          </font>
       </Text>
       <Hyperlink layoutX="70.0" layoutY="53.0" onAction="#handleBack" prefHeight="26.0" prefWidth="83.0" />
+      <Text layoutX="354.0" layoutY="604.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ved registrering aksepterer du" wrappingWidth="274.8408203125" />
+      <Hyperlink layoutX="547.0" layoutY="587.0" onAction="#onTermsOfUse" text="terms of use." />
    
    </children>
 </AnchorPane>
