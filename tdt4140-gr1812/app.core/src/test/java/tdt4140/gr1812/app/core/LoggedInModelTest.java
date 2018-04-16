@@ -23,12 +23,13 @@ public class LoggedInModelTest {
 	
 	@Test
 	public void testGetWorkoutsForAthlete() { 
-		assertTrue(LoggedInModel.getWorkoutsForAthlete("").isEmpty());
+		LoggedInModel.getWorkoutsForAthlete("12345678", false);
+		assertTrue(LoggedInModel.getWorkoutsForAthlete("", false).isEmpty());
 	}
 	
 	@Test
 	public void testGetPulseZones() {
-		assertTrue(LoggedInModel.getPulseZones("").isEmpty());
+		assertTrue(LoggedInModel.getPulseZones("", false).isEmpty());
 	}
 	
 	@Test

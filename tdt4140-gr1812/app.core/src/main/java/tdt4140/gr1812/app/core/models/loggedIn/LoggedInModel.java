@@ -38,10 +38,13 @@ public final class LoggedInModel {
 	}
 
 	//used for creating the table with the athlete's workouts
-	public static List<Workout> getWorkoutsForAthlete(String username){ //returns a list of the athlete's workouts 
+	public static List<Workout> getWorkoutsForAthlete(String username, boolean coach){ //returns a list of the athlete's workouts 
 		ArrayList<Workout> returnList = new ArrayList();
 		HashMap requestParam = new HashMap<String, String>();
+		String coachString = coach == true ? "1" : "0";
         requestParam.put("username", username);
+        requestParam.put("coach", coachString);
+        
         
         try {
         		JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "lastWorkouts");
@@ -81,11 +84,12 @@ public final class LoggedInModel {
 	} 
 	
 	// used to create the chart that displays the athlete's duration in the different pulsezones
-	public static HashMap<String, List<Integer>> getPulseZones(String username) {
+	public static HashMap<String, List<Integer>> getPulseZones(String username, boolean coach) {
 		HashMap<String, List<Integer>> returnHashMap = new HashMap();
-		 
+		String coachString = coach == true ? "1" : "0";
 		HashMap requestParam = new HashMap<String, String>();
 	    requestParam.put("username", username);
+	    requestParam.put("coach", coachString);
 	    try {
 	    JSONObject response = BackendConnector.makeRequest(requestParam, Method.POST, "graph"); 
 	    if (response.get("status").equals("success")) {

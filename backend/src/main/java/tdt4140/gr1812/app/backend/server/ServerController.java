@@ -248,12 +248,13 @@ public class ServerController {
     }
     
     @RequestMapping("lastWorkouts")
-    public String getLastWorkouts(@RequestParam("username") String username) {
+    public String getLastWorkouts(@RequestParam("username") String username,
+    								 @RequestParam("coach") String coach) {
     	
     	JSONObject feedback = new JSONObject();
 
 		try{
-			ArrayList<Workout> workouts = ServerLogic.getLastWorkouts(username);
+			ArrayList<Workout> workouts = ServerLogic.getLastWorkouts(username, coach);
 			if (workouts.size()<1) {
 				feedback.put("status", "failed");
 				feedback.put("message", "No workouts for user");
@@ -294,11 +295,13 @@ public class ServerController {
     }
     
     @RequestMapping("/graph")
-    public String getGraphInformation(@RequestParam ("username") String username) {
+    public String getGraphInformation(@RequestParam ("username") String username,
+    									 @RequestParam ("coach") String coach) {
     	JSONObject feedback = new JSONObject();
 
 		try{
-			Map <Date, List<Integer>> pulsInformation = ServerLogic.getGraphInformation(username);
+			
+			Map <Date, List<Integer>> pulsInformation = ServerLogic.getGraphInformation(username, coach);
 			
 			if (pulsInformation.keySet().size()<1) {
 				feedback.put("status", "failed");
