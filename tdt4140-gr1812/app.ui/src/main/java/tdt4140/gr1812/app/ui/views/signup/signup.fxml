@@ -20,7 +20,8 @@
          <image>
             <Image url="@signup.jpg" />
          </image>
-      </ImageView>
+      </ImageView> 
+      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;"/>
       <TextField id="mobilnummer" fx:id="mobilnummer" layoutX="102.0" layoutY="228.0" prefHeight="48.0" prefWidth="381.0" promptText="MOBILNUMMER">
          <font>
             <Font size="18.0" />
@@ -36,6 +37,11 @@
             <Font size="18.0" />
          </font>
       </TextField>
+      <PasswordField fx:id="passord" layoutX="498.0" layoutY="302.0" prefHeight="48.0" prefWidth="381.0" promptText="PASSORD">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
       <TextField id="makspuls" fx:id="makspuls" layoutX="501.0" layoutY="382.0" prefHeight="48.0" prefWidth="381.0" promptText="MAKSPULS">
          <font>
             <Font size="18.0" />
@@ -65,11 +71,7 @@
       <ToggleButton id="manToggle" fx:id="manToggle" layoutX="125.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="MANN" />
       <ToggleButton id="kvinneToggle" fx:id="kvinneToggle" layoutX="310.0" layoutY="457.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="color: ;" text="KVINNE" />
       <Text fx:id="feedback" fill="#ff0303" layoutX="104.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <PasswordField fx:id="passord" layoutX="498.0" layoutY="302.0" prefHeight="48.0" prefWidth="381.0" promptText="PASSORD">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </PasswordField>
+
       <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;"/>
    
    </children>
