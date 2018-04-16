@@ -107,7 +107,7 @@ public class LoggedInController {
     final static String sondag = "Sondag";
 	
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	public void setChart() { //set values to the chart
+	public void setChart() { //set values to the chart (displays the workout's for the current week)
 		
 		// change the layout
 		this.xdays.setLabel("Dager");
@@ -122,8 +122,8 @@ public class LoggedInController {
 		List<String> weekdays = Arrays.asList(this.mandag, this.tirsdag, this.onsdag,  this.torsdag, this.fredag, this.lordag, this.sondag);
 		
 		// for testing without backend
-		/*
-		HashMap<String, List<Integer>> testHashMap = new HashMap();
+		
+		/*HashMap<String, List<Integer>> testHashMap = new HashMap();
 		for (int i = 0; i< 7; i++) {
 			List<Integer> testList = new ArrayList();
 			for (int j= 0; j<5; j++) {
@@ -141,7 +141,7 @@ public class LoggedInController {
 		int todayInt = Calendar.getInstance().getTime().getDay();
 		
 		List<String> dates = new ArrayList();
-		for (int i = 6; i >= 0; i--) {
+		for (int i = 1; i < 8; i++) {
 			if (i > todayInt) {
 				dates.add("");
 			}
@@ -149,6 +149,8 @@ public class LoggedInController {
 				dates.add(getDate(todayInt-i));
 			}
 		}
+	
+		System.out.println(dates);
 	    
 		int a = 0;
 		for (String d : dates) { // go through the last 7 dates

@@ -95,7 +95,6 @@ public final class LoggedInModel {
 	    			String durationInPulsezones = obj.get("pulses").toString().replace("[", "").replace("]", ""); // pulses: "[p,p,p,p,p]"
 	    			List<Integer> durationInPulsezonesList = getStringAsList(durationInPulsezones);
 	    			String date = stringToDate(obj.get("Dato").toString());
-	    			System.out.println(date);
 	    			returnHashMap.put(date, durationInPulsezonesList);
 	    		}
 	    	}
@@ -156,37 +155,37 @@ public final class LoggedInModel {
 	}
 	
 	public static int getMonth(String s) {
-		if (s.equals("jan")) {
+		if (s.equals("Jan")) {
 			return 0;
 		}
-		else if (s.equals("feb")) {
+		else if (s.equals("Feb")) {
 			return 1;
 		}
-		else if (s.equals("mar")) {
+		else if (s.equals("Mar")) {
 			return 2;
 		}
-		else if (s.equals("apr")) {
+		else if (s.equals("Apr")) {
 			return 3;
 		}
-		else if (s.equals("may")) {
+		else if (s.equals("May")) {
 			return 4;
 		}
-		else if (s.equals("jun")) {
+		else if (s.equals("Jun")) {
 			return 5;
 		}
-		else if (s.equals("jul")) {
+		else if (s.equals("Jul")) {
 			return 6;
 		}
-		else if (s.equals("aug")) {
+		else if (s.equals("Aug")) {
 			return 7;
 		}
-		else if (s.equals("sep")) {
+		else if (s.equals("Sep")) {
 			return 8;
 		}
-		else if (s.equals("okt")) {
+		else if (s.equals("Okt")) {
 			return 9;
 		}
-		else if (s.equals("nov")) {
+		else if (s.equals("Nov")) {
 			return 10;
 		}
 		else {
