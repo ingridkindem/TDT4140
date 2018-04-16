@@ -121,6 +121,11 @@ public class SignupController {
         this.app = app; 
     }
     
+    @FXML
+    public void handleBack() {
+        app.goToLogin();
+    }
+    
     public void init() {
         // do initialization and configuration work...
         Iterator<MenuItem> it = idretter.getItems().iterator(); 

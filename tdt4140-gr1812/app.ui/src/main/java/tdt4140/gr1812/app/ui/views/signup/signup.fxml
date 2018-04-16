@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@Signup.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@Signup.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tdt4140.gr1812.app.ui.controllers.SignupController">
    <children>
       <ImageView fitHeight="700.0" fitWidth="1000.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -46,7 +46,7 @@
             <Font size="18.0" />
          </font>
       </TextField>
-      <Hyperlink id="registerButton2" layoutX="390.0" layoutY="541.0" onAction="#registerButtonClicked" prefHeight="43.0" prefWidth="226.0" />
+      <Hyperlink id="registerButton2" layoutX="390.0" layoutY="541.0" onAction="#registerButtonClicked" prefHeight="43.0" prefWidth="226.0" style="-fx-border-color: TRANSPARENT;" />
       <MenuButton fx:id="idretter" cache="true" layoutX="501.0" layoutY="227.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="381.0" style="-fx-background-color: #70dbdb;" textFill="WHITE">
         <items>
             <RadioMenuItem fx:id="langrenn" mnemonicParsing="false" onAction="#initialize" text="Langrenn" />
@@ -70,6 +70,7 @@
             <Font size="18.0" />
          </font>
       </PasswordField>
+      <Hyperlink layoutX="677.0" layoutY="39.0" onAction="#handleBack" prefHeight="54.0" prefWidth="139.0" style="-fx-border-color: TRANSPARENT;"/>
    
    </children>
 </AnchorPane>
