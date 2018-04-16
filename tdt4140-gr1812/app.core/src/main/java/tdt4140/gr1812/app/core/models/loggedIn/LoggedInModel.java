@@ -112,9 +112,6 @@ public final class LoggedInModel {
 			if (response.get("status").equals("success")) {
 				System.out.println("User deleted.");
 				return true;
-			} else if (response.get("status").equals("failure")) {
-				System.out.println("Couldn't delete user.");
-				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -200,7 +197,7 @@ public final class LoggedInModel {
 		else if (s.equals("Sep")) {
 			return 8;
 		}
-		else if (s.equals("Okt")) {
+		else if (s.equals("Oct")) {
 			return 9;
 		}
 		else if (s.equals("Nov")) {

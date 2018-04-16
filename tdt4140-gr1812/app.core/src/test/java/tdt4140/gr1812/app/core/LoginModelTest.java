@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tdt4140.gr1812.app.core.dataClasses.LoginModel;
+import tdt4140.gr1812.app.core.dataClasses.Tuple;
 
 public class LoginModelTest {
 	LoginModel loginmodel;
@@ -14,26 +15,20 @@ public class LoginModelTest {
 	public void setUp(){
 		this.loginmodel = new LoginModel();
 	}
-
-	@Test
-	public void testEmtyPasswordThrowsNullPointerException() {
-		try {
-			this.loginmodel.login("95902393",null);
-	        System.out.println("Should have thrown IllegalArgumentException.");
-	        assert false;
-	    } catch (NullPointerException e) {
-	        assert true;
-	    }	
-	}
 	
 	@Test
-	public void testEmptyPhoneNumberThrowsNullPointerException() {
+	public void testLogin() {
+		assertFalse(LoginModel.login("", "") == null);
+		assertFalse(null == LoginModel.login("12345678", "12345678"));
 		try {
-	        this.loginmodel.login(null,"123password");
-	        System.out.println("Should have thrown NullPointerException.");
-	        assert false;
-	    } catch (NullPointerException e) {
-	        assert true;
-	    }	
+			LoginModel.login(null, "");
+			fail();
+		} catch(NullPointerException e) {
+			
+		} try {
+			LoginModel.login("", null);
+		} catch (NullPointerException e) {
+			
+		}
 	}
 }

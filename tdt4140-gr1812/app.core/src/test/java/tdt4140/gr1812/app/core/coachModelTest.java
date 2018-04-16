@@ -1,12 +1,17 @@
 package tdt4140.gr1812.app.core;
 
 import static org.junit.Assert.*;
+
+import java.util.Arrays;
+
 import org.junit.Test;
 import tdt4140.gr1812.app.core.dataClasses.Coach;
 import tdt4140.gr1812.app.core.dataClasses.Sport;
 import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 
 public class coachModelTest {
+	
+	CoachModel model = new CoachModel(new Coach("", new Sport("fotball")));
 
     @Test
     public void getSportForCoachTest() {
@@ -17,12 +22,13 @@ public class coachModelTest {
     }
     
     @Test
-    public void getAthletesForSportCoachTest() {
-    		Coach coach = new Coach("Larry", new Sport("basket"));
-        if (coach.getName().equals("Larry")) {
-            assert(coach.getSport().getSport().equals("basket"));
-            assert(!coach.getSport().equals("fotball"));
-        }
+    public void getAthletesForSportTest() {
+    		assertFalse(CoachModel.getAthletesForSport("fotball") == null);
+    }
+    
+    @Test
+    public void testGetAthletesFullName() {
+    		assertFalse(CoachModel.getAthletesFullName("12345678", "langrenn")==null);
     }
     
 }
