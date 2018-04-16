@@ -33,7 +33,7 @@ public class LoggedInModelTest {
 	
 	@Test
 	public void testStringToDate() {
-		String date = LoggedInModel.stringToDate("10 apr 2018 22:00:00 GMT");
+		String date = LoggedInModel.stringToDate("10 Apr 2018 22:00:00 GMT");
 		assertEquals(date, "2018-04-10");
 		try {
 			String d = LoggedInModel.stringToDate("");
@@ -45,12 +45,13 @@ public class LoggedInModelTest {
 	
 	@Test
 	public void testGetStringAsList() {
-		List<Integer> list = LoggedInModel.getStringAsList("50,60,70");
+		List<Integer> list = LoggedInModel.getStringAsList("50, 60, 70");
 		assertEquals(list, Arrays.asList(50,60,70));
 		try {
 			LoggedInModel.getStringAsList("-1");
 			fail();
 		} catch (IllegalArgumentException e) {	
+			
 		}  
 	}
 	

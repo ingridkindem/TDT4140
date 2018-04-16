@@ -23,7 +23,7 @@
             <Font name="Futura Medium" size="22.0" />
          </font>
       </Text>
-      <Hyperlink fx:id="registrerOkt" layoutX="267.0" layoutY="43.0" onAction="#registrerOkt" prefHeight="45.0" prefWidth="182.0" style="-fx-border-color: TRANSPARENT;"/>
+      <Hyperlink fx:id="registrerOkt" layoutX="267.0" layoutY="43.0" onAction="#registrerOkt" prefHeight="45.0" prefWidth="182.0" style="-fx-border-color: TRANSPARENT;" />
       <ImageView fx:id="blank" fitHeight="55.0" fitWidth="184.0" layoutX="269.0" layoutY="39.0" visible="false">
          <image>
             <Image url="@Blank.jpg" />
@@ -52,7 +52,7 @@
             <Font name="Futura Medium" size="14.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="464.0" layoutY="48.0" onAction="#loggUt" prefHeight="37.0" prefWidth="166.0" textFill="#363535" style="-fx-border-color: TRANSPARENT;"/>
+      <Hyperlink layoutX="464.0" layoutY="48.0" onAction="#loggUt" prefHeight="37.0" prefWidth="166.0" style="-fx-border-color: TRANSPARENT;" textFill="#363535" />
       <SubScene fx:id="chartScene" fill="#fff2e5" height="280.0" layoutX="103.0" layoutY="110.0" style="-fx-background-color: #FFF2E5;" width="785.0">
         <root>
           <Region />
@@ -68,6 +68,17 @@
             <Font name="Futura Medium" size="14.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="275.0" layoutY="44.0" fx:id= "tilbake" onAction="#tilbake" prefHeight="37.0" prefWidth="166.0" visible="false" />
+      <Hyperlink fx:id="tilbake" layoutX="275.0" layoutY="44.0" onAction="#tilbake" prefHeight="37.0" prefWidth="166.0" visible="false" />
+      <Text layoutX="687.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ønsker du å slette bruker?">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#113abf" layoutX="848.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klikk her" underline="true">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="846.0" layoutY="658.0" onAction="#slettBruker" prefHeight="25.0" prefWidth="58.0" />
    </children>
 </AnchorPane>

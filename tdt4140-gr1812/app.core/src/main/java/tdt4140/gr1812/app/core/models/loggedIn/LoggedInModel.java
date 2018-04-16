@@ -103,7 +103,24 @@ public final class LoggedInModel {
 		}
 	    System.out.println(returnHashMap.toString());
 	    return returnHashMap;
-		}
+	}
+	
+	public static boolean deleteUser(String username) {
+		HashMap requestparam = new HashMap<String, String>();
+		requestparam.put("username", username);
+		try {
+			JSONObject response = BackendConnector.makeRequest(requestparam, Method.POST, "deleteUser"); 
+			if (response.get("status").equals("success")) {
+				System.out.println("User deleted.");
+				return true;
+			} else if (response.get("status").equals("failure")) {
+				System.out.println("Couldn't delete user.");
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} return false;
+	}
 	
 	public static int hoursToMinutes(String s) { // turns a string, s, of the form "h:mm" to an integer(number of minutes)
 		String[] min = s.split(":");
@@ -126,7 +143,10 @@ public final class LoggedInModel {
 			String[] p = pulses.split(", "); // pulses of the form "i ,i,i,i...,i" where i is an integer. 
 			for (String i : p) {
 				i.trim();
+				i.replace(" ","");
+				System.out.println(i);
 				int pulseInt = Integer.parseInt(i);
+				System.out.println(pulseInt);
 				if (pulseInt < 0) {
 					throw new Exception();
 				}

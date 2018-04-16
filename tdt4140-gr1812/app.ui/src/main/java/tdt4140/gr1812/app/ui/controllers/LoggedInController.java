@@ -248,6 +248,13 @@ public class LoggedInController {
 		app.goToCoachView();
 	}
 	
+	public void slettBruker() {
+		if (LoggedInModel.deleteUser(this.currentUser)) {
+			this.atLoggedInView = false;
+			app.goToLogin();
+		}
+	}
+	
 	//set-methods:
 	public void setApplication(FxApp app) {
 		this.app = app;

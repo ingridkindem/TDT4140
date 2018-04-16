@@ -74,5 +74,16 @@
       </Text>
       <Hyperlink layoutX="466.0" layoutY="51.0" onAction="#loggUt" prefHeight="32.0" prefWidth="154.0" />
       <Hyperlink layoutX="723.0" layoutY="565.0" onAction="#utforskUtover" prefHeight="46.0" prefWidth="198.0" />
+      <Text layoutX="687.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ønsker du å slette bruker?">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#113abf" layoutX="848.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klikk her" underline="true">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="846.0" layoutY="658.0" onAction="#slettBruker" prefHeight="25.0" prefWidth="58.0" />
    </children>
 </AnchorPane>
