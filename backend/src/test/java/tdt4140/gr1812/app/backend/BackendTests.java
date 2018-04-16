@@ -56,9 +56,9 @@ public class BackendTests {
 			System.out.println("Error in @BeforeClass");
 		}
 		try {
-			
-		} catch(Exception e) {
 			ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
+		} catch(Exception e) {
+			
 		}
 		try {
 			ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once			
