@@ -18,7 +18,6 @@ import tdt4140.gr1812.app.core.helpers.Method;
 
 public final class LoggedInModel {
 		
-	// Må endre endpoint (og annet)
 	public static String getName(String username) { //returns the name belonging to the phonenumber(username)
 		
 		String name = "failure";
