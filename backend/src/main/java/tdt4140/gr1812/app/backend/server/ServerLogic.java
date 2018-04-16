@@ -232,7 +232,7 @@ public class ServerLogic {
 		return users;
 	}
 
-	public static ArrayList<Workout> getLastWorkouts(String username) {
+	public static ArrayList<Workout> getLastWorkouts(String username, String coach) {
 
 		MysqlDataSource dataSource = new MysqlDataSource();
 		dataSource.setUser(Config.dbUser);
@@ -240,8 +240,13 @@ public class ServerLogic {
 		dataSource.setServerName(Config.dbHost);
 		dataSource.setPort(Config.dbPort);
 		dataSource.setDatabaseName(Config.dbName);
-
-		String sql = "select duration, pulses, sport, goal, privacy, extraField, date from workouts where username = ?";
+		
+		String sql = coach == "0" ? "select duration, pulses, sport, goal, privacy, extraField, date from workouts where username = ?" 
+				: "select duration, pulses, sport, goal, privacy, extraField, date from workouts where username = ? and privacy = 0";
+ 
+		
+//		String sqlAthlete = "select duration, pulses, sport, goal, privacy, extraField, date from workouts where username = ?";
+//		String sqlCoach = "select duration, pulses, sport, goal, privacy, extraField, date from workouts where username = ? and privacy = 0";
 
 		Connection conn = null;
 		ResultSet resultSet = null; // needed for reading output from database
@@ -285,7 +290,7 @@ public class ServerLogic {
 		return workouts;
 	}
 
-	public static Map<Date, List<Integer>> getGraphInformation(String username) {
+	public static Map<Date, List<Integer>> getGraphInformation(String username, String coach) {
 
 		MysqlDataSource dataSource = new MysqlDataSource();
 		dataSource.setUser(Config.dbUser);
@@ -297,7 +302,8 @@ public class ServerLogic {
 		Calendar date = Calendar.getInstance();
 		date.add(Calendar.DATE, -7); // Setting to today - 7 days
 		Date dato = new Date(date.getTime().getTime()); // jav.sql.Date for usage in DB. Calendar not compatible.
-		String sql = "select pulses, date, duration from workouts where username = ? and date >= ? order by date asc";
+		String sql = coach == "0" ? "select pulses, date, duration from workouts where username = ? and date >= ? order by date asc" :
+			"select pulses, date, duration from workouts where username = ? and privacy = '0' and date >= ? order by date asc";
 		String sqlMaxpuls = "select maxpuls from users where username = ?"; // for future use if percentage in puls zone
 																			// is needed
 

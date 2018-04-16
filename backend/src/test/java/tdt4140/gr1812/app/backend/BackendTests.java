@@ -215,7 +215,7 @@ public class BackendTests {
 
 		String username = "12345678";
 
-		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts").param("username", username)).andExpect(status().isOk())
+		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts").param("username", username).param("coach", "0")).andExpect(status().isOk())
 				.andExpect(content().string(containsString("success")));
 
 	}
@@ -225,7 +225,7 @@ public class BackendTests {
 
 		String username = "743216"; // this is the error
 
-		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts").param("username", username)).andExpect(status().isOk())
+		mvc.perform(MockMvcRequestBuilders.get("/lastWorkouts").param("username", username).param("coach", "0")).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
 
 	}
@@ -235,7 +235,7 @@ public class BackendTests {
 
 		String username = "12345678";
 
-		mvc.perform(MockMvcRequestBuilders.get("/graph").param("username", username)).andExpect(status().isOk())
+		mvc.perform(MockMvcRequestBuilders.get("/graph").param("username", username).param("coach", "0")).andExpect(status().isOk())
 				.andExpect(content().string(containsString("success")));
 
 	}
@@ -245,7 +245,7 @@ public class BackendTests {
 
 		String username = "743216"; // This is the error
 
-		mvc.perform(MockMvcRequestBuilders.get("/graph").param("username", username)).andExpect(status().isOk())
+		mvc.perform(MockMvcRequestBuilders.get("/graph").param("username", username).param("coach", "0")).andExpect(status().isOk())
 				.andExpect(content().string(containsString("failed")));
 
 	}
