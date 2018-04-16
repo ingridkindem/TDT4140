@@ -21,7 +21,7 @@ blow-job:
     - "mvn clean compile -f backend/pom.xml $MAVEN_CLI_OPTS"
 
 unittest-job:
-  stage: unittest
+  stage: test
   dependencies:
     - blow-job
   script:
@@ -30,7 +30,7 @@ unittest-job:
     #- "cat tdt4140-gr1800/app.core/target/site/jacoco/index.html"
 
 integrationtest-job:
-  stage: integrationtest
+  stage: test
   dependencies:
     - blow-job
   script:
