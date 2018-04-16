@@ -51,8 +51,9 @@ public class BackendTests {
 	@BeforeClass //runs tests 
 	public static void Before() {
 		try {
-		ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
-		ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
+			ServerLogic.signup(BackendTests.usernameTest, passwordTest, "test", "user", "200", "80", "male", "Fotball");
+			ServerLogic.deleteUserFromDB("99765432");  //has to be deleted for TestSignup to pass more than once
+			ServerLogic.deleteWorkoutFromDB("99765432"); // to avoid entries in db from testing
 		} catch (Exception e) {
 			System.out.println("Error in @BeforeClass");
 		}
