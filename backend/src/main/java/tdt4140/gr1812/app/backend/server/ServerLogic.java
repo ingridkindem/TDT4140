@@ -260,6 +260,8 @@ public class ServerLogic {
 				workout.setDuration(resultSet.getInt(1));
 				workout.setGoal(resultSet.getString(4));
 				workout.setDate(resultSet.getDate(7));
+				workout.setExtraField(resultSet.getString("extraField"));
+				
 				String pulsesString = resultSet.getString(2);
 				List<Integer> pulses = Stream.of(pulsesString.split(",")).map(Integer::parseInt)
 						.collect(Collectors.toList()); // oulses are stored as String e. g. "123,155,143,100". This

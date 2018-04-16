@@ -26,7 +26,8 @@ public class HomeScreenController {
 
     @FXML
     public void initialize() {
-       maps.getEngine().load("file:///Users/bruker/tdt4180-oxygen/12/tdt4140-gr1812/app.ui/src/main/java/tdt4140/gr1812/app/ui/views/homeScreen/location.html");
+    		URL url = this.getClass().getResource("../views/homeScreen/location.html");
+        maps.getEngine().load(url.toString());
     }
 
     public void setApplication(FxApp app) {
@@ -40,20 +41,16 @@ public class HomeScreenController {
     @FXML
     public void handleFacebook() {
         maps.getEngine().load("https://www.facebook.com/lierkvinner/");
-
     }
     
     @FXML
     public void handleMail() {
       // if we are going to use Lier ILs web site as contact, use first link instead
-      //  maps.getEngine().load("https://lieridrettslag.weborg.no/Lier-IL/Toppmeny/Kontakt-oss.html#/Hovedstyret");
-        maps.getEngine().load("file:///Users/bruker/tdt4180-oxygen/12/tdt4140-gr1812/app.ui/src/main/java/tdt4140/gr1812/app/ui/views/homeScreen/contact.html");
-   
+        maps.getEngine().load(this.getClass().getResource("../views/homeScreen/contact.html").toString());
     }
     
     public void handleMap() {
-        maps.getEngine().load("file:///Users/bruker/tdt4180-oxygen/12/tdt4140-gr1812/app.ui/src/main/java/tdt4140/gr1812/app/ui/views/homeScreen/location.html");
-
+        maps.getEngine().load(this.getClass().getResource("../views/homeScreen/location.html").toString());
     }
 
     @FXML

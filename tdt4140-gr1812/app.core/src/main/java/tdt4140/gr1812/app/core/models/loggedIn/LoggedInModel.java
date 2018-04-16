@@ -22,18 +22,18 @@ public final class LoggedInModel {
 	public static String getName(String username) { //returns the name belonging to the phonenumber(username)
 		
 		String name = "failure";
-		/*HashMap requestparam = new HashMap<String, String>();
+		HashMap requestparam = new HashMap<String, String>();
 		requestparam.put("username", username);
 		try {
-			JSONObject response = BackendConnector.makeRequest(requestparam, Method.POST, "getNameForCoach"); 
+			JSONObject response = BackendConnector.makeRequest(requestparam, Method.POST, "getName"); 
 			if (response.get("status").equals("success")) {
-				name = response.get("firstname").toString() + " " + response.get("surname").toString();
+				name = response.get("name").toString();
 			} else if (response.get("status").equals("failure")) {
 				name = "Couldn't load name";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} */
+		} 
 		return name;
 	}
 
@@ -51,7 +51,7 @@ public final class LoggedInModel {
         				JSONObject obj = objectArray.getJSONObject(i); 
         				Sport sport = new Sport(obj.getString("sport"));
         				int duration = hoursToMinutes(obj.getString("duration")); //h:mm
-        				List<Integer> pulses = getStringAsList(obj.getString("pulses")); //[1,1]
+        				List<Integer> pulses = getStringAsList(obj.getString("pulses").replace("[", "").replace("]", "")); //[1,1]
         				boolean privacy = (obj.getString("privacy").equals("1")) ? true:false;
         				String goal = obj.getString("goal"); 
         				String date = stringToDate(obj.getString("date")); // date = "10 apr 2018 22:00:00 GMT"
@@ -92,7 +92,7 @@ public final class LoggedInModel {
 	    		JSONArray objectArray = response.getJSONArray("workouts"); 
 	    		for (int i = 0; i < objectArray.length(); i++) {
 	    			JSONObject obj = objectArray.getJSONObject(i);
-	    			String durationInPulsezones = obj.get("pulses").toString(); // pulses: "[p,p,p,p,p]"
+	    			String durationInPulsezones = obj.get("pulses").toString().replace("[", "").replace("]", ""); // pulses: "[p,p,p,p,p]"
 	    			List<Integer> durationInPulsezonesList = getStringAsList(durationInPulsezones);
 	    			String date = stringToDate(obj.get("Dato").toString());
 	    			System.out.println(date);
@@ -102,6 +102,7 @@ public final class LoggedInModel {
 	    	} catch (Exception e) {
 			e.printStackTrace();
 		}
+	    System.out.println(returnHashMap.toString());
 	    return returnHashMap;
 		}
 	
@@ -119,10 +120,11 @@ public final class LoggedInModel {
 	}
 	
 	
-	public static List<Integer> getStringAsList(String pulses) { // returns the String as a list of integers. 
+	public static List<Integer> getStringAsList(String pulses) { // returns the String as a list of integers.
+		System.out.println("puslses string = " + pulses);
 		List<Integer> pulsesList = new ArrayList<Integer>();
 		try {
-			String[] p = pulses.split(","); // pulses of the form "i ,i,i,i...,i" where i is an integer. 
+			String[] p = pulses.split(", "); // pulses of the form "i ,i,i,i...,i" where i is an integer. 
 			for (String i : p) {
 				i.trim();
 				int pulseInt = Integer.parseInt(i);
@@ -140,6 +142,7 @@ public final class LoggedInModel {
 	
 	public static String stringToDate(String s) { // s = "10 apr 2018 22:00:00 GMT"
 		String returnDate = null;
+		System.out.println("prepared to do this string to date: " + s);
 		try {
 			String[] dateList = s.split(" ");
 			int day = Integer.parseInt(dateList[0]);

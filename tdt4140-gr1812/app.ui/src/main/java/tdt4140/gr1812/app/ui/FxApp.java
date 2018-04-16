@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import tdt4140.gr1812.app.core.models.coachModel.CoachModel;
 import tdt4140.gr1812.app.ui.controllers.CoachController;
 import tdt4140.gr1812.app.ui.controllers.HomeScreenController;
 import tdt4140.gr1812.app.ui.controllers.LoggedInController;
@@ -29,7 +28,7 @@ public class FxApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
     		this.stage = stage;
-        goToLoggedIn();
+        goToLogin();
    }
 
     

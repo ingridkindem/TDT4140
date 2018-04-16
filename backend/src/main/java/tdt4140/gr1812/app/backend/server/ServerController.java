@@ -243,6 +243,7 @@ public class ServerController {
 						workoutJson.put("duration", workout.getDuration());
 						workoutJson.put("goal", workout.getGoal());
 						workoutJson.put("pulses", workout.getPulses());
+						workoutJson.put("extraField", workout.getExtraField()); 
 						if (privacy) {
 							workoutJson.put("privacy", "1");
 						}else {
@@ -284,7 +285,7 @@ public class ServerController {
 				JSONArray jArray = new JSONArray();
 				for (Date dato : pulsInformation.keySet()){
 						JSONObject pulsJson = new JSONObject();
-						pulsJson.put("Dato", dato);
+						pulsJson.put("Dato", dato.toGMTString());
 						//Retrieving pulses for given date (key)
 						pulsJson.put("pulses", pulsInformation.get(dato)); 
 						jArray.put(pulsJson);

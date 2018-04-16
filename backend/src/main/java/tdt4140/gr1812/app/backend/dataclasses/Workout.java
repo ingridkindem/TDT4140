@@ -86,6 +86,14 @@ public class Workout {
 		return sport;
 	}
 	
+	public void setExtraField(String extraField) {
+		this.extraField = extraField;
+	}
+	
+	public String getExtraField() {
+		return this.extraField;
+	}
+	
 	public boolean getPrivacy() {
 		return privacy;
 	}
