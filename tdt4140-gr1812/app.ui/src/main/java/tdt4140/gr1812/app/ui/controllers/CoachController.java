@@ -56,7 +56,7 @@ public class CoachController {
 
 	@FXML
 	public void initialize() {
-		this.name.setText(LoggedInModel.getName(this.coachUsername));
+		System.out.println("The username = " + this.coachUsername);
 		this.atCoachView = true;
 		this.athletesTable.setVisible(false);
 		this.selectAthlete.setVisible(false);
@@ -105,7 +105,6 @@ public class CoachController {
 		               selectAthlete.setVisible(true);
 		               athletesTable.setVisible(false);
 		               
-		               System.out.print("current sport = " + currentSport);
 		               
 
 		               //Sets the text of the button to a person
@@ -163,9 +162,10 @@ public class CoachController {
 	}
 	
 	public void setUser(String username) {
-		System.out.println("-2-");
 		this.coachUsername = username;
 		this.currentSport = handleSport(this.coachUsername);
+		System.out.println("The current username = " + username);
+		this.name.setText(LoggedInModel.getName(username));
 		sportLabel.setText(this.currentSport);
 		observableAthletes.setAll(createAthleteObjectList());
 	}
@@ -174,39 +174,5 @@ public class CoachController {
 	public List<Athlete> createAthleteObjectList() {
 		return CoachModel.getAthletesForSport(this.currentSport);
 	}
-	
-	/*
-	 * class MyEventHandler implements EventHandler<MouseEvent> {
- w
-        @Override
-        public void handle(MouseEvent t) {
-            TableCell c = (TableCell) t.getSource();
-            int index = c.getIndex();
-            System.out.println("id = " + recordList.get(index).getId());
-            System.out.println("name = " + recordList.get(index).getName());
-            System.out.println("lastName = " + recordList.get(index).getLastName());
-            System.out.println("email = " + recordList.get(index).getEmail());
-        }
-    }
-    
-    
-     Callback<TableColumn, TableCell> stringCellFactory =
-                new Callback<TableColumn, TableCell>() {
-            @Override
-            public TableCell call(TableColumn p) {
-                MyStringTableCell cell = new MyStringTableCell();
-                cell.addEventFilter(MouseEvent.MOUSE_CLICKED, new MyEventHandler());
-                return cell;
-            }
-        };
-        
-        //      List<String> sports = CoachModel.getSportForCoach(coach);
-//      if (sports.size() > 0) {
-//          String returen = sports.get(0); 
-//          return returen; 
-//      }
-//      return "No sports for coach"; 
-	 */
-
 
 }

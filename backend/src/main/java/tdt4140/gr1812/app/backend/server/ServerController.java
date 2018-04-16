@@ -165,6 +165,28 @@ public class ServerController {
 		}
     	 return feedback.toString(); //returning status and list of athletes as one continuous String
     }
+    
+    @RequestMapping("/deleteUser")
+    public String deleteUserEndpoint(@RequestParam("username") String username) {
+    		JSONObject feedback = new JSONObject();
+    		try{
+    			String deleteResult = ServerLogic.deleteUserFromDB(username);
+    			if (deleteResult.equals("success")) {
+    				feedback.put("status", "success");
+    			}
+    			else {
+    				feedback.put("status", "faield");
+    			}
+    		}catch (Exception e) {
+    			e.printStackTrace();
+    			try {
+    				feedback.put("status", "failed").toString();
+    			} catch (JSONException e1) {
+    				e1.printStackTrace();
+    			}
+    		}
+    		return feedback.toString();
+    }
    
     @RequestMapping("sportForCoach")
     public String requestSportForCoach(@RequestParam("username") String username) {
