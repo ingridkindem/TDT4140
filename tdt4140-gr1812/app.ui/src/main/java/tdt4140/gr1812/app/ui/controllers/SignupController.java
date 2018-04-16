@@ -1,5 +1,8 @@
 package tdt4140.gr1812.app.ui.controllers;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Iterator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -133,6 +136,16 @@ public class SignupController {
     @FXML
     public void handleBack() {
         app.goToLogin();
+    }
+    
+    @FXML
+    public void onTermsOfUse() {
+    		try {
+				java.awt.Desktop.getDesktop().browse(new URI("http://pu.larserikfagernaes.com/terms.html"));
+			} catch (IOException | URISyntaxException e) {
+				// TODO Auto-generated catch block
+				
+			}
     }
     
     public void init() {
